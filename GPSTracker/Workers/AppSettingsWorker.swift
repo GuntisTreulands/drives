@@ -69,12 +69,6 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 
 	private let locationManager = CLLocationManager()
 
-	private let geoFenceHomeCar = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 56.973338, longitude: 24.108615), radius: 13, identifier: "geo_fence_home_car")
-
-	let geoFenceGate = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 56.972863, longitude: 24.109502), radius: 40, identifier: "geo_fence_gate")
-
-	let geoFenceHome = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 56.973297, longitude: 24.108169), radius: 140, identifier: "geo_fence_home")
-
 	var openDate = Date()
 
 	var settingsSwitchHandler: ((SettingsToggleResult<Any>) -> Void)?
@@ -104,17 +98,8 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		}
 
 
-		geoFenceHomeCar.notifyOnEntry = true
-		geoFenceGate.notifyOnEntry = true
-		locationManager.startMonitoring(for: geoFenceHomeCar)
-		locationManager.startMonitoring(for: geoFenceGate)
-
-		geoFenceHome.notifyOnExit = true
-		geoFenceHome.notifyOnEntry = true
-		locationManager.startMonitoring(for: geoFenceHome)
-
-
 		locationManager.startMonitoringVisits()
+		
     	NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
 		
 		refreshCurrentNotificationsStatus {}
