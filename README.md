@@ -7,7 +7,7 @@ This has been a tiny hobby project of mine - to make an app, that would record a
 
 
 
-![PreviewImage](https://github.com/GuntisTreulands/drives/blob/master/example1.png?raw=true)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example1.png)
 
 How does it work
 ---------------
