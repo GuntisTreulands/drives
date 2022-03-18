@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DriveEntity" representedClassName="DriveEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="endAddress" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="endCountry" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="endTime" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="identificator" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="isBusinessDrive" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isInProgress" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="monthString" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="sectionedMonthString" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="sortingMonthDayYearString" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="startAddress" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="startCountry" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="startTime" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="rPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointEntity" inverseName="rDrive" inverseEntity="PointEntity"/>
+    </entity>
+    <entity name="PointEntity" representedClassName="PointEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="rDrive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DriveEntity" inverseName="rPoints" inverseEntity="DriveEntity"/>
+    </entity>
+    <elements>
+        <element name="DriveEntity" positionX="-63" positionY="-18" width="128" height="254"/>
+        <element name="PointEntity" positionX="-54" positionY="-9" width="128" height="89"/>
+    </elements>
+</model>

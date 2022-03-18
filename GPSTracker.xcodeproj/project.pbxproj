@@ -1,0 +1,1040 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C1A9BC327D8DEB80079305A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1A9BC227D8DEB80079305A /* NetworkExtension.framework */; };
+		5C2EA80227BD4425006534F2 /* MotionAccessLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2EA7FE27BD4425006534F2 /* MotionAccessLayoutView.xib */; };
+		5C2EA80327BD4425006534F2 /* MotionAccessLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA7FF27BD4425006534F2 /* MotionAccessLayoutView.swift */; };
+		5C2EA80427BD4425006534F2 /* MotionAccessInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA80027BD4425006534F2 /* MotionAccessInteractor.swift */; };
+		5C2EA80527BD4425006534F2 /* MotionAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA80127BD4425006534F2 /* MotionAccessViewController.swift */; };
+		5C2EA80827BD6A86006534F2 /* MainTabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2EA80627BD6A85006534F2 /* MainTabBarView.xib */; };
+		5C2EA80927BD6A86006534F2 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA80727BD6A86006534F2 /* MainTabBarView.swift */; };
+		5C2EA81727BEC14A006534F2 /* MapModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA80F27BEC149006534F2 /* MapModels.swift */; };
+		5C2EA81827BEC14A006534F2 /* MapWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81027BEC149006534F2 /* MapWorker.swift */; };
+		5C2EA81927BEC14A006534F2 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81127BEC149006534F2 /* MapRouter.swift */; };
+		5C2EA81A27BEC14A006534F2 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81227BEC149006534F2 /* MapPresenter.swift */; };
+		5C2EA81B27BEC14A006534F2 /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81327BEC149006534F2 /* MapInteractor.swift */; };
+		5C2EA81C27BEC14A006534F2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81427BEC149006534F2 /* MapViewController.swift */; };
+		5C2EA81D27BEC14A006534F2 /* MapLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2EA81527BEC149006534F2 /* MapLayoutView.xib */; };
+		5C2EA81E27BEC14A006534F2 /* MapLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EA81627BEC149006534F2 /* MapLayoutView.swift */; };
+		5C2F9DC727C401EA00EBF242 /* HelperWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9DC627C401EA00EBF242 /* HelperWorker.swift */; };
+		5C2F9DC927C4143B00EBF242 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9DC827C4143B00EBF242 /* CollectionExtension.swift */; };
+		5C3F7A8B27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F7A8A27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift */; };
+		5C4D739A27B6ECA5007E7DB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D730627B6ECA5007E7DB0 /* LaunchScreen.storyboard */; };
+		5C4D739B27B6ECA6007E7DB0 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D730A27B6ECA5007E7DB0 /* SettingsModels.swift */; };
+		5C4D739C27B6ECA6007E7DB0 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D730B27B6ECA5007E7DB0 /* SettingsRouter.swift */; };
+		5C4D739D27B6ECA6007E7DB0 /* SettingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D730C27B6ECA5007E7DB0 /* SettingsWorker.swift */; };
+		5C4D739E27B6ECA6007E7DB0 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D730D27B6ECA5007E7DB0 /* SettingsInteractor.swift */; };
+		5C4D739F27B6ECA6007E7DB0 /* SettingsViewLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D730E27B6ECA5007E7DB0 /* SettingsViewLayoutView.swift */; };
+		5C4D73A027B6ECA6007E7DB0 /* SettingsViewLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D730F27B6ECA5007E7DB0 /* SettingsViewLayoutView.xib */; };
+		5C4D73A127B6ECA6007E7DB0 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731027B6ECA5007E7DB0 /* SettingsPresenter.swift */; };
+		5C4D73A227B6ECA6007E7DB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731127B6ECA5007E7DB0 /* SettingsViewController.swift */; };
+		5C4D73A327B6ECA6007E7DB0 /* AppLanguageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731327B6ECA5007E7DB0 /* AppLanguageModels.swift */; };
+		5C4D73A427B6ECA6007E7DB0 /* AppLanguageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731427B6ECA5007E7DB0 /* AppLanguageInteractor.swift */; };
+		5C4D73A527B6ECA6007E7DB0 /* AppLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731527B6ECA5007E7DB0 /* AppLanguageWorker.swift */; };
+		5C4D73A627B6ECA6007E7DB0 /* AppLanguageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731627B6ECA5007E7DB0 /* AppLanguageRouter.swift */; };
+		5C4D73A727B6ECA6007E7DB0 /* AppLanguagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731727B6ECA5007E7DB0 /* AppLanguagePresenter.swift */; };
+		5C4D73A827B6ECA6007E7DB0 /* AppLanguageLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731827B6ECA5007E7DB0 /* AppLanguageLayoutView.swift */; };
+		5C4D73A927B6ECA6007E7DB0 /* AppLanguageLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D731927B6ECA5007E7DB0 /* AppLanguageLayoutView.xib */; };
+		5C4D73AA27B6ECA6007E7DB0 /* AppLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D731A27B6ECA5007E7DB0 /* AppLanguageViewController.swift */; };
+		5C4D73BB27B6ECA6007E7DB0 /* ScenesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D732D27B6ECA5007E7DB0 /* ScenesManager.swift */; };
+		5C4D73C427B6ECA6007E7DB0 /* SetupAppLanguageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733927B6ECA5007E7DB0 /* SetupAppLanguageInteractor.swift */; };
+		5C4D73C527B6ECA6007E7DB0 /* SetupAppLanguageLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733A27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.swift */; };
+		5C4D73C627B6ECA6007E7DB0 /* SetupAppLanguagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733B27B6ECA5007E7DB0 /* SetupAppLanguagePresenter.swift */; };
+		5C4D73C727B6ECA6007E7DB0 /* SetupAppLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733C27B6ECA5007E7DB0 /* SetupAppLanguageViewController.swift */; };
+		5C4D73C827B6ECA6007E7DB0 /* SetupAppLanguageLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D733D27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.xib */; };
+		5C4D73C927B6ECA6007E7DB0 /* SetupAppLanguageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733E27B6ECA5007E7DB0 /* SetupAppLanguageRouter.swift */; };
+		5C4D73CA27B6ECA6007E7DB0 /* SetupAppLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D733F27B6ECA5007E7DB0 /* SetupAppLanguageWorker.swift */; };
+		5C4D73CB27B6ECA6007E7DB0 /* SetupAppLanguageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D734027B6ECA5007E7DB0 /* SetupAppLanguageModels.swift */; };
+		5C4D73D527B6ECA6007E7DB0 /* MainListLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D734D27B6ECA5007E7DB0 /* MainListLayoutView.xib */; };
+		5C4D73D627B6ECA6007E7DB0 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D734E27B6ECA5007E7DB0 /* MainListViewController.swift */; };
+		5C4D73D727B6ECA6007E7DB0 /* MainListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D734F27B6ECA5007E7DB0 /* MainListInteractor.swift */; };
+		5C4D73D827B6ECA6007E7DB0 /* MainListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735027B6ECA5007E7DB0 /* MainListRouter.swift */; };
+		5C4D73DA27B6ECA6007E7DB0 /* MainListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735227B6ECA5007E7DB0 /* MainListWorker.swift */; };
+		5C4D73DB27B6ECA6007E7DB0 /* MainListLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735327B6ECA5007E7DB0 /* MainListLayoutView.swift */; };
+		5C4D73DC27B6ECA6007E7DB0 /* MainListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735427B6ECA5007E7DB0 /* MainListPresenter.swift */; };
+		5C4D73DD27B6ECA6007E7DB0 /* MainListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735527B6ECA5007E7DB0 /* MainListModels.swift */; };
+		5C4D73DE27B6ECA6007E7DB0 /* FontChangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D735827B6ECA5007E7DB0 /* FontChangeTableViewCell.swift */; };
+		5C4D73E027B6ECA6007E7DB0 /* LanguageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D735A27B6ECA5007E7DB0 /* LanguageListCell.xib */; };
+		5C4D73E227B6ECA6007E7DB0 /* SettingsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D735C27B6ECA5007E7DB0 /* SettingsListCell.xib */; };
+		5C4D73E727B6ECA6007E7DB0 /* MainListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D736127B6ECA5007E7DB0 /* MainListCell.xib */; };
+		5C4D73E827B6ECA6007E7DB0 /* LanguageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736227B6ECA5007E7DB0 /* LanguageListCell.swift */; };
+		5C4D73E927B6ECA6007E7DB0 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736327B6ECA5007E7DB0 /* MainListCell.swift */; };
+		5C4D73EB27B6ECA6007E7DB0 /* SettingsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736527B6ECA5007E7DB0 /* SettingsListCell.swift */; };
+		5C4D73ED27B6ECA6007E7DB0 /* FontChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736827B6ECA5007E7DB0 /* FontChangeView.swift */; };
+		5C4D73EE27B6ECA6007E7DB0 /* TableViewNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D736927B6ECA5007E7DB0 /* TableViewNoDataView.xib */; };
+		5C4D73EF27B6ECA6007E7DB0 /* NotifPhoneAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736A27B6ECA5007E7DB0 /* NotifPhoneAnimationView.swift */; };
+		5C4D73F227B6ECA6007E7DB0 /* MainListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736D27B6ECA5007E7DB0 /* MainListHeaderView.swift */; };
+		5C4D73F327B6ECA6007E7DB0 /* TextTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D736E27B6ECA5007E7DB0 /* TextTableViewHeaderView.swift */; };
+		5C4D73F427B6ECA6007E7DB0 /* TextTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D736F27B6ECA5007E7DB0 /* TextTableViewHeaderView.xib */; };
+		5C4D73F527B6ECA6007E7DB0 /* TableViewNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D737027B6ECA5007E7DB0 /* TableViewNoDataView.swift */; };
+		5C4D73F627B6ECA6007E7DB0 /* MainListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D737127B6ECA5007E7DB0 /* MainListHeaderView.xib */; };
+		5C4D73F727B6ECA6007E7DB0 /* NotifPhoneAnimationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D737227B6ECA5007E7DB0 /* NotifPhoneAnimationView.xib */; };
+		5C4D73F827B6ECA6007E7DB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D737327B6ECA5007E7DB0 /* Assets.xcassets */; };
+		5C4D73FF27B6ECA6007E7DB0 /* CellBackgroundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D737C27B6ECA5007E7DB0 /* CellBackgroundType.swift */; };
+		5C4D740027B6ECA6007E7DB0 /* NSDataToSha256String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D737D27B6ECA5007E7DB0 /* NSDataToSha256String.swift */; };
+		5C4D740127B6ECA6007E7DB0 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D737E27B6ECA5007E7DB0 /* AppFonts.swift */; };
+		5C4D740327B6ECA6007E7DB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D738027B6ECA5007E7DB0 /* Main.storyboard */; };
+		5C4D740427B6ECA6007E7DB0 /* StringLocalizationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738227B6ECA5007E7DB0 /* StringLocalizationExtension.swift */; };
+		5C4D740527B6ECA6007E7DB0 /* UIViewAnimateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738327B6ECA5007E7DB0 /* UIViewAnimateExtension.swift */; };
+		5C4D740627B6ECA6007E7DB0 /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738427B6ECA5007E7DB0 /* StringSizeExtension.swift */; };
+		5C4D740727B6ECA6007E7DB0 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738527B6ECA5007E7DB0 /* DispatchQueue.swift */; };
+		5C4D740827B6ECA6007E7DB0 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738627B6ECA5007E7DB0 /* UIDeviceExtension.swift */; };
+		5C4D740927B6ECA6007E7DB0 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738727B6ECA5007E7DB0 /* UserDefaultsExtension.swift */; };
+		5C4D740A27B6ECA6007E7DB0 /* DoubleRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738827B6ECA5007E7DB0 /* DoubleRoundExtension.swift */; };
+		5C4D740B27B6ECA6007E7DB0 /* DataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738A27B6ECA5007E7DB0 /* DataBase.xcdatamodeld */; };
+		5C4D740C27B6ECA6007E7DB0 /* AppSettingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738D27B6ECA5007E7DB0 /* AppSettingsWorker.swift */; };
+		5C4D740D27B6ECA6007E7DB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D738F27B6ECA5007E7DB0 /* AppDelegate.swift */; };
+		5C4D740F27B6ECA6007E7DB0 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D739227B6ECA5007E7DB0 /* DataBaseManager.swift */; };
+		5C4D741027B6ECA6007E7DB0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D739427B6ECA5007E7DB0 /* Localizable.strings */; };
+		5C4D741227B6F07E007E7DB0 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D741127B6F07E007E7DB0 /* CallKit.framework */; };
+		5C4D741427B6F084007E7DB0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D741327B6F084007E7DB0 /* CoreLocation.framework */; };
+		5C4D741627B6F08A007E7DB0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D741527B6F08A007E7DB0 /* CoreData.framework */; };
+		5C4D741927B6F093007E7DB0 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D741727B6F093007E7DB0 /* UserNotificationsUI.framework */; };
+		5C4D741A27B6F093007E7DB0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D741827B6F093007E7DB0 /* UserNotifications.framework */; };
+		5C4D742427B7A964007E7DB0 /* GPSAccessInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D741C27B7A964007E7DB0 /* GPSAccessInteractor.swift */; };
+		5C4D742527B7A964007E7DB0 /* GPSAccessLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */; };
+		5C4D742727B7A964007E7DB0 /* GPSAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D741F27B7A964007E7DB0 /* GPSAccessViewController.swift */; };
+		5C4D742A27B7A964007E7DB0 /* GPSAccessLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D742227B7A964007E7DB0 /* GPSAccessLayoutView.swift */; };
+		5C5F1A9927D34D900035988F /* StatsLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F1A9827D34D8F0035988F /* StatsLayoutView.swift */; };
+		5C5F1A9B27D34DCF0035988F /* StatsLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F1A9A27D34DCF0035988F /* StatsLayoutView.xib */; };
+		5C5F1ABB27D79E500035988F /* GatesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F1ABA27D79E500035988F /* GatesWorker.swift */; };
+		5C7B814327C00857006E89C4 /* ActivityWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814227C00857006E89C4 /* ActivityWorker.swift */; };
+		5C7B814527C17F19006E89C4 /* DataBaseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */; };
+		5C7B814927C235A7006E89C4 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814827C235A7006E89C4 /* MapPoint.swift */; };
+		5C7B814C27C236D8006E89C4 /* MapPinAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814A27C236D8006E89C4 /* MapPinAccessoryView.swift */; };
+		5C7B814D27C236D8006E89C4 /* MapPinAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C7B814B27C236D8006E89C4 /* MapPinAccessoryView.xib */; };
+		5CBEF1202370C6BA0052D289 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBEF11F2370C6BA0052D289 /* MapKit.framework */; };
+		63364074D2B59618DF26EDB7 /* Pods_GPSTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5C1A9BD627D8DEED0079305A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5C11F07A229EF4FB00EC7CEC /* GPSTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C1A9BC127D8DEB80079305A /* GPSTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GPSTracker.entitlements; sourceTree = "<group>"; };
+		5C1A9BC227D8DEB80079305A /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		5C2EA7FE27BD4425006534F2 /* MotionAccessLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotionAccessLayoutView.xib; sourceTree = "<group>"; };
+		5C2EA7FF27BD4425006534F2 /* MotionAccessLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAccessLayoutView.swift; sourceTree = "<group>"; };
+		5C2EA80027BD4425006534F2 /* MotionAccessInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAccessInteractor.swift; sourceTree = "<group>"; };
+		5C2EA80127BD4425006534F2 /* MotionAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAccessViewController.swift; sourceTree = "<group>"; };
+		5C2EA80627BD6A85006534F2 /* MainTabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarView.xib; sourceTree = "<group>"; };
+		5C2EA80727BD6A86006534F2 /* MainTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		5C2EA80F27BEC149006534F2 /* MapModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapModels.swift; sourceTree = "<group>"; };
+		5C2EA81027BEC149006534F2 /* MapWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapWorker.swift; sourceTree = "<group>"; };
+		5C2EA81127BEC149006534F2 /* MapRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		5C2EA81227BEC149006534F2 /* MapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		5C2EA81327BEC149006534F2 /* MapInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
+		5C2EA81427BEC149006534F2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5C2EA81527BEC149006534F2 /* MapLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapLayoutView.xib; sourceTree = "<group>"; };
+		5C2EA81627BEC149006534F2 /* MapLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapLayoutView.swift; sourceTree = "<group>"; };
+		5C2F9DC627C401EA00EBF242 /* HelperWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperWorker.swift; sourceTree = "<group>"; };
+		5C2F9DC827C4143B00EBF242 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		5C3F7A8A27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrivateGatesHelperWorker.swift; path = ../../../PrivateGatesHelperWorker.swift; sourceTree = "<group>"; };
+		5C4D730627B6ECA5007E7DB0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5C4D730A27B6ECA5007E7DB0 /* SettingsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		5C4D730B27B6ECA5007E7DB0 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		5C4D730C27B6ECA5007E7DB0 /* SettingsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWorker.swift; sourceTree = "<group>"; };
+		5C4D730D27B6ECA5007E7DB0 /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		5C4D730E27B6ECA5007E7DB0 /* SettingsViewLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewLayoutView.swift; sourceTree = "<group>"; };
+		5C4D730F27B6ECA5007E7DB0 /* SettingsViewLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewLayoutView.xib; sourceTree = "<group>"; };
+		5C4D731027B6ECA5007E7DB0 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		5C4D731127B6ECA5007E7DB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5C4D731327B6ECA5007E7DB0 /* AppLanguageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageModels.swift; sourceTree = "<group>"; };
+		5C4D731427B6ECA5007E7DB0 /* AppLanguageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageInteractor.swift; sourceTree = "<group>"; };
+		5C4D731527B6ECA5007E7DB0 /* AppLanguageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageWorker.swift; sourceTree = "<group>"; };
+		5C4D731627B6ECA5007E7DB0 /* AppLanguageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageRouter.swift; sourceTree = "<group>"; };
+		5C4D731727B6ECA5007E7DB0 /* AppLanguagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguagePresenter.swift; sourceTree = "<group>"; };
+		5C4D731827B6ECA5007E7DB0 /* AppLanguageLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageLayoutView.swift; sourceTree = "<group>"; };
+		5C4D731927B6ECA5007E7DB0 /* AppLanguageLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppLanguageLayoutView.xib; sourceTree = "<group>"; };
+		5C4D731A27B6ECA5007E7DB0 /* AppLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLanguageViewController.swift; sourceTree = "<group>"; };
+		5C4D732D27B6ECA5007E7DB0 /* ScenesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenesManager.swift; sourceTree = "<group>"; };
+		5C4D733927B6ECA5007E7DB0 /* SetupAppLanguageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageInteractor.swift; sourceTree = "<group>"; };
+		5C4D733A27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageLayoutView.swift; sourceTree = "<group>"; };
+		5C4D733B27B6ECA5007E7DB0 /* SetupAppLanguagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguagePresenter.swift; sourceTree = "<group>"; };
+		5C4D733C27B6ECA5007E7DB0 /* SetupAppLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageViewController.swift; sourceTree = "<group>"; };
+		5C4D733D27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupAppLanguageLayoutView.xib; sourceTree = "<group>"; };
+		5C4D733E27B6ECA5007E7DB0 /* SetupAppLanguageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageRouter.swift; sourceTree = "<group>"; };
+		5C4D733F27B6ECA5007E7DB0 /* SetupAppLanguageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageWorker.swift; sourceTree = "<group>"; };
+		5C4D734027B6ECA5007E7DB0 /* SetupAppLanguageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAppLanguageModels.swift; sourceTree = "<group>"; };
+		5C4D734D27B6ECA5007E7DB0 /* MainListLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListLayoutView.xib; sourceTree = "<group>"; };
+		5C4D734E27B6ECA5007E7DB0 /* MainListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
+		5C4D734F27B6ECA5007E7DB0 /* MainListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListInteractor.swift; sourceTree = "<group>"; };
+		5C4D735027B6ECA5007E7DB0 /* MainListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListRouter.swift; sourceTree = "<group>"; };
+		5C4D735227B6ECA5007E7DB0 /* MainListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListWorker.swift; sourceTree = "<group>"; };
+		5C4D735327B6ECA5007E7DB0 /* MainListLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListLayoutView.swift; sourceTree = "<group>"; };
+		5C4D735427B6ECA5007E7DB0 /* MainListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListPresenter.swift; sourceTree = "<group>"; };
+		5C4D735527B6ECA5007E7DB0 /* MainListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListModels.swift; sourceTree = "<group>"; };
+		5C4D735827B6ECA5007E7DB0 /* FontChangeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontChangeTableViewCell.swift; sourceTree = "<group>"; };
+		5C4D735A27B6ECA5007E7DB0 /* LanguageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguageListCell.xib; sourceTree = "<group>"; };
+		5C4D735C27B6ECA5007E7DB0 /* SettingsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsListCell.xib; sourceTree = "<group>"; };
+		5C4D736127B6ECA5007E7DB0 /* MainListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListCell.xib; sourceTree = "<group>"; };
+		5C4D736227B6ECA5007E7DB0 /* LanguageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageListCell.swift; sourceTree = "<group>"; };
+		5C4D736327B6ECA5007E7DB0 /* MainListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
+		5C4D736527B6ECA5007E7DB0 /* SettingsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCell.swift; sourceTree = "<group>"; };
+		5C4D736827B6ECA5007E7DB0 /* FontChangeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontChangeView.swift; sourceTree = "<group>"; };
+		5C4D736927B6ECA5007E7DB0 /* TableViewNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewNoDataView.xib; sourceTree = "<group>"; };
+		5C4D736A27B6ECA5007E7DB0 /* NotifPhoneAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifPhoneAnimationView.swift; sourceTree = "<group>"; };
+		5C4D736D27B6ECA5007E7DB0 /* MainListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListHeaderView.swift; sourceTree = "<group>"; };
+		5C4D736E27B6ECA5007E7DB0 /* TextTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewHeaderView.swift; sourceTree = "<group>"; };
+		5C4D736F27B6ECA5007E7DB0 /* TextTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableViewHeaderView.xib; sourceTree = "<group>"; };
+		5C4D737027B6ECA5007E7DB0 /* TableViewNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewNoDataView.swift; sourceTree = "<group>"; };
+		5C4D737127B6ECA5007E7DB0 /* MainListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListHeaderView.xib; sourceTree = "<group>"; };
+		5C4D737227B6ECA5007E7DB0 /* NotifPhoneAnimationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifPhoneAnimationView.xib; sourceTree = "<group>"; };
+		5C4D737327B6ECA5007E7DB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C4D737C27B6ECA5007E7DB0 /* CellBackgroundType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellBackgroundType.swift; sourceTree = "<group>"; };
+		5C4D737D27B6ECA5007E7DB0 /* NSDataToSha256String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataToSha256String.swift; sourceTree = "<group>"; };
+		5C4D737E27B6ECA5007E7DB0 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		5C4D738027B6ECA5007E7DB0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5C4D738227B6ECA5007E7DB0 /* StringLocalizationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLocalizationExtension.swift; sourceTree = "<group>"; };
+		5C4D738327B6ECA5007E7DB0 /* UIViewAnimateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAnimateExtension.swift; sourceTree = "<group>"; };
+		5C4D738427B6ECA5007E7DB0 /* StringSizeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
+		5C4D738527B6ECA5007E7DB0 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		5C4D738627B6ECA5007E7DB0 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		5C4D738727B6ECA5007E7DB0 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		5C4D738827B6ECA5007E7DB0 /* DoubleRoundExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleRoundExtension.swift; sourceTree = "<group>"; };
+		5C4D738B27B6ECA5007E7DB0 /* DataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBase.xcdatamodel; sourceTree = "<group>"; };
+		5C4D738D27B6ECA5007E7DB0 /* AppSettingsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsWorker.swift; sourceTree = "<group>"; };
+		5C4D738F27B6ECA5007E7DB0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C4D739027B6ECA5007E7DB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C4D739227B6ECA5007E7DB0 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		5C4D739527B6ECA5007E7DB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C4D739727B6ECA5007E7DB0 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C4D739827B6ECA5007E7DB0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C4D741127B6F07E007E7DB0 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		5C4D741327B6F084007E7DB0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5C4D741527B6F08A007E7DB0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5C4D741727B6F093007E7DB0 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		5C4D741827B6F093007E7DB0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		5C4D741C27B7A964007E7DB0 /* GPSAccessInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccessInteractor.swift; sourceTree = "<group>"; };
+		5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GPSAccessLayoutView.xib; sourceTree = "<group>"; };
+		5C4D741F27B7A964007E7DB0 /* GPSAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccessViewController.swift; sourceTree = "<group>"; };
+		5C4D742227B7A964007E7DB0 /* GPSAccessLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccessLayoutView.swift; sourceTree = "<group>"; };
+		5C5F1A9827D34D8F0035988F /* StatsLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLayoutView.swift; sourceTree = "<group>"; };
+		5C5F1A9A27D34DCF0035988F /* StatsLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsLayoutView.xib; sourceTree = "<group>"; };
+		5C5F1ABA27D79E500035988F /* GatesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatesWorker.swift; sourceTree = "<group>"; };
+		5C7B814227C00857006E89C4 /* ActivityWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWorker.swift; sourceTree = "<group>"; };
+		5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseWorker.swift; sourceTree = "<group>"; };
+		5C7B814827C235A7006E89C4 /* MapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
+		5C7B814A27C236D8006E89C4 /* MapPinAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinAccessoryView.swift; sourceTree = "<group>"; };
+		5C7B814B27C236D8006E89C4 /* MapPinAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapPinAccessoryView.xib; sourceTree = "<group>"; };
+		5CBE5A1E237C4BF900639FDF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		5CBEF11F2370C6BA0052D289 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		771CC491CCEE1062F8249937 /* Pods-GPSTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.debug.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPSTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99646AD5BE7EBB9D53BFCE1D /* Pods-GPSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.release.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C11F077229EF4FB00EC7CEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C4D741927B6F093007E7DB0 /* UserNotificationsUI.framework in Frameworks */,
+				5C4D741A27B6F093007E7DB0 /* UserNotifications.framework in Frameworks */,
+				5C4D741627B6F08A007E7DB0 /* CoreData.framework in Frameworks */,
+				5C4D741427B6F084007E7DB0 /* CoreLocation.framework in Frameworks */,
+				5C4D741227B6F07E007E7DB0 /* CallKit.framework in Frameworks */,
+				5C1A9BC327D8DEB80079305A /* NetworkExtension.framework in Frameworks */,
+				5CBEF1202370C6BA0052D289 /* MapKit.framework in Frameworks */,
+				63364074D2B59618DF26EDB7 /* Pods_GPSTracker.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0089759EE82449622D5B108A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				771CC491CCEE1062F8249937 /* Pods-GPSTracker.debug.xcconfig */,
+				99646AD5BE7EBB9D53BFCE1D /* Pods-GPSTracker.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5C11F071229EF4FB00EC7CEC = {
+			isa = PBXGroup;
+			children = (
+				5C4D730527B6ECA5007E7DB0 /* GPSTracker */,
+				5C11F07B229EF4FB00EC7CEC /* Products */,
+				A06D9252C43D3E2E4CB0455A /* Frameworks */,
+				0089759EE82449622D5B108A /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		5C11F07B229EF4FB00EC7CEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C11F07A229EF4FB00EC7CEC /* GPSTracker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C2EA7FD27BD4425006534F2 /* MotionAccess */ = {
+			isa = PBXGroup;
+			children = (
+				5C2EA80127BD4425006534F2 /* MotionAccessViewController.swift */,
+				5C2EA80027BD4425006534F2 /* MotionAccessInteractor.swift */,
+				5C2EA7FE27BD4425006534F2 /* MotionAccessLayoutView.xib */,
+				5C2EA7FF27BD4425006534F2 /* MotionAccessLayoutView.swift */,
+			);
+			path = MotionAccess;
+			sourceTree = "<group>";
+		};
+		5C2EA80E27BEC149006534F2 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				5C2EA81427BEC149006534F2 /* MapViewController.swift */,
+				5C2EA81327BEC149006534F2 /* MapInteractor.swift */,
+				5C2EA81227BEC149006534F2 /* MapPresenter.swift */,
+				5C2EA81027BEC149006534F2 /* MapWorker.swift */,
+				5C2EA80F27BEC149006534F2 /* MapModels.swift */,
+				5C2EA81127BEC149006534F2 /* MapRouter.swift */,
+				5C2EA81627BEC149006534F2 /* MapLayoutView.swift */,
+				5C2EA81527BEC149006534F2 /* MapLayoutView.xib */,
+				5C7B814827C235A7006E89C4 /* MapPoint.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		5C4D730527B6ECA5007E7DB0 /* GPSTracker */ = {
+			isa = PBXGroup;
+			children = (
+				5C1A9BC127D8DEB80079305A /* GPSTracker.entitlements */,
+				5C4D730627B6ECA5007E7DB0 /* LaunchScreen.storyboard */,
+				5C4D730727B6ECA5007E7DB0 /* Scenes */,
+				5C4D735627B6ECA5007E7DB0 /* CommonViews */,
+				5C4D737327B6ECA5007E7DB0 /* Assets.xcassets */,
+				5C4D737B27B6ECA5007E7DB0 /* Models */,
+				5C4D738027B6ECA5007E7DB0 /* Main.storyboard */,
+				5C4D738127B6ECA5007E7DB0 /* Extensions */,
+				5C4D738927B6ECA5007E7DB0 /* DB */,
+				5C4D738C27B6ECA5007E7DB0 /* Workers */,
+				5C4D738E27B6ECA5007E7DB0 /* AppDelegate */,
+				5C4D739027B6ECA5007E7DB0 /* Info.plist */,
+				5C4D739127B6ECA5007E7DB0 /* Services */,
+				5C4D739327B6ECA5007E7DB0 /* Localization */,
+			);
+			path = GPSTracker;
+			sourceTree = "<group>";
+		};
+		5C4D730727B6ECA5007E7DB0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D730827B6ECA5007E7DB0 /* Settings */,
+				5C4D732D27B6ECA5007E7DB0 /* ScenesManager.swift */,
+				5C4D732E27B6ECA5007E7DB0 /* SetUp */,
+				5C4D734A27B6ECA5007E7DB0 /* Main */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		5C4D730827B6ECA5007E7DB0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D730927B6ECA5007E7DB0 /* Settings */,
+				5C4D731227B6ECA5007E7DB0 /* AppLanguage */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5C4D730927B6ECA5007E7DB0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D731127B6ECA5007E7DB0 /* SettingsViewController.swift */,
+				5C4D730D27B6ECA5007E7DB0 /* SettingsInteractor.swift */,
+				5C4D731027B6ECA5007E7DB0 /* SettingsPresenter.swift */,
+				5C4D730C27B6ECA5007E7DB0 /* SettingsWorker.swift */,
+				5C4D730A27B6ECA5007E7DB0 /* SettingsModels.swift */,
+				5C4D730B27B6ECA5007E7DB0 /* SettingsRouter.swift */,
+				5C4D730E27B6ECA5007E7DB0 /* SettingsViewLayoutView.swift */,
+				5C4D730F27B6ECA5007E7DB0 /* SettingsViewLayoutView.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5C4D731227B6ECA5007E7DB0 /* AppLanguage */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D731327B6ECA5007E7DB0 /* AppLanguageModels.swift */,
+				5C4D731427B6ECA5007E7DB0 /* AppLanguageInteractor.swift */,
+				5C4D731527B6ECA5007E7DB0 /* AppLanguageWorker.swift */,
+				5C4D731627B6ECA5007E7DB0 /* AppLanguageRouter.swift */,
+				5C4D731727B6ECA5007E7DB0 /* AppLanguagePresenter.swift */,
+				5C4D731827B6ECA5007E7DB0 /* AppLanguageLayoutView.swift */,
+				5C4D731927B6ECA5007E7DB0 /* AppLanguageLayoutView.xib */,
+				5C4D731A27B6ECA5007E7DB0 /* AppLanguageViewController.swift */,
+			);
+			path = AppLanguage;
+			sourceTree = "<group>";
+		};
+		5C4D732E27B6ECA5007E7DB0 /* SetUp */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D733827B6ECA5007E7DB0 /* AppLanguage */,
+				5C4D741B27B7A964007E7DB0 /* GPSAccess */,
+				5C2EA7FD27BD4425006534F2 /* MotionAccess */,
+			);
+			path = SetUp;
+			sourceTree = "<group>";
+		};
+		5C4D733827B6ECA5007E7DB0 /* AppLanguage */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D733C27B6ECA5007E7DB0 /* SetupAppLanguageViewController.swift */,
+				5C4D733927B6ECA5007E7DB0 /* SetupAppLanguageInteractor.swift */,
+				5C4D733B27B6ECA5007E7DB0 /* SetupAppLanguagePresenter.swift */,
+				5C4D733F27B6ECA5007E7DB0 /* SetupAppLanguageWorker.swift */,
+				5C4D734027B6ECA5007E7DB0 /* SetupAppLanguageModels.swift */,
+				5C4D733E27B6ECA5007E7DB0 /* SetupAppLanguageRouter.swift */,
+				5C4D733A27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.swift */,
+				5C4D733D27B6ECA5007E7DB0 /* SetupAppLanguageLayoutView.xib */,
+			);
+			path = AppLanguage;
+			sourceTree = "<group>";
+		};
+		5C4D734A27B6ECA5007E7DB0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5C2EA80E27BEC149006534F2 /* Map */,
+				5C4D734B27B6ECA5007E7DB0 /* MainList */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		5C4D734B27B6ECA5007E7DB0 /* MainList */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D734E27B6ECA5007E7DB0 /* MainListViewController.swift */,
+				5C4D734F27B6ECA5007E7DB0 /* MainListInteractor.swift */,
+				5C4D735427B6ECA5007E7DB0 /* MainListPresenter.swift */,
+				5C4D735227B6ECA5007E7DB0 /* MainListWorker.swift */,
+				5C4D735527B6ECA5007E7DB0 /* MainListModels.swift */,
+				5C4D735027B6ECA5007E7DB0 /* MainListRouter.swift */,
+				5C4D735327B6ECA5007E7DB0 /* MainListLayoutView.swift */,
+				5C4D734D27B6ECA5007E7DB0 /* MainListLayoutView.xib */,
+				5C5F1A9827D34D8F0035988F /* StatsLayoutView.swift */,
+				5C5F1A9A27D34DCF0035988F /* StatsLayoutView.xib */,
+			);
+			path = MainList;
+			sourceTree = "<group>";
+		};
+		5C4D735627B6ECA5007E7DB0 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D735727B6ECA5007E7DB0 /* Cells */,
+				5C4D736727B6ECA5007E7DB0 /* Views */,
+			);
+			path = CommonViews;
+			sourceTree = "<group>";
+		};
+		5C4D735727B6ECA5007E7DB0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D735827B6ECA5007E7DB0 /* FontChangeTableViewCell.swift */,
+				5C4D736227B6ECA5007E7DB0 /* LanguageListCell.swift */,
+				5C4D735A27B6ECA5007E7DB0 /* LanguageListCell.xib */,
+				5C4D736327B6ECA5007E7DB0 /* MainListCell.swift */,
+				5C4D736127B6ECA5007E7DB0 /* MainListCell.xib */,
+				5C4D736527B6ECA5007E7DB0 /* SettingsListCell.swift */,
+				5C4D735C27B6ECA5007E7DB0 /* SettingsListCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		5C4D736727B6ECA5007E7DB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5C7B814A27C236D8006E89C4 /* MapPinAccessoryView.swift */,
+				5C7B814B27C236D8006E89C4 /* MapPinAccessoryView.xib */,
+				5C2EA80727BD6A86006534F2 /* MainTabBarView.swift */,
+				5C2EA80627BD6A85006534F2 /* MainTabBarView.xib */,
+				5C4D736827B6ECA5007E7DB0 /* FontChangeView.swift */,
+				5C4D736E27B6ECA5007E7DB0 /* TextTableViewHeaderView.swift */,
+				5C4D736F27B6ECA5007E7DB0 /* TextTableViewHeaderView.xib */,
+				5C4D737027B6ECA5007E7DB0 /* TableViewNoDataView.swift */,
+				5C4D736927B6ECA5007E7DB0 /* TableViewNoDataView.xib */,
+				5C4D736D27B6ECA5007E7DB0 /* MainListHeaderView.swift */,
+				5C4D737127B6ECA5007E7DB0 /* MainListHeaderView.xib */,
+				5C4D736A27B6ECA5007E7DB0 /* NotifPhoneAnimationView.swift */,
+				5C4D737227B6ECA5007E7DB0 /* NotifPhoneAnimationView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5C4D737B27B6ECA5007E7DB0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D737C27B6ECA5007E7DB0 /* CellBackgroundType.swift */,
+				5C4D737D27B6ECA5007E7DB0 /* NSDataToSha256String.swift */,
+				5C4D737E27B6ECA5007E7DB0 /* AppFonts.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5C4D738127B6ECA5007E7DB0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D738227B6ECA5007E7DB0 /* StringLocalizationExtension.swift */,
+				5C2F9DC827C4143B00EBF242 /* CollectionExtension.swift */,
+				5C4D738327B6ECA5007E7DB0 /* UIViewAnimateExtension.swift */,
+				5C4D738427B6ECA5007E7DB0 /* StringSizeExtension.swift */,
+				5C4D738527B6ECA5007E7DB0 /* DispatchQueue.swift */,
+				5C4D738627B6ECA5007E7DB0 /* UIDeviceExtension.swift */,
+				5C4D738727B6ECA5007E7DB0 /* UserDefaultsExtension.swift */,
+				5C4D738827B6ECA5007E7DB0 /* DoubleRoundExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5C4D738927B6ECA5007E7DB0 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D738A27B6ECA5007E7DB0 /* DataBase.xcdatamodeld */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		5C4D738C27B6ECA5007E7DB0 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D738D27B6ECA5007E7DB0 /* AppSettingsWorker.swift */,
+				5C7B814227C00857006E89C4 /* ActivityWorker.swift */,
+				5C5F1ABA27D79E500035988F /* GatesWorker.swift */,
+				5C3F7A8A27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift */,
+				5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */,
+				5C2F9DC627C401EA00EBF242 /* HelperWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		5C4D738E27B6ECA5007E7DB0 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D738F27B6ECA5007E7DB0 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5C4D739127B6ECA5007E7DB0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D739227B6ECA5007E7DB0 /* DataBaseManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5C4D739327B6ECA5007E7DB0 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D739427B6ECA5007E7DB0 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		5C4D741B27B7A964007E7DB0 /* GPSAccess */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D741F27B7A964007E7DB0 /* GPSAccessViewController.swift */,
+				5C4D741C27B7A964007E7DB0 /* GPSAccessInteractor.swift */,
+				5C4D742227B7A964007E7DB0 /* GPSAccessLayoutView.swift */,
+				5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */,
+			);
+			path = GPSAccess;
+			sourceTree = "<group>";
+		};
+		A06D9252C43D3E2E4CB0455A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C1A9BC227D8DEB80079305A /* NetworkExtension.framework */,
+				5C4D741827B6F093007E7DB0 /* UserNotifications.framework */,
+				5C4D741727B6F093007E7DB0 /* UserNotificationsUI.framework */,
+				5C4D741527B6F08A007E7DB0 /* CoreData.framework */,
+				5C4D741327B6F084007E7DB0 /* CoreLocation.framework */,
+				5C4D741127B6F07E007E7DB0 /* CallKit.framework */,
+				5CBE5A1E237C4BF900639FDF /* CoreTelephony.framework */,
+				5CBEF11F2370C6BA0052D289 /* MapKit.framework */,
+				8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C11F079229EF4FB00EC7CEC /* GPSTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C11F0A2229EF4FC00EC7CEC /* Build configuration list for PBXNativeTarget "GPSTracker" */;
+			buildPhases = (
+				CB8E7F8B62B8BFBC9ECA83FC /* [CP] Check Pods Manifest.lock */,
+				5CBE5A1B237B5D9C00639FDF /* Run Script */,
+				5C11F076229EF4FB00EC7CEC /* Sources */,
+				5C11F077229EF4FB00EC7CEC /* Frameworks */,
+				5C11F078229EF4FB00EC7CEC /* Resources */,
+				94B19138247197A9C10E4582 /* [CP] Embed Pods Frameworks */,
+				5C1A9BD627D8DEED0079305A /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GPSTracker;
+			productName = fuelhunter;
+			productReference = 5C11F07A229EF4FB00EC7CEC /* GPSTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C11F072229EF4FB00EC7CEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1300;
+				ORGANIZATIONNAME = myEmerg;
+				TargetAttributes = {
+					5C11F079229EF4FB00EC7CEC = {
+						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 5C11F075229EF4FB00EC7CEC /* Build configuration list for PBXProject "GPSTracker" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ru,
+				lv,
+				Base,
+			);
+			mainGroup = 5C11F071229EF4FB00EC7CEC;
+			productRefGroup = 5C11F07B229EF4FB00EC7CEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C11F079229EF4FB00EC7CEC /* GPSTracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C11F078229EF4FB00EC7CEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C4D73F427B6ECA6007E7DB0 /* TextTableViewHeaderView.xib in Resources */,
+				5C4D73F827B6ECA6007E7DB0 /* Assets.xcassets in Resources */,
+				5C4D740327B6ECA6007E7DB0 /* Main.storyboard in Resources */,
+				5C4D73C827B6ECA6007E7DB0 /* SetupAppLanguageLayoutView.xib in Resources */,
+				5C7B814D27C236D8006E89C4 /* MapPinAccessoryView.xib in Resources */,
+				5C4D73E727B6ECA6007E7DB0 /* MainListCell.xib in Resources */,
+				5C2EA80227BD4425006534F2 /* MotionAccessLayoutView.xib in Resources */,
+				5C4D73E027B6ECA6007E7DB0 /* LanguageListCell.xib in Resources */,
+				5C4D741027B6ECA6007E7DB0 /* Localizable.strings in Resources */,
+				5C5F1A9B27D34DCF0035988F /* StatsLayoutView.xib in Resources */,
+				5C4D73F627B6ECA6007E7DB0 /* MainListHeaderView.xib in Resources */,
+				5C4D73F727B6ECA6007E7DB0 /* NotifPhoneAnimationView.xib in Resources */,
+				5C2EA80827BD6A86006534F2 /* MainTabBarView.xib in Resources */,
+				5C4D73D527B6ECA6007E7DB0 /* MainListLayoutView.xib in Resources */,
+				5C4D73A027B6ECA6007E7DB0 /* SettingsViewLayoutView.xib in Resources */,
+				5C4D73E227B6ECA6007E7DB0 /* SettingsListCell.xib in Resources */,
+				5C4D739A27B6ECA5007E7DB0 /* LaunchScreen.storyboard in Resources */,
+				5C2EA81D27BEC14A006534F2 /* MapLayoutView.xib in Resources */,
+				5C4D73A927B6ECA6007E7DB0 /* AppLanguageLayoutView.xib in Resources */,
+				5C4D742527B7A964007E7DB0 /* GPSAccessLayoutView.xib in Resources */,
+				5C4D73EE27B6ECA6007E7DB0 /* TableViewNoDataView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CBE5A1B237B5D9C00639FDF /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby excel2LangFiles.rb gpstracker_languages.xlsx\n";
+		};
+		94B19138247197A9C10E4582 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GPSTracker/Pods-GPSTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GPSTracker/Pods-GPSTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GPSTracker/Pods-GPSTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB8E7F8B62B8BFBC9ECA83FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GPSTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C11F076229EF4FB00EC7CEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C2EA80327BD4425006534F2 /* MotionAccessLayoutView.swift in Sources */,
+				5C5F1A9927D34D900035988F /* StatsLayoutView.swift in Sources */,
+				5C4D73EB27B6ECA6007E7DB0 /* SettingsListCell.swift in Sources */,
+				5C4D73ED27B6ECA6007E7DB0 /* FontChangeView.swift in Sources */,
+				5C3F7A8B27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift in Sources */,
+				5C4D73D627B6ECA6007E7DB0 /* MainListViewController.swift in Sources */,
+				5C4D73DE27B6ECA6007E7DB0 /* FontChangeTableViewCell.swift in Sources */,
+				5C2F9DC927C4143B00EBF242 /* CollectionExtension.swift in Sources */,
+				5C4D739B27B6ECA6007E7DB0 /* SettingsModels.swift in Sources */,
+				5C4D739D27B6ECA6007E7DB0 /* SettingsWorker.swift in Sources */,
+				5C2EA80427BD4425006534F2 /* MotionAccessInteractor.swift in Sources */,
+				5C7B814327C00857006E89C4 /* ActivityWorker.swift in Sources */,
+				5C2EA81727BEC14A006534F2 /* MapModels.swift in Sources */,
+				5C7B814C27C236D8006E89C4 /* MapPinAccessoryView.swift in Sources */,
+				5C4D73E827B6ECA6007E7DB0 /* LanguageListCell.swift in Sources */,
+				5C4D73A727B6ECA6007E7DB0 /* AppLanguagePresenter.swift in Sources */,
+				5C4D740A27B6ECA6007E7DB0 /* DoubleRoundExtension.swift in Sources */,
+				5C4D740627B6ECA6007E7DB0 /* StringSizeExtension.swift in Sources */,
+				5C4D740927B6ECA6007E7DB0 /* UserDefaultsExtension.swift in Sources */,
+				5C4D742427B7A964007E7DB0 /* GPSAccessInteractor.swift in Sources */,
+				5C4D742A27B7A964007E7DB0 /* GPSAccessLayoutView.swift in Sources */,
+				5C4D73F227B6ECA6007E7DB0 /* MainListHeaderView.swift in Sources */,
+				5C7B814527C17F19006E89C4 /* DataBaseWorker.swift in Sources */,
+				5C4D73C427B6ECA6007E7DB0 /* SetupAppLanguageInteractor.swift in Sources */,
+				5C4D73C527B6ECA6007E7DB0 /* SetupAppLanguageLayoutView.swift in Sources */,
+				5C4D740127B6ECA6007E7DB0 /* AppFonts.swift in Sources */,
+				5C4D73DD27B6ECA6007E7DB0 /* MainListModels.swift in Sources */,
+				5C7B814927C235A7006E89C4 /* MapPoint.swift in Sources */,
+				5C4D740827B6ECA6007E7DB0 /* UIDeviceExtension.swift in Sources */,
+				5C4D73E927B6ECA6007E7DB0 /* MainListCell.swift in Sources */,
+				5C4D740427B6ECA6007E7DB0 /* StringLocalizationExtension.swift in Sources */,
+				5C4D740C27B6ECA6007E7DB0 /* AppSettingsWorker.swift in Sources */,
+				5C4D73FF27B6ECA6007E7DB0 /* CellBackgroundType.swift in Sources */,
+				5C4D73D727B6ECA6007E7DB0 /* MainListInteractor.swift in Sources */,
+				5C4D73C727B6ECA6007E7DB0 /* SetupAppLanguageViewController.swift in Sources */,
+				5C4D73CA27B6ECA6007E7DB0 /* SetupAppLanguageWorker.swift in Sources */,
+				5C2EA81E27BEC14A006534F2 /* MapLayoutView.swift in Sources */,
+				5C2EA81A27BEC14A006534F2 /* MapPresenter.swift in Sources */,
+				5C4D73EF27B6ECA6007E7DB0 /* NotifPhoneAnimationView.swift in Sources */,
+				5C4D73A227B6ECA6007E7DB0 /* SettingsViewController.swift in Sources */,
+				5C2EA81927BEC14A006534F2 /* MapRouter.swift in Sources */,
+				5C2F9DC727C401EA00EBF242 /* HelperWorker.swift in Sources */,
+				5C4D740027B6ECA6007E7DB0 /* NSDataToSha256String.swift in Sources */,
+				5C4D73D827B6ECA6007E7DB0 /* MainListRouter.swift in Sources */,
+				5C2EA80927BD6A86006534F2 /* MainTabBarView.swift in Sources */,
+				5C4D73A327B6ECA6007E7DB0 /* AppLanguageModels.swift in Sources */,
+				5C4D73F527B6ECA6007E7DB0 /* TableViewNoDataView.swift in Sources */,
+				5C4D739C27B6ECA6007E7DB0 /* SettingsRouter.swift in Sources */,
+				5C2EA81B27BEC14A006534F2 /* MapInteractor.swift in Sources */,
+				5C4D73DA27B6ECA6007E7DB0 /* MainListWorker.swift in Sources */,
+				5C4D742727B7A964007E7DB0 /* GPSAccessViewController.swift in Sources */,
+				5C4D73C627B6ECA6007E7DB0 /* SetupAppLanguagePresenter.swift in Sources */,
+				5C4D73C927B6ECA6007E7DB0 /* SetupAppLanguageRouter.swift in Sources */,
+				5C4D740B27B6ECA6007E7DB0 /* DataBase.xcdatamodeld in Sources */,
+				5C4D73AA27B6ECA6007E7DB0 /* AppLanguageViewController.swift in Sources */,
+				5C4D73DB27B6ECA6007E7DB0 /* MainListLayoutView.swift in Sources */,
+				5C2EA80527BD4425006534F2 /* MotionAccessViewController.swift in Sources */,
+				5C4D740D27B6ECA6007E7DB0 /* AppDelegate.swift in Sources */,
+				5C4D740F27B6ECA6007E7DB0 /* DataBaseManager.swift in Sources */,
+				5C4D73A527B6ECA6007E7DB0 /* AppLanguageWorker.swift in Sources */,
+				5C4D740527B6ECA6007E7DB0 /* UIViewAnimateExtension.swift in Sources */,
+				5C5F1ABB27D79E500035988F /* GatesWorker.swift in Sources */,
+				5C4D739F27B6ECA6007E7DB0 /* SettingsViewLayoutView.swift in Sources */,
+				5C4D740727B6ECA6007E7DB0 /* DispatchQueue.swift in Sources */,
+				5C4D739E27B6ECA6007E7DB0 /* SettingsInteractor.swift in Sources */,
+				5C4D73CB27B6ECA6007E7DB0 /* SetupAppLanguageModels.swift in Sources */,
+				5C4D73A627B6ECA6007E7DB0 /* AppLanguageRouter.swift in Sources */,
+				5C4D73F327B6ECA6007E7DB0 /* TextTableViewHeaderView.swift in Sources */,
+				5C2EA81C27BEC14A006534F2 /* MapViewController.swift in Sources */,
+				5C4D73A827B6ECA6007E7DB0 /* AppLanguageLayoutView.swift in Sources */,
+				5C4D73A427B6ECA6007E7DB0 /* AppLanguageInteractor.swift in Sources */,
+				5C4D73BB27B6ECA6007E7DB0 /* ScenesManager.swift in Sources */,
+				5C4D73DC27B6ECA6007E7DB0 /* MainListPresenter.swift in Sources */,
+				5C4D73A127B6ECA6007E7DB0 /* SettingsPresenter.swift in Sources */,
+				5C2EA81827BEC14A006534F2 /* MapWorker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5C4D739427B6ECA5007E7DB0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C4D739527B6ECA5007E7DB0 /* en */,
+				5C4D739727B6ECA5007E7DB0 /* lv */,
+				5C4D739827B6ECA5007E7DB0 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C11F0A0229EF4FC00EC7CEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5C11F0A1229EF4FC00EC7CEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C11F0A3229EF4FC00EC7CEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 771CC491CCEE1062F8249937 /* Pods-GPSTracker.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GPSTracker/GPSTracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				INFOPLIST_FILE = "$(SRCROOT)/GPSTracker/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5C11F0A4229EF4FC00EC7CEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99646AD5BE7EBB9D53BFCE1D /* Pods-GPSTracker.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GPSTracker/GPSTracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				INFOPLIST_FILE = "$(SRCROOT)/GPSTracker/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C11F075229EF4FB00EC7CEC /* Build configuration list for PBXProject "GPSTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C11F0A0229EF4FC00EC7CEC /* Debug */,
+				5C11F0A1229EF4FC00EC7CEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C11F0A2229EF4FC00EC7CEC /* Build configuration list for PBXNativeTarget "GPSTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C11F0A3229EF4FC00EC7CEC /* Debug */,
+				5C11F0A4229EF4FC00EC7CEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5C4D738A27B6ECA5007E7DB0 /* DataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5C4D738B27B6ECA5007E7DB0 /* DataBase.xcdatamodel */,
+			);
+			currentVersion = 5C4D738B27B6ECA5007E7DB0 /* DataBase.xcdatamodel */;
+			path = DataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5C11F072229EF4FB00EC7CEC /* Project object */;
+}
