@@ -5,8 +5,6 @@ I present to you... an app that can record all your car drives automatically.
 
 This has been a tiny hobby project of mine - to make an app, that would record all the car drives I make automatically, and be able to export some "useful" data to email.
 
-
-
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example1.png)
 
 How does it work
