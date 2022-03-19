@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		Font.recalculateFontIncreaseSize()
 
-
+		DataBaseWorker.invalidateAnyEntriesWithNoAddress()
 		DataBaseWorker.calculateStartAndEndAddressForDrives()
 		DataBaseWorker.calculateDistanceAndTimeForDrives()
 

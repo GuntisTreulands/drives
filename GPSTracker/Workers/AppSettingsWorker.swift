@@ -99,7 +99,7 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 
 
 		locationManager.startMonitoringVisits()
-		
+
     	NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
 		
 		refreshCurrentNotificationsStatus {}

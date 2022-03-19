@@ -10,12 +10,46 @@ import CoreData
 import CoreLocation
 
 protocol DataBaseWorkerLogic {
+	static func invalidateAnyEntriesWithNoAddress()
 	static func calculateDistanceAndTimeForDrives()
 	static func calculateStartAndEndAddressForDrives()
 	static func getExportData() -> String
 }
 
 class DataBaseWorker: NSObject, DataBaseWorkerLogic {
+
+	static func invalidateAnyEntriesWithNoAddress() {
+		DispatchQueue.background(background: {
+			let task = {
+
+				do {
+					let backgroundContext = DataBaseManager.shared.newBackgroundManagedObjectContext()
+					let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
+					fetchRequest.predicate = NSPredicate(format:"startAddress == %@ || endAddress == %@", "-", "-")
+					let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
+					fetchRequest.sortDescriptors = [sortByMonth]
+
+					do {
+						let drives = try backgroundContext.fetch(fetchRequest)
+
+						for drive in drives {
+							drive.startAddress = ""
+							drive.endAddress = ""
+							drive.totalDistance = 0
+						}
+
+						DataBaseManager.shared.saveBackgroundContext(backgroundContext: backgroundContext)
+
+					} catch _ { }
+				}
+			}
+
+			DataBaseManager.shared.addATask(action: task)
+
+		}, completion:{
+			DataBaseWorker.calculateDistanceAndTimeForDrives()
+					})
+	}
 
 	static func calculateDistanceAndTimeForDrives() {
 		DispatchQueue.background(background: {

@@ -77,8 +77,15 @@ I will add later.
   
 
   
+Motion API
 
-  
+---------------
+
+Keep in mind, that Motion API can detect driving mode from the GPS movement itself, but it takes some time.
+
+In my case, my phone connects to car Bluetooth, and that seems to be the primary thing for Motion API. Even if I stop the car (without turning it off), and walk around the car, while still connected to car Bluetooth - I am still in a driving mode.
+
+
 
 More info
 

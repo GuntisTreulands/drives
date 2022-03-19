@@ -76,10 +76,6 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 			return
 		}
 
-//		if isDrivingCurrently == false {
-//			GatesWorker.shared.userWalkingAtALocation(location)
-//		}
-
 		guard let activeDrive = activeDrive else {
 			return
 		}

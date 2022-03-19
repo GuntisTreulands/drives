@@ -16,7 +16,6 @@ import UserNotificationsUI
 protocol GatesWorkerLogic {
 	func setUpGatesMonitorFromLocation(_ location: CLLocation)
 	func userAtALocation(_ location: CLLocation)
-	func userWalkingAtALocation(_ location: CLLocation)
 }
 
 class GatesWorker: NSObject, GatesWorkerLogic {
@@ -30,13 +29,10 @@ class GatesWorker: NSObject, GatesWorkerLogic {
 	var walkingReportWithinGate = false
 
 	let gateRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: PrivateGatesHelperWorker.gateLatitude,
-		longitude: PrivateGatesHelperWorker.gateLongitude), radius: 46, identifier: "drive_out_region")
+		longitude: PrivateGatesHelperWorker.gateLongitude), radius: 48, identifier: "drive_out_region")
 
 	let largerGateRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: PrivateGatesHelperWorker.gateLatitude,
 		longitude: PrivateGatesHelperWorker.gateLongitude), radius: 200, identifier: "drive_out_region")
-
-	let walkingGateRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: PrivateGatesHelperWorker.gateLatitude,
-		longitude: PrivateGatesHelperWorker.gateLongitude), radius: 33, identifier: "drive_out_region")
 
 	private override init() {
 		super.init()
@@ -55,12 +51,14 @@ class GatesWorker: NSObject, GatesWorkerLogic {
 
 	func userAtALocation(_ location: CLLocation) {
 
-		if gateRegion.contains(location.coordinate) && self.shouldInitiateCallForGate == true {
-			if encounters >= 2 {
-				PrivateGatesHelperWorker.openTheGates()
-				self.shouldInitiateCallForGate = false
-			} else {
-				encounters += 1
+		if gateRegion.contains(location.coordinate) {
+			if self.shouldInitiateCallForGate == true {
+				if encounters >= 2 {
+					PrivateGatesHelperWorker.openTheGates()
+					self.shouldInitiateCallForGate = false
+				} else {
+					encounters += 1
+				}
 			}
 		} else if largerGateRegion.contains(location.coordinate) {
 			// Priming! Enable gate calling!
@@ -69,32 +67,6 @@ class GatesWorker: NSObject, GatesWorkerLogic {
 			encounters = 0
 			self.shouldInitiateCallForGate = false
 		}
-	}
-
-	func userWalkingAtALocation(_ location: CLLocation) {
-
-//		if walkingGateRegion.contains(location.coordinate) {
-//
-//			walkingReportWithinGate = true
-//			let content = UNMutableNotificationContent()
-//			content.title = "Walking location"
-//			content.body = "Within gate radius"
-//			content.sound = UNNotificationSound.default
-//			let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//			let request = UNNotificationRequest(identifier: "Walking location", content: content, trigger: trigger)
-//			UNUserNotificationCenter.current().add(request)
-//		} else {
-//			if walkingReportWithinGate == true {
-//				walkingReportWithinGate = false
-//				let content = UNMutableNotificationContent()
-//				content.title = "Walking location"
-//				content.body = "Outside gate radius"
-//				content.sound = UNNotificationSound.default
-//				let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//				let request = UNNotificationRequest(identifier: "Walking location", content: content, trigger: trigger)
-//				UNUserNotificationCenter.current().add(request)
-//			}
-//		}
 	}
 }
 
