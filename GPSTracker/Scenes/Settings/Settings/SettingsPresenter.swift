@@ -38,7 +38,7 @@ class SettingsPresenter: SettingsPresentationLogic {
 
 		let settingsItem7 = Settings.SettingsList.ViewModel.DisplayedSettingsCell(settingsListCellType: .feedbackCell, title: "settings_feedback_title".localized(), description: "settings_feedback_description".localized(), shouldShowToggle: false, shouldShowAccessory: true)
 
-		let settingsItem8 = Settings.SettingsList.ViewModel.DisplayedSettingsCell(settingsListCellType: .appVersionCell, title: "settings_app_version_title".localized(), description: "1.0 (1)", shouldShowToggle: false, shouldShowAccessory: false)
+		let settingsItem8 = Settings.SettingsList.ViewModel.DisplayedSettingsCell(settingsListCellType: .appVersionCell, title: "settings_app_version_title".localized(), description: "2.0 (1)", shouldShowToggle: false, shouldShowAccessory: false)
 
 		let array = [settingsItem1, settingsItem2, settingsItem3, settingsItem4, settingsItem5, settingsItem6, settingsItem7, settingsItem8]
 

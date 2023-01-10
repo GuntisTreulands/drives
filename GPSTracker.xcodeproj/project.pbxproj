@@ -101,15 +101,30 @@
 		5C4D742527B7A964007E7DB0 /* GPSAccessLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */; };
 		5C4D742727B7A964007E7DB0 /* GPSAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D741F27B7A964007E7DB0 /* GPSAccessViewController.swift */; };
 		5C4D742A27B7A964007E7DB0 /* GPSAccessLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D742227B7A964007E7DB0 /* GPSAccessLayoutView.swift */; };
+		5C4DD9A228D8DD3A006D23C8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4DD9A128D8DD3A006D23C8 /* DateExtension.swift */; };
 		5C5F1A9927D34D900035988F /* StatsLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F1A9827D34D8F0035988F /* StatsLayoutView.swift */; };
 		5C5F1A9B27D34DCF0035988F /* StatsLayoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C5F1A9A27D34DCF0035988F /* StatsLayoutView.xib */; };
 		5C5F1ABB27D79E500035988F /* GatesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5F1ABA27D79E500035988F /* GatesWorker.swift */; };
+		5C681AF12800638A005DF5CA /* AltitudeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C681AF02800638A005DF5CA /* AltitudeWorker.swift */; };
+		5C6CD1E728F2CA2F000662D6 /* CarGuruPriceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CD1E628F2CA2F000662D6 /* CarGuruPriceWorker.swift */; };
 		5C7B814327C00857006E89C4 /* ActivityWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814227C00857006E89C4 /* ActivityWorker.swift */; };
 		5C7B814527C17F19006E89C4 /* DataBaseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */; };
 		5C7B814927C235A7006E89C4 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814827C235A7006E89C4 /* MapPoint.swift */; };
 		5C7B814C27C236D8006E89C4 /* MapPinAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7B814A27C236D8006E89C4 /* MapPinAccessoryView.swift */; };
 		5C7B814D27C236D8006E89C4 /* MapPinAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C7B814B27C236D8006E89C4 /* MapPinAccessoryView.xib */; };
+		5C94A61728D78E1000A53013 /* StatsListYearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C94A61328D78E1000A53013 /* StatsListYearCell.swift */; };
+		5C94A61828D78E1000A53013 /* StatsListPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C94A61428D78E1000A53013 /* StatsListPriceCell.xib */; };
+		5C94A61928D78E1000A53013 /* StatsListYearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C94A61528D78E1000A53013 /* StatsListYearCell.xib */; };
+		5C94A61A28D78E1000A53013 /* StatsListPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C94A61628D78E1000A53013 /* StatsListPriceCell.swift */; };
 		5CBEF1202370C6BA0052D289 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBEF11F2370C6BA0052D289 /* MapKit.framework */; };
+		5CD0153729649D49004A4122 /* StatsSegmentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CD0153529649D49004A4122 /* StatsSegmentHeaderView.xib */; };
+		5CD0153829649D49004A4122 /* StatsSegmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0153629649D49004A4122 /* StatsSegmentHeaderView.swift */; };
+		5CD0153B2965D89D004A4122 /* CarDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0153A2965D89D004A4122 /* CarDataDownloader.swift */; };
+		5CD0153D2965D8C0004A4122 /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0153C2965D8C0004A4122 /* DataDownloader.swift */; };
+		5CD0153F2965DA26004A4122 /* DownloaderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0153E2965DA26004A4122 /* DownloaderState.swift */; };
+		5CD015412965DD99004A4122 /* MyCarDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD015402965DD99004A4122 /* MyCarDataModel.swift */; };
+		5CF32D0228E05A4200265CB7 /* CityBeePriceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF32D0128E05A4100265CB7 /* CityBeePriceWorker.swift */; };
+		5CF9673C28E20CFB00E02153 /* BoltDrivePriceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9673B28E20CFB00E02153 /* BoltDrivePriceWorker.swift */; };
 		63364074D2B59618DF26EDB7 /* Pods_GPSTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -226,16 +241,31 @@
 		5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GPSAccessLayoutView.xib; sourceTree = "<group>"; };
 		5C4D741F27B7A964007E7DB0 /* GPSAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccessViewController.swift; sourceTree = "<group>"; };
 		5C4D742227B7A964007E7DB0 /* GPSAccessLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccessLayoutView.swift; sourceTree = "<group>"; };
+		5C4DD9A128D8DD3A006D23C8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		5C5F1A9827D34D8F0035988F /* StatsLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLayoutView.swift; sourceTree = "<group>"; };
 		5C5F1A9A27D34DCF0035988F /* StatsLayoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsLayoutView.xib; sourceTree = "<group>"; };
 		5C5F1ABA27D79E500035988F /* GatesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatesWorker.swift; sourceTree = "<group>"; };
+		5C681AF02800638A005DF5CA /* AltitudeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeWorker.swift; sourceTree = "<group>"; };
+		5C6CD1E628F2CA2F000662D6 /* CarGuruPriceWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarGuruPriceWorker.swift; sourceTree = "<group>"; };
 		5C7B814227C00857006E89C4 /* ActivityWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWorker.swift; sourceTree = "<group>"; };
 		5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseWorker.swift; sourceTree = "<group>"; };
 		5C7B814827C235A7006E89C4 /* MapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		5C7B814A27C236D8006E89C4 /* MapPinAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinAccessoryView.swift; sourceTree = "<group>"; };
 		5C7B814B27C236D8006E89C4 /* MapPinAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapPinAccessoryView.xib; sourceTree = "<group>"; };
+		5C94A61328D78E1000A53013 /* StatsListYearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsListYearCell.swift; sourceTree = "<group>"; };
+		5C94A61428D78E1000A53013 /* StatsListPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsListPriceCell.xib; sourceTree = "<group>"; };
+		5C94A61528D78E1000A53013 /* StatsListYearCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsListYearCell.xib; sourceTree = "<group>"; };
+		5C94A61628D78E1000A53013 /* StatsListPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsListPriceCell.swift; sourceTree = "<group>"; };
 		5CBE5A1E237C4BF900639FDF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5CBEF11F2370C6BA0052D289 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5CD0153529649D49004A4122 /* StatsSegmentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsSegmentHeaderView.xib; sourceTree = "<group>"; };
+		5CD0153629649D49004A4122 /* StatsSegmentHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsSegmentHeaderView.swift; sourceTree = "<group>"; };
+		5CD0153A2965D89D004A4122 /* CarDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarDataDownloader.swift; sourceTree = "<group>"; };
+		5CD0153C2965D8C0004A4122 /* DataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
+		5CD0153E2965DA26004A4122 /* DownloaderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderState.swift; sourceTree = "<group>"; };
+		5CD015402965DD99004A4122 /* MyCarDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCarDataModel.swift; sourceTree = "<group>"; };
+		5CF32D0128E05A4100265CB7 /* CityBeePriceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityBeePriceWorker.swift; sourceTree = "<group>"; };
+		5CF9673B28E20CFB00E02153 /* BoltDrivePriceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoltDrivePriceWorker.swift; sourceTree = "<group>"; };
 		771CC491CCEE1062F8249937 /* Pods-GPSTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.debug.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPSTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99646AD5BE7EBB9D53BFCE1D /* Pods-GPSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.release.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -329,6 +359,7 @@
 				5C4D738C27B6ECA5007E7DB0 /* Workers */,
 				5C4D738E27B6ECA5007E7DB0 /* AppDelegate */,
 				5C4D739027B6ECA5007E7DB0 /* Info.plist */,
+				5CD015392965D89D004A4122 /* Server */,
 				5C4D739127B6ECA5007E7DB0 /* Services */,
 				5C4D739327B6ECA5007E7DB0 /* Localization */,
 			);
@@ -455,6 +486,10 @@
 				5C4D736127B6ECA5007E7DB0 /* MainListCell.xib */,
 				5C4D736527B6ECA5007E7DB0 /* SettingsListCell.swift */,
 				5C4D735C27B6ECA5007E7DB0 /* SettingsListCell.xib */,
+				5C94A61628D78E1000A53013 /* StatsListPriceCell.swift */,
+				5C94A61428D78E1000A53013 /* StatsListPriceCell.xib */,
+				5C94A61328D78E1000A53013 /* StatsListYearCell.swift */,
+				5C94A61528D78E1000A53013 /* StatsListYearCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -473,6 +508,8 @@
 				5C4D736927B6ECA5007E7DB0 /* TableViewNoDataView.xib */,
 				5C4D736D27B6ECA5007E7DB0 /* MainListHeaderView.swift */,
 				5C4D737127B6ECA5007E7DB0 /* MainListHeaderView.xib */,
+				5CD0153629649D49004A4122 /* StatsSegmentHeaderView.swift */,
+				5CD0153529649D49004A4122 /* StatsSegmentHeaderView.xib */,
 				5C4D736A27B6ECA5007E7DB0 /* NotifPhoneAnimationView.swift */,
 				5C4D737227B6ECA5007E7DB0 /* NotifPhoneAnimationView.xib */,
 			);
@@ -492,6 +529,7 @@
 		5C4D738127B6ECA5007E7DB0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5C4DD9A128D8DD3A006D23C8 /* DateExtension.swift */,
 				5C4D738227B6ECA5007E7DB0 /* StringLocalizationExtension.swift */,
 				5C2F9DC827C4143B00EBF242 /* CollectionExtension.swift */,
 				5C4D738327B6ECA5007E7DB0 /* UIViewAnimateExtension.swift */,
@@ -516,8 +554,12 @@
 			isa = PBXGroup;
 			children = (
 				5C4D738D27B6ECA5007E7DB0 /* AppSettingsWorker.swift */,
+				5CF32D0128E05A4100265CB7 /* CityBeePriceWorker.swift */,
+				5CF9673B28E20CFB00E02153 /* BoltDrivePriceWorker.swift */,
+				5C6CD1E628F2CA2F000662D6 /* CarGuruPriceWorker.swift */,
 				5C7B814227C00857006E89C4 /* ActivityWorker.swift */,
 				5C5F1ABA27D79E500035988F /* GatesWorker.swift */,
+				5C681AF02800638A005DF5CA /* AltitudeWorker.swift */,
 				5C3F7A8A27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift */,
 				5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */,
 				5C2F9DC627C401EA00EBF242 /* HelperWorker.swift */,
@@ -558,6 +600,17 @@
 				5C4D741D27B7A964007E7DB0 /* GPSAccessLayoutView.xib */,
 			);
 			path = GPSAccess;
+			sourceTree = "<group>";
+		};
+		5CD015392965D89D004A4122 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				5CD0153C2965D8C0004A4122 /* DataDownloader.swift */,
+				5CD0153A2965D89D004A4122 /* CarDataDownloader.swift */,
+				5CD0153E2965DA26004A4122 /* DownloaderState.swift */,
+				5CD015402965DD99004A4122 /* MyCarDataModel.swift */,
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 		A06D9252C43D3E2E4CB0455A /* Frameworks */ = {
@@ -656,9 +709,12 @@
 				5C4D73E727B6ECA6007E7DB0 /* MainListCell.xib in Resources */,
 				5C2EA80227BD4425006534F2 /* MotionAccessLayoutView.xib in Resources */,
 				5C4D73E027B6ECA6007E7DB0 /* LanguageListCell.xib in Resources */,
+				5C94A61928D78E1000A53013 /* StatsListYearCell.xib in Resources */,
+				5CD0153729649D49004A4122 /* StatsSegmentHeaderView.xib in Resources */,
 				5C4D741027B6ECA6007E7DB0 /* Localizable.strings in Resources */,
 				5C5F1A9B27D34DCF0035988F /* StatsLayoutView.xib in Resources */,
 				5C4D73F627B6ECA6007E7DB0 /* MainListHeaderView.xib in Resources */,
+				5C94A61828D78E1000A53013 /* StatsListPriceCell.xib in Resources */,
 				5C4D73F727B6ECA6007E7DB0 /* NotifPhoneAnimationView.xib in Resources */,
 				5C2EA80827BD6A86006534F2 /* MainTabBarView.xib in Resources */,
 				5C4D73D527B6ECA6007E7DB0 /* MainListLayoutView.xib in Resources */,
@@ -740,6 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2EA80327BD4425006534F2 /* MotionAccessLayoutView.swift in Sources */,
+				5CD0153D2965D8C0004A4122 /* DataDownloader.swift in Sources */,
 				5C5F1A9927D34D900035988F /* StatsLayoutView.swift in Sources */,
 				5C4D73EB27B6ECA6007E7DB0 /* SettingsListCell.swift in Sources */,
 				5C4D73ED27B6ECA6007E7DB0 /* FontChangeView.swift in Sources */,
@@ -752,6 +809,7 @@
 				5C2EA80427BD4425006534F2 /* MotionAccessInteractor.swift in Sources */,
 				5C7B814327C00857006E89C4 /* ActivityWorker.swift in Sources */,
 				5C2EA81727BEC14A006534F2 /* MapModels.swift in Sources */,
+				5CD0153F2965DA26004A4122 /* DownloaderState.swift in Sources */,
 				5C7B814C27C236D8006E89C4 /* MapPinAccessoryView.swift in Sources */,
 				5C4D73E827B6ECA6007E7DB0 /* LanguageListCell.swift in Sources */,
 				5C4D73A727B6ECA6007E7DB0 /* AppLanguagePresenter.swift in Sources */,
@@ -768,6 +826,7 @@
 				5C4D73DD27B6ECA6007E7DB0 /* MainListModels.swift in Sources */,
 				5C7B814927C235A7006E89C4 /* MapPoint.swift in Sources */,
 				5C4D740827B6ECA6007E7DB0 /* UIDeviceExtension.swift in Sources */,
+				5C681AF12800638A005DF5CA /* AltitudeWorker.swift in Sources */,
 				5C4D73E927B6ECA6007E7DB0 /* MainListCell.swift in Sources */,
 				5C4D740427B6ECA6007E7DB0 /* StringLocalizationExtension.swift in Sources */,
 				5C4D740C27B6ECA6007E7DB0 /* AppSettingsWorker.swift in Sources */,
@@ -775,13 +834,18 @@
 				5C4D73D727B6ECA6007E7DB0 /* MainListInteractor.swift in Sources */,
 				5C4D73C727B6ECA6007E7DB0 /* SetupAppLanguageViewController.swift in Sources */,
 				5C4D73CA27B6ECA6007E7DB0 /* SetupAppLanguageWorker.swift in Sources */,
+				5CF32D0228E05A4200265CB7 /* CityBeePriceWorker.swift in Sources */,
 				5C2EA81E27BEC14A006534F2 /* MapLayoutView.swift in Sources */,
 				5C2EA81A27BEC14A006534F2 /* MapPresenter.swift in Sources */,
 				5C4D73EF27B6ECA6007E7DB0 /* NotifPhoneAnimationView.swift in Sources */,
 				5C4D73A227B6ECA6007E7DB0 /* SettingsViewController.swift in Sources */,
+				5CD0153829649D49004A4122 /* StatsSegmentHeaderView.swift in Sources */,
 				5C2EA81927BEC14A006534F2 /* MapRouter.swift in Sources */,
+				5CD0153B2965D89D004A4122 /* CarDataDownloader.swift in Sources */,
 				5C2F9DC727C401EA00EBF242 /* HelperWorker.swift in Sources */,
 				5C4D740027B6ECA6007E7DB0 /* NSDataToSha256String.swift in Sources */,
+				5CF9673C28E20CFB00E02153 /* BoltDrivePriceWorker.swift in Sources */,
+				5C4DD9A228D8DD3A006D23C8 /* DateExtension.swift in Sources */,
 				5C4D73D827B6ECA6007E7DB0 /* MainListRouter.swift in Sources */,
 				5C2EA80927BD6A86006534F2 /* MainTabBarView.swift in Sources */,
 				5C4D73A327B6ECA6007E7DB0 /* AppLanguageModels.swift in Sources */,
@@ -798,22 +862,26 @@
 				5C2EA80527BD4425006534F2 /* MotionAccessViewController.swift in Sources */,
 				5C4D740D27B6ECA6007E7DB0 /* AppDelegate.swift in Sources */,
 				5C4D740F27B6ECA6007E7DB0 /* DataBaseManager.swift in Sources */,
+				5C94A61728D78E1000A53013 /* StatsListYearCell.swift in Sources */,
 				5C4D73A527B6ECA6007E7DB0 /* AppLanguageWorker.swift in Sources */,
 				5C4D740527B6ECA6007E7DB0 /* UIViewAnimateExtension.swift in Sources */,
 				5C5F1ABB27D79E500035988F /* GatesWorker.swift in Sources */,
 				5C4D739F27B6ECA6007E7DB0 /* SettingsViewLayoutView.swift in Sources */,
 				5C4D740727B6ECA6007E7DB0 /* DispatchQueue.swift in Sources */,
+				5C6CD1E728F2CA2F000662D6 /* CarGuruPriceWorker.swift in Sources */,
 				5C4D739E27B6ECA6007E7DB0 /* SettingsInteractor.swift in Sources */,
 				5C4D73CB27B6ECA6007E7DB0 /* SetupAppLanguageModels.swift in Sources */,
 				5C4D73A627B6ECA6007E7DB0 /* AppLanguageRouter.swift in Sources */,
 				5C4D73F327B6ECA6007E7DB0 /* TextTableViewHeaderView.swift in Sources */,
 				5C2EA81C27BEC14A006534F2 /* MapViewController.swift in Sources */,
 				5C4D73A827B6ECA6007E7DB0 /* AppLanguageLayoutView.swift in Sources */,
+				5CD015412965DD99004A4122 /* MyCarDataModel.swift in Sources */,
 				5C4D73A427B6ECA6007E7DB0 /* AppLanguageInteractor.swift in Sources */,
 				5C4D73BB27B6ECA6007E7DB0 /* ScenesManager.swift in Sources */,
 				5C4D73DC27B6ECA6007E7DB0 /* MainListPresenter.swift in Sources */,
 				5C4D73A127B6ECA6007E7DB0 /* SettingsPresenter.swift in Sources */,
 				5C2EA81827BEC14A006534F2 /* MapWorker.swift in Sources */,
+				5C94A61A28D78E1000A53013 /* StatsListPriceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +1037,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -992,6 +1061,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

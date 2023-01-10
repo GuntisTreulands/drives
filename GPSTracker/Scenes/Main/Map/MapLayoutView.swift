@@ -11,11 +11,11 @@ import MapKit
 
 
 protocol MapLayoutViewLogic: AnyObject {
-	
+	func mapPointWasPressed(_ point: MapPoint)
 }
 
 protocol MapLayoutViewDataLogic: AnyObject {
-	func updateData(data: [MapPoint])
+	func updateData(data: [[MapPoint]], editMode: Bool)
 }
 
 class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate, MKMapViewDelegate {
@@ -27,12 +27,12 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	@IBOutlet var mapView: MKMapView!
 
 
-	var data = [MapPoint]()
+	var data = [[MapPoint]]()
+	var editMode: Bool = false
 
 	var calculatedMaxPinWidth: CGFloat = 0
 	var calculatedMaxPinHeight: CGFloat = 0
 	var currentMapOffset: CGFloat = 0
-//	var offsetRatio: Double = 1
 
 	var allPinsMapRect: MKMapRect!
 	var selectedPinMapRect: MKMapRect!
@@ -40,11 +40,6 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	var zoomOnUserWasDone: Bool = false
 	var userDraggedOrZoomedMap: Bool = false
 	var disableMapAdjusting: Bool = false
-
-	var usedAccessoryViews: [MapPinAccessoryView] = []
-
-	var polyLine: MKPolyline?
-
 
 	// MARK: View lifecycle
 
@@ -94,18 +89,22 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	// MARK: Functions
 
 	private func addNecessaryLinePoints() {
-		if let polyLine = polyLine {
-			mapView.removeOverlay(polyLine)
+		for overlay in mapView.overlays {
+			mapView.removeOverlay(overlay)
 		}
+
 		var array = [CLLocationCoordinate2D]()
 
 		for i in 0 ..< self.data.count {
-			array.append(self.data[i].coordinate)
-		}
+			for j in 0 ..< self.data[i].count {
+                array.append(self.data[i][j].coordinate)
+			}
 
-		let polyLine = MKPolyline.init(coordinates: array, count: array.count)
-		mapView.addOverlay(polyLine)
-		self.polyLine = polyLine
+			let polyLine = MKPolyline.init(coordinates: array, count: array.count)
+			mapView.addOverlay(polyLine)
+
+			array.removeAll()
+		}
 	}
 
 	private func regionFor(mapPoints points: [MapPoint]) -> MKCoordinateRegion {
@@ -115,13 +114,6 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 			let p = MKMapPoint(points[i].coordinate)
 			r = r.union(MKMapRect(x: p.x, y: p.y, width: 0, height: 0))
 		}
-
-//		if points.isEmpty {
-//			if mapView!.userLocation.location != nil {
-//				let p = MKMapPoint(mapView!.userLocation.coordinate)
-//				r = r.union(MKMapRect(x: p.x, y: p.y, width: 0, height: 0))
-//			}
-//		}
 
 		var region = MKCoordinateRegion(r)
 
@@ -153,29 +145,6 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		}
 
 		self.mapView.setVisibleMapRect(r, edgePadding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), animated: animated)
-
-
-//
-//		// For now, override.. because when user starts to mess with map, it sucks when it zooms out again..
-//		if self.userDraggedOrZoomedMap == true { return }
-//
-//
-//
-//		if !disableMapAdjusting {
-//			if self.userDraggedOrZoomedMap == true { disableMapAdjusting = true }
-//
-//			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-//				self.userDraggedOrZoomedMap = false
-//				self.disableMapAdjusting = false
-//			})
-//
-//			if self.allPinsMapRect.origin.x != -1 { // In case allPinsMapRect is invalid (no pins?), zoom on country.
-//
-//				UIView.animate(withDuration: 0.2, delay: 0, options: .allowUserInteraction, animations: {
-//					self.mapView.setVisibleMapRect(self.allPinsMapRect, edgePadding: UIEdgeInsets(top: self.calculatedMaxPinHeight + 15, left: self.calculatedMaxPinWidth / 2 + 5, bottom: self.currentMapOffset + 5, right: self.calculatedMaxPinWidth / 2 + 5), animated: self.userDraggedOrZoomedMap == true ? true : animated)
-//				}) { (result) in }
-//			}
-//		}
 	}
 
 	private func recalculateMapRect() {
@@ -188,24 +157,47 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 
 	// MARK: MapLayoutViewDataLogic
 
-	func updateData(data: [MapPoint]) {
+	func updateData(data: [[MapPoint]], editMode: Bool) {
 
-		self.data = data
+		self.editMode = editMode
 
-		usedAccessoryViews.removeAll()
+		if self.data.isEmpty {
+			self.data = data
 
-		mapView.removeAnnotations(mapView.annotations)
+			mapView.removeAnnotations(mapView.annotations)
 
-		mapView.addAnnotation(data.first!)
+			for drive in self.data {
+				if !self.editMode {
+					mapView.addAnnotation(drive.first!)
 
-		mapView.addAnnotation(data.last!)
-//		mapView.addAnnotations(data)
+					mapView.addAnnotation(drive.last!)
+				} else {
 
-		recalculateMapRect()
+					mapView.addAnnotations(drive)
+				}
+			}
 
-		zoomOnAllPins(animated: false)
+			recalculateMapRect()
 
-		addNecessaryLinePoints()
+			zoomOnAllPins(animated: false)
+
+			addNecessaryLinePoints()
+		} else {
+			self.data = data
+			mapView.removeAnnotations(mapView.annotations)
+
+			for drive in self.data {
+				if !self.editMode {
+					mapView.addAnnotation(drive.first!)
+
+					mapView.addAnnotation(drive.last!)
+				} else {
+
+					mapView.addAnnotations(drive)
+				}
+			}
+
+		}
 	}
 
 	// MARK: MKMapViewDelegate
@@ -224,6 +216,10 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 			return nil
 		}
 
+		if self.data.count > 1 {
+			return MKAnnotationView.init()
+		}
+
 		let annotationIdentifier = "mapPoint"
 
 		var annotationView: MKAnnotationView?
@@ -234,82 +230,70 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		else {
 			let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
 			annotationView = av
+		}
 
-			if (annotation as! MapPoint).isStart {
-				av.pinTintColor = UIColor.init(red: 69/255.0, green: 155/255.0, blue: 2/255.0, alpha: 1)
-			} else {
-				av.pinTintColor = .red
-			}
+		let av = (annotationView as! MKPinAnnotationView)
 
-			av.canShowCallout = true
+		if (annotation as! MapPoint).title!.contains("$") {
+			av.pinTintColor = UIColor.purple
+		}
+		else if (annotation as! MapPoint).isStart && !self.editMode {
+			av.pinTintColor = UIColor.init(red: 69/255.0, green: 155/255.0, blue: 2/255.0, alpha: 1)
+		} else {
+			av.pinTintColor = .red
+		}
 
-			if #available(iOS 13.0, *) {
+		av.canShowCallout = true
+
+		if #available(iOS 13.0, *) {
+			if self.editMode {
 				let button = UIButton.init(type: .close)
 				av.rightCalloutAccessoryView = button
 			}
-
 		}
-
-
-//		if let annotationView = annotationView,
-//		   let mapPointAnnotation = annotationView.annotation as? MapPoint {
-
-
-
-
-//			annotationView.canShowCallout = false
-//
-//			// This is needed, otherwise, I noticed that in some cases, more than one gets added..
-//			let mapPinAccessory = annotationView.viewWithTag(333) as? MapPinAccessoryView ?? MapPinAccessoryView()
-//
-//
-//			mapPinAccessory.setAsTiny(true)
-//			mapPinAccessory.title = mapPointAnnotation.title!
-//
-//
-//			mapPinAccessory.setDistanceVisible(false)
-//
-//			mapPinAccessory.layoutIfNeeded()
-//			mapPinAccessory.tag = 333
-//
-//
-//			calculatedMaxPinWidth = max(mapPinAccessory.frame.width, calculatedMaxPinWidth)
-//			calculatedMaxPinHeight = max(mapPinAccessory.frame.height, calculatedMaxPinHeight)
-//
-//			annotationView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-//			annotationView.addSubview(mapPinAccessory)
-//
-//			annotationView.frame = mapPinAccessory.frame
-//
-//			if usedAccessoryViews.contains(mapPinAccessory) == false {
-//				usedAccessoryViews.append(mapPinAccessory)
-//			}
-//		}
 
 		return annotationView
 	}
 
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 		guard !(view.annotation is MKUserLocation) else { return }
-
-//		controller?.mapPinWasPressed(view.annotation as! MapPoint)
 	}
 
-//	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-//		if !zoomOnUserWasDone {
-//			zoomOnAllPins(animated: true)
-//			zoomOnUserWasDone = true
-//		}
-//	}
+	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+		if self.data.count > 1 {
+			mapView.mapType = .satellite
+			mapView.mapType = .standard
+		}
+	}
 
+
+	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+		if self.editMode {
+			let mapPoint = view.annotation as! MapPoint
+			//print("mapPoint \(mapPoint)")
+			controller?.mapPointWasPressed(view.annotation as! MapPoint)
+
+			// We support only first line.
+			let index = self.data[0].firstIndex(of: mapPoint)
+			self.data[0].remove(at: index!)
+			mapView.removeAnnotation(mapPoint)
+
+			addNecessaryLinePoints()
+		}
+	}
 
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 		if overlay.isKind(of: MKPolyline.self) {
 			// draw the track
 			let polyLine = overlay
 			let polyLineRenderer = MKPolylineRenderer(overlay: polyLine)
-			polyLineRenderer.strokeColor = UIColor.black.withAlphaComponent(0.75)
-			polyLineRenderer.lineWidth = 5.0
+			if self.data.count == 1 {
+				polyLineRenderer.strokeColor = UIColor.black.withAlphaComponent(0.75)
+				polyLineRenderer.lineWidth = 5.0
+			} else {
+				polyLineRenderer.strokeColor = UIColor.red.withAlphaComponent(0.4)
+				polyLineRenderer.lineWidth = 2.0
+			}
 
 			return polyLineRenderer
 		}

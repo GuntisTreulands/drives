@@ -131,8 +131,8 @@ class MapPinAccessoryView: UIView, MapPinAccessoryViewDisplayLogic {
 		distanceLabelBottomConstraint = distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
 		distanceLabelBottomConstraint.isActive = true
 
-		priceLabel.font = Font(.medium, size: .size3).font
-		distanceLabel.font = Font(.normal, size: .size5).font
+		priceLabel.font = Font(.medium, size: .size19).font
+		distanceLabel.font = Font(.normal, size: .size15).font
 
 		iconGray.contentMode = .center
 		iconNormal.contentMode = .center

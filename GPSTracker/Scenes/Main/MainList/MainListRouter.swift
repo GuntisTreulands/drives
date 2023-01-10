@@ -14,7 +14,9 @@ import UIKit
 
 protocol MainListRoutingLogic {
 	func routeToSettings()
+	func routeToFullMap()
 	func routeToMapWithIdentificator(_ identificator: String)
+	func routeToMapWithSectionedMonthString(_ sectionedMonthString: String)
 }
 
 protocol MainListDataPassing {
@@ -34,6 +36,12 @@ class MainListRouter: NSObject, MainListRoutingLogic, MainListDataPassing {
   		navigateTo(source: viewController!, destination: SettingsViewController())
   	}
 
+	@objc func routeToFullMap() {
+		viewController?.navigationController?.delegate = nil
+		let destination = MapViewController()
+  		navigateTo(source: viewController!, destination: destination)
+	}
+	
   	@objc func routeToMapWithIdentificator(_ identificator: String) {
 		viewController?.navigationController?.delegate = nil
 		let destination = MapViewController()
@@ -41,7 +49,13 @@ class MainListRouter: NSObject, MainListRoutingLogic, MainListDataPassing {
   		navigateTo(source: viewController!, destination: destination)
   	}
 
-	
+	@objc func routeToMapWithSectionedMonthString(_ sectionedMonthString: String) {
+		viewController?.navigationController?.delegate = nil
+		let destination = MapViewController()
+		destination.router?.dataStore?.monthIdentificator = sectionedMonthString
+  		navigateTo(source: viewController!, destination: destination)
+	}
+
   	// MARK: Functions
 
 	private func navigateTo(source: MainListViewController, destination: UIViewController) {

@@ -22,9 +22,7 @@ struct Font {
 
 	static func recalculateFontIncreaseSize() {
 		// Default should be 28. (From my testing.)
-//		print("font size before increase \(Font.increaseFontSize)")
 		Font.increaseFontSize = min(10, Int(UIFont.preferredFont(forTextStyle: .title1).pointSize) - 28)
-//		print("font size after increase \(Font.increaseFontSize)")
 	}
 
     enum FontType: String {
@@ -33,14 +31,14 @@ struct Font {
         case bold   = "HelveticaNeue-Bold"
     }
     enum FontSize: Int {
-    	case size0 = 33
-        case size1 = 25
-        case size2 = 21
-        case size3 = 19
-        case size4 = 17
-        case size5 = 15
-        case size6 = 14
-        case size7 = 13
+    	case size33 = 33
+        case size25 = 25
+        case size21 = 21
+        case size19 = 19
+        case size17 = 17
+        case size15 = 15
+        case size14 = 14
+        case size13 = 13
     }
 
     var type: FontType

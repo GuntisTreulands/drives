@@ -11,11 +11,12 @@
 //
 
 import UIKit
-
+import CoreMotion
 
 
 protocol MainListDisplayLogic: AnyObject {
 	func presentList(viewModel: MainList.FetchDrives.ViewModel)
+	func loadStats(viewModel: MainList.FetchStats.ViewModel)
 }
 
 class MainListViewController: UIViewController, MainListDisplayLogic, MainListLayoutViewLogic, MainTabBarViewButtonLogic, StatsLayoutViewLogic {
@@ -27,7 +28,10 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 	var tabBarView: MainTabBarView!
 	var selectedCell: MainListCell?
 	var timer: Timer?
-	
+	lazy var altimeter = CMAltimeter()
+
+	var selectedStatsType: MainList.StatsShowType = .lastYear
+
 	// MARK: Object lifecycle
 
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -54,13 +58,29 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
     		name: .languageWasChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(fontSizeWasChanged),
     		name: .fontSizeWasChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(dataDownloaderStateChange),
+    		name: .dataDownloaderStateChange, object: nil)
 
 		self.navigationController!.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image:
 			UIImage(named: "settings_icon"), style: .plain, target: router, action:NSSelectorFromString("routeToSettings"))
 
+		self.navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image:
+			UIImage(named: "map_icon"), style: .plain, target: router, action:NSSelectorFromString("routeToFullMap"))
+
 		setUpView()
 
 		self.getData()
+
+
+
+		self.altimeter.startRelativeAltitudeUpdates(to: OperationQueue.main, withHandler: { (altitudeData:CMAltitudeData?, error:Error?) in
+
+			if (error == nil) {
+
+			}
+		})
+
+
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +137,7 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 		tabBarView = MainTabBarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
 		self.view.addSubview(tabBarView)
 		tabBarView.topAnchor.constraint(equalTo: layoutView.bottomAnchor).isActive = true
+		tabBarView.topAnchor.constraint(equalTo: statsLayoutView.bottomAnchor).isActive = true
 		tabBarView.heightAnchor.constraint(equalToConstant: 49).isActive = true
         tabBarView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
         tabBarView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
@@ -124,13 +145,18 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 		tabBarView.controller = self
 
 		tabBarView.updateTitles()
+
+		statsLayoutView.alpha = 0
 	}
 
 	// MARK: Functions
 
 	func getData() {
-		let request = MainList.FetchDrives.Request()
-		interactor?.fetchDrives(request: request)
+		let requestDrives = MainList.FetchDrives.Request()
+		interactor?.fetchDrives(request: requestDrives)
+
+		let requestStats = MainList.FetchStats.Request(statsShowType: self.selectedStatsType)
+		interactor?.fetchStats(request: requestStats)
 	}
 
 
@@ -139,10 +165,14 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 	func presentList(viewModel: MainList.FetchDrives.ViewModel) {
 		DispatchQueue.main.asyncAfter(deadline: .now()) {
 			self.layoutView.updateData(data: viewModel.displayedCellItems)
-			self.statsLayoutView.updateData(data: [])
 		}
 	}
 	
+	func loadStats(viewModel: MainList.FetchStats.ViewModel) {
+		DispatchQueue.main.asyncAfter(deadline: .now()) {
+			self.statsLayoutView.updateData(data: viewModel.displayedCellItems, statsShowType: self.selectedStatsType)
+		}
+	}
 
 	// MARK: MainListLayoutViewLogic
 
@@ -165,8 +195,18 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 		self.interactor?.changeADriveType(request: MainList.ChangeADriveType.Request.init(identificator: identificator, isBusinessType: businessType))
 	}
 
+	func headerWasPressedWithSectionedMonthString(_ sectionedMonthString: String) {
+		self.router?.routeToMapWithSectionedMonthString(sectionedMonthString)
+	}
+
 	// MARK: StatsLayoutViewLogic
 
+	func segmentButtonIndexChanged(_ index: Int) {
+		self.selectedStatsType = MainList.StatsShowType.init(rawValue: index)!
+		
+		let requestStats = MainList.FetchStats.Request(statsShowType: self.selectedStatsType)
+		interactor?.fetchStats(request: requestStats)
+	}
 
 	// MARK: MainTabBarViewButtonLogic
 
@@ -186,11 +226,14 @@ class MainListViewController: UIViewController, MainListDisplayLogic, MainListLa
 		getData()
 		tabBarView.updateTitles()
 		layoutView.adjustNoDataLabelText()
-		statsLayoutView.adjustNoDataLabelText()
 	}
 
 	@objc private func fontSizeWasChanged() {
 		self.layoutView.resetUI()
 	}
 
+	@objc private func dataDownloaderStateChange() {
+		let requestStats = MainList.FetchStats.Request(statsShowType: self.selectedStatsType)
+		interactor?.fetchStats(request: requestStats)
+	}
 }

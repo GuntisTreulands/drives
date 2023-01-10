@@ -44,7 +44,7 @@ class TextTableViewHeaderView: FontChangeHeaderFooterView, TextTableViewHeaderVi
 	// MARK: Functions
 	
 	private func updateFonts() {
-		titleLabel.font = Font(.normal, size: .size3).font
+		titleLabel.font = Font(.normal, size: .size19).font
 	}
 
     override func fontSizeWasChanged() {

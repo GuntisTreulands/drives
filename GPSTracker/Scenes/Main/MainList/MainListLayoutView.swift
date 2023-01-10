@@ -12,6 +12,7 @@ protocol MainListLayoutViewLogic: AnyObject {
 	func userPressedOnADriveWithIdentificator(_ identificator: String)
 	func userPressedToDeleteADriveWithIdentificator(_ identificator: String)
 	func userPressedToMarkADriveWithIdentificator(_ identificator: String, businessType: Bool)
+	func headerWasPressedWithSectionedMonthString(_ sectionedMonthString: String)
 }
 
 protocol MainListLayoutViewDataLogic: AnyObject {
@@ -24,7 +25,7 @@ protocol MainListLayoutViewDataLogic: AnyObject {
 }
 
 
-class MainListLayoutView: UIView, UITableViewDataSource, UITableViewDelegate, MainListLayoutViewDataLogic {
+class MainListLayoutView: UIView, UITableViewDataSource, UITableViewDelegate, MainListLayoutViewDataLogic, MainListHeaderViewButtonLogic {
 
 	weak var controller: MainListLayoutViewLogic?
 	weak var superParentView: UIView!
@@ -170,6 +171,8 @@ class MainListLayoutView: UIView, UITableViewDataSource, UITableViewDelegate, Ma
 
 		let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! MainListHeaderView
 
+		header.controller = self
+		
 		let aData = self.data[section].first!
 
 		var combinedTime: Double = 0
@@ -256,6 +259,12 @@ class MainListLayoutView: UIView, UITableViewDataSource, UITableViewDelegate, Ma
 
         return configuration
     }
+
+	// MARK: MainListHeaderViewButtonLogic
+
+	func headerWasPressed(_ sectionIndex: Int) {
+		self.controller?.headerWasPressedWithSectionedMonthString(self.data[sectionIndex][0].sectionedMonthString)
+	}
 
 	// MARK: MainListLayoutViewDataLogic
 

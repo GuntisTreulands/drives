@@ -3,7 +3,7 @@
 //  GPSTracker
 //
 //  Created by Guntis on 18/02/2022.
-//  Copyright © 2022 myEmerg. All rights reserved.
+//  Copyright © 2022. All rights reserved.
 //
 
 import CoreData
@@ -27,16 +27,29 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 	public var activeDrive: DriveEntity?
 
 	let dayMonthYearDateFormatter = DateFormatter()
+	let yearMonthDayDateFormatter = DateFormatter()
 	let dayMonthDateFormatter = DateFormatter()
-	let monthYearDateFormatter = DateFormatter()
+	let yearMonthDateFormatter = DateFormatter()
+	let yearDateFormatter = DateFormatter()
 	let monthDateFormatter = DateFormatter()
-
 
 	private override init() {
 		super.init()
 		dayMonthYearDateFormatter.dateFormat = "dd.MM.yyyy"
+		dayMonthYearDateFormatter.locale = Locale.init(identifier: "en_US")
+
+		yearMonthDayDateFormatter.dateFormat = "yyyy.MM.dd"
+		yearMonthDayDateFormatter.locale = Locale.init(identifier: "en_US")
+
 		dayMonthDateFormatter.dateFormat = "dd.MM"
-		monthYearDateFormatter.dateFormat = "MM.YYYY"
+		dayMonthDateFormatter.locale = Locale.init(identifier: "en_US")
+
+		yearMonthDateFormatter.dateFormat = "YYYY.MM"
+		yearMonthDateFormatter.locale = Locale.init(identifier: "en_US")
+
+		yearDateFormatter.dateFormat = "YYYY"
+		yearDateFormatter.locale = Locale.init(identifier: "en_US")
+		
 		monthDateFormatter.dateFormat = "MMM"
 		monthDateFormatter.locale = Locale.init(identifier: "en_US")
 	}
@@ -74,6 +87,10 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 		if location.verticalAccuracy > 180 {
 			return
+		}
+
+		if !isDrivingCurrently {
+			GatesWorker.shared.userWalkedAtALocation(location)
 		}
 
 		guard let activeDrive = activeDrive else {
@@ -140,8 +157,9 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 			if let activeDrive = ActivityWorker.shared.activeDrive {
 				activeDrive.monthString = ActivityWorker.shared.monthDateFormatter.string(from: Date())
-				activeDrive.sectionedMonthString = ActivityWorker.shared.monthYearDateFormatter.string(from: Date())
+				activeDrive.sectionedMonthString = ActivityWorker.shared.yearMonthDateFormatter.string(from: Date())
 				activeDrive.sortingMonthDayYearString = ActivityWorker.shared.dayMonthYearDateFormatter.string(from: Date())
+				activeDrive.sortingYearMonthDayString = ActivityWorker.shared.yearMonthDayDateFormatter.string(from: Date())
 				activeDrive.identificator = "\(Date().timeIntervalSince1970)"
 				activeDrive.isInProgress = true
 				activeDrive.startTime = Date().timeIntervalSince1970
@@ -157,7 +175,7 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 		DataBaseManager.shared.addATask(action: task)
 
-		AppSettingsWorker.shared.setLocationManagerInAnActiveState(true)
+		AppSettingsWorker.shared.safelySetLocationManagerInAnActiveState(true)
 
 		AppSettingsWorker.shared.stopMonitoringAnyRegions()
 	}
@@ -173,6 +191,7 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 			if let firstPoint = sortedPoints.first {
 				previousLocation = CLLocation.init(latitude: firstPoint.latitude, longitude: firstPoint.longitude)
+
 
 				for point in sortedPoints {
 					let location = CLLocation.init(latitude: point.latitude, longitude: point.longitude)
@@ -201,6 +220,11 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 			let task = {
 				if let activeDrive = ActivityWorker.shared.activeDrive {
+					let sortedPoints: [PointEntity] = activeDrive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: false)]) as! [PointEntity]
+
+					if let firstPoint = sortedPoints.first {
+						activeDrive.rLastPoint = firstPoint
+					}
 					activeDrive.totalDistance = distance
 					activeDrive.totalTime = seconds
 					activeDrive.endTime = Date().timeIntervalSince1970
@@ -213,10 +237,14 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 
 			DataBaseManager.shared.addATask(action: task)
 
-			AppSettingsWorker.shared.setLocationManagerInAnActiveState(false)
-
+			AppSettingsWorker.shared.safelySetLocationManagerInAnActiveState(false)
 
 			AppSettingsWorker.shared.startMonitoringRegionForLocation(previousLocation)
+
+			if let lastPoint = sortedPoints.first {
+				let location = CLLocation.init(latitude: lastPoint.latitude, longitude: lastPoint.longitude)
+				GatesWorker.shared.driveEndedAtALocation(location)
+			}
 		}
 	}
 
@@ -235,3 +263,25 @@ class ActivityWorker: NSObject, ActivityWorkerLogic {
 	}
 }
 
+/*
+	ALTIMETER!!!
+
+	1.) Need to monitor enter/leave home region - thus,
+		a.) if we leave home region, and are by foot, then turn off gps.
+		b.) if we enter home region, and are by foot, then turn on gps. (until left region, or altitude +10 (+-3)
+
+	2.) Cold start app, check if we are in home region. If yes, store current altitude (as a basis for apartment)
+		At this point we don't know if we are ground level or apartment.
+		Act normaly, after 10 mins, turn gps off.
+
+		a.) If we are in home region and altitude decreases by 10 meters, turn gps on, until left home region, or altitude returns back to basis apartment interval (relative -3 <value> 3)
+
+		b.) If we are in home region and altitude increases by 10 meters, then we need to store new altitude and use it as a basis for apartment.
+			Turn off gps.
+
+		c.) If we are outside home region, it is fine.
+
+
+
+	Only problem is, need to validate if in home region,  altitude is correct (ground level and apartment level)
+ */

@@ -4,19 +4,72 @@
 
  I present to you... an app that can record all your car drives automatically.
 
-This has been a tiny hobby project of mine - to make an app, that would automatically record all the car drives I make, and be able to export some "useful" data to email.
+This has been a tiny hobby project of mine - to make an app, that would automatically record all the car drives I make and be able to export some "useful" data to email.
 
   
 
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example3.gif)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example4.gif)
 
-  
 
+** Version 2 Update!! Whoop Whoop!🙀 **  
+
+**1.)** Statistics page (To finally determine if owning a car costs more that rent services.. )
+
+**2.)** Month drives / All drives - map view (Just to see all the drives at once. Looks so sweet)
+
+
+**Statistics** 
+
+
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example7.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example8.png)
+
+
+Since for ever, I have collected all the costs I have with my car.. Fuel, Taxes, insurance, car wash, repairs, and
+even - car value drop (once a year I see check some market place to see the aprox value of my car).
+But what was missing - how often do I drive, and how long are the drives.
+
+Here, in Latvia, we have 3 most popular car rent services:
+Bolt Drive, CarGuru and CityBee.
+- I investigated their homepages and apps, to determine all the possible costs for renting their cheapest car.
+
+- Then I mapped within my app for each drive (actually I combined some of the drives, that were trips over multiple days), to determine price for each service.
+
+- To add a cherry on top - For each drive/trip, I now knew the cheapest rentable service, so I created another entry: Mixed Rent (If I knew beforehand my trip length/distance, I could in theory, choose appropriate car rent service).
+
+And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
+
+**Definatelly it is worth to have my own car, than rent!(*)(*) **
+
+(*) If I am being honest, In year 1 of owning my current car, it actually appears that my car was more expensive than renting would have been, because in year one I got premium insurance, had some initial post-buy repairs, car value dropped much more on first year, etc.  So - the longer I own a car, the cheaper it got, and in the last year, my car is cheaper by ~3.5x than if I would rent a car for each drive/trip
+
+(*) I am using static rent service prices, while comparing my car costs 5 years ago. Yes, it sucks, but hey, it's a start, and it's pretty cool in my humble opinion.  Rent service prices are hardcoded for now.
+
+
+**Month drives / All drives - map view**
+
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example6.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example5.png)
+
+Not much to comment here. It felt kinda awesome, if I could see All my drives at once, just to see that spider web on the map - where have I driven with my car.
+
+It was actually (and still is) a challange. I started recording my drives since 2022.02.15 I think, and I have recorded about 533 drives, in total having around 480k points. No easy feat for MKMapview.
+
+So, I added some filtering, to determine and keep only pivotal points and ended up with around 67k points.
+Map is now more usable, but it still takes some time to load, and iOS 16.x has a bug, that it will freeze app after a while (with so much data). Only solution is to refresh it (change mapType to something else and back) after each panning/zooming. Still room to improve.
+
+
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example9.gif)
+
+
+--------------- 
+**Drives recording**
 How does it work.
 
 ---------------
 
   
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example3.gif)
 
 **1.)** App needs "Location Updates" and "Background processing" capabilities
 
@@ -70,9 +123,6 @@ By integrating performFetchWithCompletionHandler: into the AppDelegate, iOS coul
 
 I could rig up either a server sending some VOIP pushes from time to time to wake the app, or maybe use those silent pushes (but those are also not always getting through).
 
-**13.) One more thing.. but while I wrote other things, I forgot about this one.**
-
-I will add later.
 
   
 

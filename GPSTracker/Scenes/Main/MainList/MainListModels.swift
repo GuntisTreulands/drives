@@ -35,6 +35,7 @@ enum MainList {
 				var startAddress: String
 				var endAddress: String
 				var isBusinessType: Bool
+				var sectionedMonthString: String
 			}
 			var displayedCellItems: [[DisplayedCellItem]]
 		}
@@ -50,6 +51,46 @@ enum MainList {
 		struct Request {
 			var identificator: String
 			var isBusinessType: Bool
+		}
+	}
+
+	enum StatsCellType {
+		case year, myCar, cityBee, carGuru, boltDrive, mixed
+	}
+	enum StatsShowType: Int {
+		case firstYear = 0, lastYear = 1, avgYear = 2
+	}
+	enum FetchStats {
+		struct Request {
+			var statsShowType: StatsShowType
+		}
+		struct Response {
+			var fetchedDrives: [DriveEntity]
+			var fetchedSectionedDrives: [[DriveEntity]]
+			var statsShowType: StatsShowType
+			var carCosts: [Double]
+			var valueDrop: [Double]
+		}
+		struct ViewModel {
+			struct StatsCellItem: Equatable {
+				var statsCellType: StatsCellType
+
+				var yearDistance: Double = 0
+				var yearTime: Double = 0
+				var driveDaysInAYear: Int = 0
+				var drivesInAYear: Int = 0
+				var avgWeekDays: Double = 0
+				var avgMonthDays: Double = 0
+				var avgWeekDrives: Double = 0
+				var avgMonthDrives: Double = 0
+
+				var title: String = ""
+				var ratioText: String = ""
+				var avgMonthCost: Double = 0
+				var avgHalfYearCost: Double = 0
+				var avgYearCost: Double = 0
+			}
+			var displayedCellItems: [[StatsCellItem]]
 		}
 	}
 }

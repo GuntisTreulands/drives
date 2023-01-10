@@ -30,43 +30,127 @@ class MapPresenter: MapPresentationLogic {
 
 		dateFormatter.dateFormat = "HH:mm"
 
+		var finalMultiArray = [[Map.FetchPoints.ViewModel.DisplayedItem]]()
+		var finalMapPointsArray = [[MapPoint]]()
+		var topTitle = response.monthIdentificator.isEmpty ? "map_all_drives".localized() : response.monthIdentificator
 
-		var finalArray = [Map.FetchPoints.ViewModel.DisplayedItem]()
+		for pointArray in response.fetchedPoints {
+            if pointArray.isEmpty {
+                continue
+            }
+			var finalArray = [Map.FetchPoints.ViewModel.DisplayedItem]()
+			let seconds = Int((pointArray.last!.timestamp - pointArray.first!.timestamp))
+			let minutes = Int(seconds / 60)
 
-		let seconds = Int((response.fetchedPoints.last!.timestamp - response.fetchedPoints.first!.timestamp))
-		let minutes = Int(seconds / 60)
+			let distance = pointArray.first?.rDrive?.totalDistance
 
-		let distance = response.fetchedPoints.first?.rDrive?.totalDistance
-
-
-		let title = "\(HelperWorker.distanceFromMeters(distance ?? 0)) | \(HelperWorker.timeFromSeconds(seconds))"
-
-		for point in response.fetchedPoints {
-			let date = Date.init(timeIntervalSince1970: point.timestamp)
-
-			var title = dateFormatter.string(from: date)
-			var subtitle = dateFormatter.string(from: date)
-
-			if response.fetchedPoints.first == point {
-				title = "Start"
-			} else if response.fetchedPoints.last == point {
-				title = "End"
-				subtitle = "\(subtitle) (\(minutes) minutes)"
+			if response.fetchedPoints.count == 1 {
+				topTitle = "\(HelperWorker.distanceFromMeters(distance ?? 0)) | \(HelperWorker.timeFromSeconds(seconds))"
 			}
 
-			finalArray.append(Map.FetchPoints.ViewModel.DisplayedItem.init(title: title, subtitle: subtitle, latitude: point.latitude, longitude: point.longitude, isStart: (response.fetchedPoints.first == point), isEnd: (response.fetchedPoints.last == point)))
-		}
+			//var skipCount = 0
+			var keepCount = 0
 
-		let allMapPoints = createMapPoints(from: finalArray)
+			for (index, point) in pointArray.enumerated() {
+				let date = Date.init(timeIntervalSince1970: point.timestamp)
+
+				var title = dateFormatter.string(from: date)
+				var subtitle = dateFormatter.string(from: date)
+
+				if pointArray.first == point {
+					title = "Start"
+				} else if pointArray.last == point {
+					title = "End"
+					subtitle = "\(subtitle) (\(minutes) minutes)"
+				}
+//				else {
+//
+//					let previousPoint: PointEntity = pointArray[index - 1]
+//					let nextPoint: PointEntity = pointArray[index + 1]
+//					let nextNextPoint: PointEntity = pointArray[min(pointArray.count - 1, index + 6)]
+//
+//					let dxc = point.latitude - previousPoint.latitude
+//					let dyc = point.longitude - previousPoint.longitude
+//
+//					let dxl = nextPoint.latitude - previousPoint.latitude
+//					let dyl = nextPoint.longitude - previousPoint.longitude
+//
+//					let dxl2 = nextNextPoint.latitude - previousPoint.latitude
+//					let dyl2 = nextNextPoint.longitude - previousPoint.longitude
+//
+//					let cross: Double = dxc * dyl - dyc * dxl
+//					let cross2: Double = dxc * dyl2 - dyc * dxl2
+//
+////					if abs(cross) < 0.000000001 && skipCount < 15 {
+//
+//
+//					if (abs(cross) > 0.000000008) {
+//						title = "$Not On line \(cross)"
+//						keepCount = min(30, keepCount + 12)
+//					} else {
+//						if (abs(cross2) > 0.000000009 && keepCount < 1) {
+//							title = "$2Not On line \(cross)"
+//							keepCount = min(30, keepCount + 12)
+//						} else {
+//							title = "On Line, Deletable \(cross)"
+//							keepCount = max(0, keepCount - 1)
+//						}
+//					}
+//
+//
+////					if (abs(cross) < 0.000000001 || abs(cross2) < 0.000000003) {// && skipCount < 25 {
+////						title = "On Line, Deletable \(cross)"
+////						skipCount += 1
+////						keepCount = 0
+////					} else {
+////						if keepCount > 0 && abs(cross) > 0.000000003 {
+////							title = "skip \(cross)"
+////							keepCount = 0
+////						} else {
+////							title = "$Not On line \(cross)"
+////							skipCount = 0
+////							keepCount += 1
+////						}
+////					}
+////
+////
+////					if abs(cross) < 0.000000002 || abs(cross2) < 0.000000002 {// && skipCount < 15 {
+//////					if abs(cross) < 0.0000000009 && skipCount < 15 {
+////						title = "On Line, Deletable \(cross)"
+////						skipCount += 1
+////						keepCount = 0
+////					} else {
+////						if abs(cross) > 0.000000008 || keepCount < 1 {
+////							title = "$Not On line \(cross)"
+////							skipCount = 0
+////							keepCount += 1
+////						} else {
+////							title = "Not On Line, But skip \(cross)"
+////							keepCount = 0
+////							skipCount = 0
+////						}
+////
+////					}
+//
+//				}
+
+				finalArray.append(Map.FetchPoints.ViewModel.DisplayedItem.init(title: title, subtitle: subtitle, latitude: point.latitude, longitude: point.longitude, isStart: (pointArray.first == point), isEnd: (pointArray.last == point), objectID: point.objectID))
+			}
+
+			let allMapPoints = createMapPoints(from: finalArray)
+
+			finalMultiArray.append(finalArray)
+			finalMapPointsArray.append(allMapPoints)
+		}
 		
-    	let viewModel = Map.FetchPoints.ViewModel(displayedItems: finalArray, mapPoints: allMapPoints, title: title)
+    	let viewModel = Map.FetchPoints.ViewModel(displayedItems: finalMultiArray, mapPoints: finalMapPointsArray, title: topTitle)
     	viewController?.presentMap(viewModel: viewModel)
 	}
 
 	// MARK: Functions
 
 	private func createMapPoints(from data: [Map.FetchPoints.ViewModel.DisplayedItem]) -> [MapPoint] {
-		let mapPoints = data.map { MapPoint(title: $0.title, subtitle: $0.subtitle, isStart: $0.isStart, isEnd: $0.isEnd, coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)) }
+		let mapPoints = data.map { MapPoint(title: $0.title, subtitle: $0.subtitle, isStart: $0.isStart, isEnd: $0.isEnd, coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude), objectID: $0.objectID) }
 
   		return mapPoints
   	}

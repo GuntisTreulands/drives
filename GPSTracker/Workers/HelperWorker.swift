@@ -3,7 +3,7 @@
 //  GPSTracker
 //
 //  Created by Guntis on 21/02/2022.
-//  Copyright © 2022 myEmerg. All rights reserved.
+//  Copyright © 2022. All rights reserved.
 //
 
 import Foundation
@@ -23,10 +23,16 @@ class HelperWorker: NSObject, HelperWorkerLogic {
 		let hours = seconds / 3600
 		let minutes = (seconds % 3600) / 60
 
-		let hourString = hours > 9 ? "\(hours)" : "0\(hours)"
-		let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
+//		let hourString = hours > 9 ? "\(hours)" : "0\(hours)"
+//		let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
 
-		return "\(hourString):\(minutesString)"
+		if hours == 0 {
+			return "\(minutes)m"
+		} else {
+			return "\(hours)h \(minutes)m"
+		}
+		
+//		return "\(hourString):\(minutesString)"
 	}
 
 	static func readableTimeFromSeconds(_ seconds: Int) -> String {
@@ -34,9 +40,9 @@ class HelperWorker: NSObject, HelperWorkerLogic {
 		let minutes = (seconds % 3600) / 60
 
 		if hours == 0 {
-			return "\(minutes) m"
+			return "\(minutes)m"
 		} else {
-			return "\(hours) h \(minutes) m"
+			return "\(hours)h \(minutes)m"
 		}
 	}
 

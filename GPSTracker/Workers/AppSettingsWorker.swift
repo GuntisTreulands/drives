@@ -28,6 +28,8 @@ extension Notification.Name {
     static let settingsUpdated = Notification.Name("settingsUpdated")
 
     static let fontSizeWasChanged = Notification.Name("fontSizeWasChanged")
+
+    static let dataDownloaderStateChange = Notification.Name("dataDownloaderStateChange")
 }
 
 protocol AppSettingsWorkerLogic {
@@ -47,7 +49,8 @@ protocol AppSettingsWorkerLogic {
 	func userPressedButtonToGetGPSAccess(_ handler: @escaping (SettingsToggleResult<Any>) -> Void)
 	func getGPSIsEnabled() -> Bool
 	func getCurrentLocation() -> CLLocation?
-	func setLocationManagerInAnActiveState(_ active: Bool)
+	func safelySetLocationManagerInAnActiveState(_ active: Bool)
+	func startMonitoringForHomeRegionAtALocation()
 	func startMonitoringRegionForLocation(_ location: CLLocation)
 	func stopMonitoringAnyRegions()
 
@@ -55,7 +58,7 @@ protocol AppSettingsWorkerLogic {
 	func getMotionIsEnabled() -> Bool
 }
 
-class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDelegate, UNUserNotificationCenterDelegate, AltitudeLogic {
 
 	enum Language: String {
 		case latvian = "lv"
@@ -125,7 +128,7 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		}
 
 
-
+		AltitudeWorker.shared.controller = self
 	}
 
 	func startMotionTracking() {
@@ -147,7 +150,7 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		UINavigationBar.appearance().tintColor = UIColor(named: "TitleColor")!
 		UINavigationBar.appearance().titleTextAttributes =
 			[NSAttributedString.Key.foregroundColor: UIColor(named: "TitleColor")!,
-			NSAttributedString.Key.font: Font(.normal, size: .size1).font]
+			NSAttributedString.Key.font: Font(.normal, size: .size25).font]
 	}
 
 	// MARK: Notifications
@@ -157,6 +160,7 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 			DispatchQueue.main.asyncAfter(deadline: .now()) {
 				NotificationCenter.default.post(name: .applicationDidBecomeActiveFromAppSettings, object: nil)
 				DataBaseWorker.calculateDistanceAndTimeForDrives()
+				DataBaseWorker.calculateFilteredPointsForDrives()
 				DataBaseWorker.calculateStartAndEndAddressForDrives()
 			}
 		}
@@ -315,8 +319,15 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		return locationManager.location
 	}
 
+	func safelySetLocationManagerInAnActiveState(_ active: Bool) {
+		if active == false && AltitudeWorker.shared.justReachedGroundLevel == false {
+			setLocationManagerInAnActiveState(active)
+		} else {
+			setLocationManagerInAnActiveState(active)
+		}
+	}
 
-	func setLocationManagerInAnActiveState(_ active: Bool) {
+	private func setLocationManagerInAnActiveState(_ active: Bool) {
 		if active {
 			locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
 //			locationManager.startMonitoringSignificantLocationChanges()
@@ -324,6 +335,13 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
 //			locationManager.stopMonitoringSignificantLocationChanges()
 		}
+	}
+
+	func startMonitoringForHomeRegionAtALocation() {
+		let homeRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: PrivateGatesHelperWorker.homeLatitude, longitude: PrivateGatesHelperWorker.homeLongitude), radius: 105, identifier: "home_region")
+		homeRegion.notifyOnEntry = true
+		homeRegion.notifyOnExit = true
+		locationManager.startMonitoring(for: homeRegion)
 	}
 
 	func startMonitoringRegionForLocation(_ location: CLLocation) {
@@ -337,6 +355,8 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		for region in locationManager.monitoredRegions {
 			locationManager.stopMonitoring(for: region)
 		}
+
+		startMonitoringForHomeRegionAtALocation()
 	}
 
 	// MARK: Motion
@@ -394,26 +414,55 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 		}
 
 
+		if !ActivityWorker.shared.isDrivingCurrently && !AltitudeWorker.shared.justReachedGroundLevel {
 
-
-		if Date().timeIntervalSince1970 - openDate.timeIntervalSince1970 > 60 * 10 {
-
-			if !ActivityWorker.shared.isDrivingCurrently {
+			if Date().timeIntervalSince1970 - openDate.timeIntervalSince1970 > 60 * 10 {
 
 				if locationManager.desiredAccuracy != kCLLocationAccuracyThreeKilometers {
 					print("Stopping active GPS, because not driving.")
 					setLocationManagerInAnActiveState(false)
 
-					let content = UNMutableNotificationContent()
-					content.title = "debug_info_title".localized()
-					content.body = "debug_stopping_active_gps".localized()
-					content.sound = UNNotificationSound.default
-					let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-					let request = UNNotificationRequest(identifier: "Info", content: content, trigger: trigger)
-					UNUserNotificationCenter.current().add(request)
+//					let content = UNMutableNotificationContent()
+//					content.title = "debug_info_title".localized()
+//					content.body = "debug_stopping_active_gps".localized()
+//					content.sound = UNNotificationSound.default
+//					let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//					let request = UNNotificationRequest(identifier: "Info", content: content, trigger: trigger)
+//					UNUserNotificationCenter.current().add(request)
 				}
 			}
 		}
+	}
+
+	// MARK: AltitudeLogic
+
+	func justReachedGroundLevel() {
+
+		// This way - we can activate GPS when we are on the ground level - and outside of our apartment.
+		// Not used anymore.
+//		setLocationManagerInAnActiveState(true)
+
+//		let content = UNMutableNotificationContent()
+//		content.title = "debug_info_title".localized()
+//		content.body = "Just Reached Ground Level".localized()
+//		content.sound = UNNotificationSound.default
+//		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//		let request = UNNotificationRequest(identifier: "Altitude_Ground_Info", content: content, trigger: trigger)
+//		UNUserNotificationCenter.current().add(request)
+	}
+
+	func justReachedApartmentLevel() {
+		if ActivityWorker.shared.isDrivingCurrently == false {
+			setLocationManagerInAnActiveState(false)
+		}
+
+//		let content = UNMutableNotificationContent()
+//		content.title = "debug_info_title".localized()
+//		content.body = "Just Reached Apartment Level".localized()
+//		content.sound = UNNotificationSound.default
+//		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//		let request = UNNotificationRequest(identifier: "Altitude_Ap_Info", content: content, trigger: trigger)
+//		UNUserNotificationCenter.current().add(request)
 	}
 
 	// MARK: CLLocationManagerDelegate
@@ -454,28 +503,10 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 
 	func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
 
-//		if region.identifier == "geo_fence_home_car"
-//		{
-//			let content = UNMutableNotificationContent()
-//			content.title = "CAR Region Geofence"
-//			content.body = "Device is within car home parking location region."
-//			content.sound = UNNotificationSound.default
-//			let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//			let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-//			UNUserNotificationCenter.current().add(request)
-//		}
-//		else if region.identifier == "geo_fence_gate"
-//		{
-//			let content = UNMutableNotificationContent()
-//			content.title = "GATE Region Geofence"
-//			content.body = "Device is within gate location region."
-//			content.sound = UNNotificationSound.default
-//			let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//			let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-//			UNUserNotificationCenter.current().add(request)
-//		}
-//		else if region.identifier == "geo_fence_home"
-//		{
+//		if(region.identifier == "home_region") {
+//			AltitudeWorker.shared.justReachedGroundLevel = true
+//			AltitudeWorker.shared.startAltimeterChecking()
+//
 //			let content = UNMutableNotificationContent()
 //			content.title = "Home Region Geofence"
 //			content.body = "Device just entered home region."
@@ -488,8 +519,9 @@ class AppSettingsWorker: NSObject, AppSettingsWorkerLogic, CLLocationManagerDele
 
 	func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
 
-//		if region.identifier == "geo_fence_home"
-//		{
+//		if(region.identifier == "home_region") {
+//			AltitudeWorker.shared.stopAltimeterChecking()
+//
 //			let content = UNMutableNotificationContent()
 //			content.title = "Home Region Geofence"
 //			content.body = "Device just left home region."

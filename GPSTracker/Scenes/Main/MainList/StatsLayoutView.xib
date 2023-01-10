@@ -12,7 +12,6 @@
                 <outlet property="baseView" destination="iN0-l3-epB" id="FVJ-x9-mgh"/>
                 <outlet property="tableView" destination="A1O-7A-o4w" id="5aO-fr-YE4"/>
                 <outlet property="tableViewBottomShadow" destination="kBi-YL-PXL" id="9Jc-OU-McQ"/>
-                <outlet property="tableViewNoDataView" destination="c9E-jc-WyX" id="ULq-0k-55u"/>
                 <outlet property="tableViewTopShadow" destination="V42-2k-Rtg" id="ugP-jL-oCf"/>
             </connections>
         </placeholder>
@@ -21,11 +20,6 @@
             <rect key="frame" x="0.0" y="0.0" width="372" height="677"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9E-jc-WyX" customClass="TableViewNoDataView" customModule="GPSTracker" customModuleProvider="target">
-                    <rect key="frame" x="66" y="274" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="50" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="A1O-7A-o4w">
                     <rect key="frame" x="16" y="224" width="286" height="188"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

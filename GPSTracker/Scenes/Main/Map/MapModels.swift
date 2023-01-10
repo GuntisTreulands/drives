@@ -16,12 +16,18 @@ import CoreData
 enum Map {
 	// MARK: Use cases
 
+	enum DeleteAPoint {
+		struct Request {
+			var point: MapPoint
+		}
+	}
+
 	enum FetchPoints {
 		struct Request {
-//			var forcedReload: Bool
 		}
 		struct Response {
-			var fetchedPoints: [PointEntity]
+			var fetchedPoints: [[PointEntity]]
+			var monthIdentificator: String
 		}
 		struct ViewModel {
 			struct DisplayedItem: Equatable {
@@ -31,9 +37,10 @@ enum Map {
 				var longitude: Double
 				var isStart: Bool
 				var isEnd: Bool
+				var objectID: NSManagedObjectID
 			}
-			var displayedItems: [DisplayedItem]
-			var mapPoints: [MapPoint]
+			var displayedItems: [[DisplayedItem]]
+			var mapPoints: [[MapPoint]]
 			var title: String
 		}
 	}

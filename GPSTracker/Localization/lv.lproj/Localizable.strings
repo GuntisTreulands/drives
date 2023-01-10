@@ -63,11 +63,26 @@
 "main_business_category" = "Bizness";
 "main_car_wash_category" = "Auto mazgāšana vai degvielas uzpilde";
 "main_no_drives_yet" = "Vēl nav neviena brauciena..";
+"map_all_drives" = "Visi braucieni";
 //=== MAIN
 
 
 //--- STATS
-"stats_no_data" = "Šeit parādīsies statistika..\n\n\nKad pabeigšu programmēt šo.";
+"stats_drives_days_in_year" = "xxx dienas (yyy braucieni) gadā";
+"stats_drives_days_in_week" = "xxx dienas (yyy braucieni) ~ nedēļā";
+"stats_drives_days_in_month" = "xxx dienas (yyy braucieni) ~ mēnesī";
+"stats_avg_month_eur" = "~ mēnesī xxx Eur";
+"stats_avg_half_year_eur" = "~ pusgadā xxx Eur";
+"stats_avg_year_eur" = "~ gadā xxx Eur";
+"stats_year_interval" = "Annual interval";
+"stats_first_year" = "Pirmais";
+"stats_last_year" = "Pēdējais";
+"stats_average_year" = "Vidēji";
+"stats_my_car" = "Mans auto";
+"stats_citybee" = "CityBee";
+"stats_bolt_drive" = "Bolt Drive";
+"stats_carguru" = "CarGuru";
+"stats_mixed" = "Jauktais";
 //=== STATS
 
 

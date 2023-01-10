@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MainListHeaderViewButtonLogic: AnyObject {
+	func headerWasPressed(_ sectionIndex: Int)
+}
+
 protocol MainListHeaderViewDisplayLogic {
     func setSectionIndex(_ sectionIndex: Int)
 }
@@ -16,14 +20,19 @@ class MainListHeaderView: FontChangeHeaderFooterView, MainListHeaderViewDisplayL
 
 	public var cellBgType: CellBackgroundType = .single
 
+	weak var controller: MainListHeaderViewButtonLogic?
+
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet var iconRoad: UIImageView!
 	@IBOutlet var iconTime: UIImageView!
 	@IBOutlet var timeLabel: UILabel!
 	@IBOutlet var distanceLabel: UILabel!
+	@IBOutlet var headerButton: UIButton!
 
 	var titleLabelTopConstraint: NSLayoutConstraint!
 	var titleLabelBottomConstraint: NSLayoutConstraint!
+
+	var sectionIndex: Int = 0
 
 	// MARK: View lifecycle
 
@@ -35,6 +44,7 @@ class MainListHeaderView: FontChangeHeaderFooterView, MainListHeaderViewDisplayL
 		iconTime.translatesAutoresizingMaskIntoConstraints = false
 		timeLabel.translatesAutoresizingMaskIntoConstraints = false
 		distanceLabel.translatesAutoresizingMaskIntoConstraints = false
+		headerButton.translatesAutoresizingMaskIntoConstraints = false
 
 
 		self.contentView.backgroundColor = .white
@@ -68,6 +78,11 @@ class MainListHeaderView: FontChangeHeaderFooterView, MainListHeaderViewDisplayL
 		iconRoad.rightAnchor.constraint(equalTo: distanceLabel.leftAnchor, constant: -5).isActive = true
 		iconRoad.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5).isActive = true
 
+		headerButton.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+		headerButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+		headerButton.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+
+		headerButton.addTarget(self, action: NSSelectorFromString("headerButtonPressed"), for: .touchUpInside)
 
 		timeLabel.alpha = 0.6
 		iconTime.alpha = 0.6
@@ -80,18 +95,23 @@ class MainListHeaderView: FontChangeHeaderFooterView, MainListHeaderViewDisplayL
 	// MARK: Functions
 	
 	private func updateFonts() {
-		titleLabel.font = Font(.medium, size: .size1).font
-		distanceLabel.font = Font(.medium, size: .size3).font
-		timeLabel.font = Font(.medium, size: .size3).font
+		titleLabel.font = Font(.medium, size: .size25).font
+		distanceLabel.font = Font(.medium, size: .size19).font
+		timeLabel.font = Font(.medium, size: .size19).font
 	}
 
     override func fontSizeWasChanged() {
 		updateFonts()
 	}
 
+	@objc private func headerButtonPressed() {
+		self.controller?.headerWasPressed(self.sectionIndex)
+	}
+
 	// MARK: FuelListHeaderViewDisplayLogic
 	
 	func setSectionIndex(_ sectionIndex: Int) {
+		self.sectionIndex = sectionIndex
 		if sectionIndex > 0 {
 			titleLabelTopConstraint.constant = 20
 		} else {

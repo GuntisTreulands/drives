@@ -154,11 +154,11 @@ class MainListCell: FontChangeTableViewCell, MainListCellDisplayLogic {
 	// MARK: Functions
 
 	private func updateFonts() {
-		distanceLabel.font = Font(.bold, size: .size2).font
-		timeLabel.font = Font(.bold, size: .size2).font
-		dateLabel.font = Font(.normal, size: .size4).font
-		startAddressLabel.font = Font(.normal, size: .size4).font
-		endAddressLabel.font = Font(.normal, size: .size4).font
+		distanceLabel.font = Font(.bold, size: .size21).font
+		timeLabel.font = Font(.bold, size: .size21).font
+		dateLabel.font = Font(.normal, size: .size17).font
+		startAddressLabel.font = Font(.normal, size: .size17).font
+		endAddressLabel.font = Font(.normal, size: .size17).font
 	}
 
 	override func fontSizeWasChanged() {

@@ -23,7 +23,8 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	var interactor: MapBusinessLogic?
 	var router: (NSObjectProtocol & MapRoutingLogic & MapDataPassing)?
 	var layoutView: MapLayoutView!
-	
+	var editModeEnabled: Bool = false
+
 	// MARK: Object lifecycle
 
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -65,21 +66,21 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
     	self.navigationController!.navigationBar.shadowImage = UIImage()
 		self.navigationController!.navigationBar.isTranslucent = true
     	self.view.backgroundColor = .white
-
-    	
-//		self.navigationController?.navigationBar.prefersLargeTitles = true
 	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		DataBaseWorker.calculateStartAndEndAddressForDrives()
+	}
+
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-//		layoutView.adjustVisibilityOfShadowLines()
 	}
 
 	//MARK: Set up
 
 	private func setup() {
-//		self.title = "GPS Tracker"
-
 		let viewController = self
 		let interactor = MapInteractor()
 		let presenter = MapPresenter()
@@ -90,6 +91,8 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 		presenter.viewController = viewController
 		router.viewController = viewController
 		router.dataStore = interactor
+
+		setUpTopRightButton()
 	}
 
 	private func setUpView() {
@@ -102,6 +105,14 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 		layoutView.controller = self
 	}
 
+	private func setUpTopRightButton() {
+		if editModeEnabled {
+			self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(editButtonPressed))
+		} else {
+			self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editButtonPressed))
+		}
+	}
+
 	// MARK: Functions
 
 	func getData() {
@@ -109,21 +120,32 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 		interactor?.fetchPoints(request: request)
 	}
 
+	@objc func editButtonPressed() {
+        editModeEnabled.toggle()
+
+		setUpTopRightButton()
+
+		getData()
+	}
 
 	// MARK: MapDisplayLogic
 
 	func presentMap(viewModel: Map.FetchPoints.ViewModel) {
 
-//		DispatchQueue.main.asyncAfter(deadline: .now()) {
-//
-		self.layoutView.updateData(data: viewModel.mapPoints)
+		if viewModel.mapPoints.count > 1 {
+			self.navigationItem.rightBarButtonItem = nil
+		}
+
+		self.layoutView.updateData(data: viewModel.mapPoints, editMode: editModeEnabled)
 		self.title = viewModel.title
-//
-//		}
 	}
 
 
 	// MARK: MapLayoutViewLogic
+
+	func mapPointWasPressed(_ point: MapPoint) {
+		self.interactor?.deleteAPoint(request: Map.DeleteAPoint.Request.init(point: point))
+	}
 
 	// MARK: Notifications
 
@@ -132,12 +154,11 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	}
 
 	@objc private func fontSizeWasChanged() {
-//		self.layoutView.resetUI()
+
 	}
 
 	@objc private func settingsUpdated() {
-//		let request = FuelList.FetchPrices.Request(forcedReload: true)
-//		interactor?.fetchPrices(request: request)
+
 	}
 
 }

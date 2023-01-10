@@ -3,7 +3,7 @@
 //  GPSTracker
 //
 //  Created by Guntis on 19/02/2022.
-//  Copyright © 2022 myEmerg. All rights reserved.
+//  Copyright © 2022. All rights reserved.
 //
 
 import CoreData
@@ -11,6 +11,7 @@ import CoreLocation
 
 protocol DataBaseWorkerLogic {
 	static func invalidateAnyEntriesWithNoAddress()
+	static func calculateFilteredPointsForDrives()
 	static func calculateDistanceAndTimeForDrives()
 	static func calculateStartAndEndAddressForDrives()
 	static func getExportData() -> String
@@ -19,44 +20,133 @@ protocol DataBaseWorkerLogic {
 class DataBaseWorker: NSObject, DataBaseWorkerLogic {
 
 	static func invalidateAnyEntriesWithNoAddress() {
+
+		let task = {
+
+			do {
+				let context = DataBaseManager.shared.mainManagedObjectContext()
+				let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format:"startAddress == %@ || endAddress == %@", "-", "-")
+				let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
+				fetchRequest.sortDescriptors = [sortByMonth]
+
+				do {
+					let drives = try context.fetch(fetchRequest)
+
+
+					for drive in drives {
+						drive.startAddress = ""
+						drive.endAddress = ""
+						drive.totalDistance = 0
+					}
+
+					DataBaseManager.shared.saveContext()//(backgroundContext: backgroundContext)
+
+				} catch { print("error \(error)")}
+			}
+		}
+
+		DataBaseManager.shared.addATask(action: task)
+
+		DataBaseWorker.calculateDistanceAndTimeForDrives()
+		DataBaseWorker.calculateFilteredPointsForDrives()
+
+//		}, completion:{
+////			DataBaseWorker.calculateDistanceAndTimeForDrives()
+//		})
+	}
+
+	static func calculateFilteredPointsForDrives() {
+
 		DispatchQueue.background(background: {
 			let task = {
 
 				do {
-					let backgroundContext = DataBaseManager.shared.newBackgroundManagedObjectContext()
+
+					DataBaseManager.shared.persistentContainer!.performBackgroundTask { context in
+					context.mergePolicy = NSOverwriteMergePolicy
+
 					let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
-					fetchRequest.predicate = NSPredicate(format:"startAddress == %@ || endAddress == %@", "-", "-")
-					let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
-					fetchRequest.sortDescriptors = [sortByMonth]
+					fetchRequest.predicate = NSPredicate(format:"isInProgress == FALSE && rFilteredPoints.@count == 0")
+					let sortByMonth = NSSortDescriptor(key: "sectionedMonthString", ascending: false)
+					let sortByDay = NSSortDescriptor(key: "sortingMonthDayYearString", ascending: false)
+					let sortByStartTime = NSSortDescriptor(key: "startTime", ascending: true)
+
+					fetchRequest.sortDescriptors = [sortByMonth, sortByDay, sortByStartTime]
 
 					do {
-						let drives = try backgroundContext.fetch(fetchRequest)
+						let drives = try context.fetch(fetchRequest)
 
 						for drive in drives {
-							drive.startAddress = ""
-							drive.endAddress = ""
-							drive.totalDistance = 0
+
+							let sortedPoints: [PointEntity] = drive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
+
+							var keepCount = 0
+
+							for (index, point) in sortedPoints.enumerated() {
+
+								point.rFilteredDrive = nil
+
+								if sortedPoints.first == point {
+									point.rFilteredDrive = drive
+								} else if sortedPoints.last == point {
+									point.rFilteredDrive = drive
+								} else {
+									let previousPoint: PointEntity = sortedPoints[index - 1]
+									let nextPoint: PointEntity = sortedPoints[index + 1]
+									let nextNextPoint: PointEntity = sortedPoints[min(sortedPoints.count - 1, index + 6)] //5 //6
+
+									let dxc = point.latitude - previousPoint.latitude
+									let dyc = point.longitude - previousPoint.longitude
+
+									let dxl = nextPoint.latitude - previousPoint.latitude
+									let dyl = nextPoint.longitude - previousPoint.longitude
+
+									let dxl2 = nextNextPoint.latitude - previousPoint.latitude
+									let dyl2 = nextNextPoint.longitude - previousPoint.longitude
+
+									let cross: Double = dxc * dyl - dyc * dxl
+									let cross2: Double = dxc * dyl2 - dyc * dxl2
+
+
+									if (abs(cross) > 0.000000008) {
+										point.rFilteredDrive = drive
+										keepCount = min(30, keepCount + 12)
+									} else {
+										if (abs(cross2) > 0.000000009 && keepCount < 1) {
+											point.rFilteredDrive = drive
+											keepCount = min(30, keepCount + 12)
+										} else {
+											keepCount = max(0, keepCount - 1)
+										}
+									}
+								}
+							}
 						}
 
-						DataBaseManager.shared.saveBackgroundContext(backgroundContext: backgroundContext)
+						DataBaseManager.shared.saveBackgroundContext(backgroundContext: context)
 
 					} catch _ { }
+				}
 				}
 			}
 
 			DataBaseManager.shared.addATask(action: task)
 
-		}, completion:{
-			DataBaseWorker.calculateDistanceAndTimeForDrives()
-					})
+		}, completion:{ })
 	}
 
+
 	static func calculateDistanceAndTimeForDrives() {
+
 		DispatchQueue.background(background: {
 			let task = {
 
 				do {
-					let backgroundContext = DataBaseManager.shared.newBackgroundManagedObjectContext()
+
+					DataBaseManager.shared.persistentContainer!.performBackgroundTask { context in
+					context.mergePolicy = NSOverwriteMergePolicy
+
 					let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
 					fetchRequest.predicate = NSPredicate(format:"isInProgress == TRUE || totalDistance == 0 || totalTime < 10 || sortingMonthDayYearString == ''")
 					let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
@@ -64,9 +154,15 @@ class DataBaseWorker: NSObject, DataBaseWorkerLogic {
 					fetchRequest.sortDescriptors = [sortByMonth, sortByStartTime]
 
 					do {
-						let drives = try backgroundContext.fetch(fetchRequest)
+						let drives = try context.fetch(fetchRequest)
+
 
 						for drive in drives {
+//							print("drive.isInProgress \(drive.isInProgress)")
+//							print("totalDistance \(drive.totalDistance)")
+//							print("totalTime \(drive.totalTime)")
+//							print("sortingMonthDayYearString \(drive.sortingMonthDayYearString)")
+
 							var distance: Double = 0
 
 							var previousLocation: CLLocation!
@@ -94,9 +190,10 @@ class DataBaseWorker: NSObject, DataBaseWorkerLogic {
 //							drive.sortingMonthDayYearString = sortingString
 						}
 
-						DataBaseManager.shared.saveBackgroundContext(backgroundContext: backgroundContext)
+						DataBaseManager.shared.saveBackgroundContext(backgroundContext: context)
 
 					} catch _ { }
+				}
 				}
 			}
 
@@ -111,103 +208,123 @@ class DataBaseWorker: NSObject, DataBaseWorkerLogic {
 		DispatchQueue.background(background: {
 
 			let task = {
-			
+
 				do {
 
-					let backgroundContext = DataBaseManager.shared.newBackgroundManagedObjectContext()
-					let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
-					fetchRequest.predicate = NSPredicate(format:"rPoints.@count > 10 && ((isInProgress == TRUE && startAddress == '') || (isInProgress == FALSE && (startAddress == '' || endAddress == '')))")
-					let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
-					let sortByStartTime = NSSortDescriptor(key: "startTime", ascending: false)
-					fetchRequest.sortDescriptors = [sortByMonth, sortByStartTime]
-					fetchRequest.fetchLimit = 1
+					DataBaseManager.shared.persistentContainer!.performBackgroundTask { context in
+						context.mergePolicy = NSOverwriteMergePolicy
 
-					let geocoder = CLGeocoder()
+						let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
+						fetchRequest.predicate = NSPredicate(format:"rPoints.@count > 10 && ((isInProgress == TRUE && startAddress == '') || (isInProgress == FALSE && (startAddress == '' || endAddress == '')))")
+						let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
+						let sortByStartTime = NSSortDescriptor(key: "startTime", ascending: false)
+						fetchRequest.sortDescriptors = [sortByMonth, sortByStartTime]
+						fetchRequest.fetchLimit = 1
 
-					do {
-						let drives = try backgroundContext.fetch(fetchRequest)
 
-						for drive in drives {
 
-							print("calculateStartAndEndAddressForDrives - Will work on drive!!! \(drive)")
+						let geocoder = CLGeocoder()
 
-							let sortedPoints: [PointEntity] = drive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
+						do {
+							let drives = try context.fetch(fetchRequest)
+							for drive in drives {
 
-							var addToStartAddress = false
+//								print("drive.isInProgress \(drive.isInProgress)")
+//								print("totalDistance \(drive.totalDistance)")
+//								print("totalTime \(drive.totalTime)")
+//								print("sortingMonthDayYearString \(drive.sortingMonthDayYearString)")
 
-							if drive.isInProgress || (!drive.isInProgress && drive.startAddress?.count == 0) {
-								addToStartAddress = true
-							}
+//								print("calculateStartAndEndAddressForDrives - Will work on drive!!! \(drive)")
 
-							let group = DispatchGroup()
-							var country = "-"
-							var addressArray = [String]()
+								let sortedPoints: [PointEntity] = drive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
 
-							if addToStartAddress {
+								var addToStartAddress = false
 
-								for index in 0 ..< 5 {
-									let aPoint = sortedPoints[index]
-									let location = CLLocation.init(latitude: aPoint.latitude, longitude: aPoint.longitude)
-
-									group.enter()
-
-									geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error)->Void in
-										DispatchQueue.background(background: {
-
-											let address = HelperWorker.addressFromAPlacemark(placemarks?.first)
-
-											if(address.address != "-") {
-												addressArray.append(address.address)
-												country = address.country
-											}
-
-											group.leave()
-										}, completion:{ })
-									})
-									group.wait()
+								if drive.isInProgress || (!drive.isInProgress && drive.startAddress?.count == 0) {
+									addToStartAddress = true
 								}
 
-							} else {
-								for index in sortedPoints.count-6 ..< sortedPoints.count-1 {
-									let aPoint = sortedPoints[index]
-									let location = CLLocation.init(latitude: aPoint.latitude, longitude: aPoint.longitude)
+								let group = DispatchGroup()
+								var country = "-"
+								var addressArray = [String]()
 
-									group.enter()
+								if addToStartAddress && sortedPoints.count > 10 {
 
-									geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error)->Void in
-										DispatchQueue.background(background: {
+//									print("sortedPoints.count \(sortedPoints.count)")
 
-											let address = HelperWorker.addressFromAPlacemark(placemarks?.first)
+									for index in 0 ..< 3 {
+										let aPoint = sortedPoints[index]
+										let location = CLLocation.init(latitude: aPoint.latitude, longitude: aPoint.longitude)
 
-											if(address.address != "-") {
-												addressArray.append(address.address)
-												country = address.country
-											}
+										group.enter()
 
-											group.leave()
-										}, completion:{ })
-									})
-									group.wait()
+										//print("Requesting 1 address for place \(location), date \(drive.sortingMonthDayYearString!)")
+
+										geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error)->Void in
+											DispatchQueue.background(background: {
+
+												let address = HelperWorker.addressFromAPlacemark(placemarks?.first)
+
+												if(address.address != "-") {
+													addressArray.append(address.address)
+													country = address.country
+												}
+
+//												print("1 Address = \(address)")
+											}, completion:{
+												group.leave()
+
+											})
+										})
+										group.wait()
+									}
+
+								} else if sortedPoints.count > 10 {
+									for index in sortedPoints.count-4 ..< sortedPoints.count-1 {
+										let aPoint = sortedPoints[index]
+										let location = CLLocation.init(latitude: aPoint.latitude, longitude: aPoint.longitude)
+
+										group.enter()
+
+										//print("Requesting 2 address for place \(location), date \(drive.sortingMonthDayYearString!)")
+
+										geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error)->Void in
+											DispatchQueue.background(background: {
+
+												let address = HelperWorker.addressFromAPlacemark(placemarks?.first)
+
+												if(address.address != "-") {
+													addressArray.append(address.address)
+													country = address.country
+												}
+
+//												print("2  Address = \(address)")
+
+											}, completion:{
+											group.leave() })
+										})
+										group.wait()
+									}
+								}
+
+								let mostCommonAddress = addressArray.mostFrequent() ?? "-"
+								if addToStartAddress {
+									drive.startAddress = mostCommonAddress
+									drive.startCountry = country
+								}
+								else {
+									drive.endAddress = mostCommonAddress
+									drive.endCountry = country
+								}
+
+								DataBaseManager.shared.saveBackgroundContext(backgroundContext: context)
+								DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+									DataBaseWorker.calculateStartAndEndAddressForDrives()
 								}
 							}
 
-							let mostCommonAddress = addressArray.mostFrequent() ?? "-"
-							if addToStartAddress {
-								drive.startAddress = mostCommonAddress
-								drive.startCountry = country
-							}
-							else {
-								drive.endAddress = mostCommonAddress
-								drive.endCountry = country
-							}
-
-							DataBaseManager.shared.saveBackgroundContext(backgroundContext: backgroundContext)
-							DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-								DataBaseWorker.calculateStartAndEndAddressForDrives()
-							}
-						}
-
-					} catch _ { }
+						} catch _ { }
+					}
 				}
 			}
 

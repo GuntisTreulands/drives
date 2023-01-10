@@ -17,6 +17,7 @@ protocol MainListBusinessLogic {
 	func fetchDrives(request: MainList.FetchDrives.Request)
 	func deleteADrive(request: MainList.DeleteADrive.Request)
 	func changeADriveType(request: MainList.ChangeADriveType.Request)
+	func fetchStats(request: MainList.FetchStats.Request)
 }
 
 protocol MainListDataStore {
@@ -28,10 +29,13 @@ class MainListInteractor: NSObject, MainListBusinessLogic, MainListDataStore, NS
 	var presenter: MainListPresentationLogic?
 	var fetchedResultsController: NSFetchedResultsController<DriveEntity>!
 
+	var statsShowType: MainList.StatsShowType!
+
 	// MARK: MainListBusinessLogic
 
 	func fetchDrives(request: MainList.FetchDrives.Request) {
 		if fetchedResultsController == nil {
+
 			let context = DataBaseManager.shared.mainManagedObjectContext()
 			let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
 			let sortByMonth = NSSortDescriptor(key: "sectionedMonthString", ascending: false)
@@ -52,6 +56,7 @@ class MainListInteractor: NSObject, MainListBusinessLogic, MainListDataStore, NS
 			for section in fetchedResultsController.sections! {
 
 				if let correctObjects = section.objects {
+//					try! DataBaseManager.shared.mainManagedObjectContext().obtainPermanentIDs(for: (correctObjects as? [DriveEntity])!)
 					fetchedDrives.append((correctObjects as? [DriveEntity])!)
 				}
 			}
@@ -115,9 +120,74 @@ class MainListInteractor: NSObject, MainListBusinessLogic, MainListDataStore, NS
 	}
 
 
+	func fetchStats(request: MainList.FetchStats.Request) {
+		self.statsShowType = request.statsShowType
+		let task = {
+
+			let context = DataBaseManager.shared.mainManagedObjectContext()
+			let fetchRequestCarCosts: NSFetchRequest<CarCostsEntity> = CarCostsEntity.fetchRequest()
+			fetchRequestCarCosts.sortDescriptors = [NSSortDescriptor.init(key: "sortId", ascending: true)]
+			var carCostsItems = [CarCostsEntity]()
+			do { carCostsItems = try context.fetch(fetchRequestCarCosts) } catch { }
+
+			let fetchRequestValueDrop: NSFetchRequest<ValueDropEntity> = ValueDropEntity.fetchRequest()
+			fetchRequestValueDrop.sortDescriptors = [NSSortDescriptor.init(key: "sortId", ascending: true)]
+			var valueDropItems = [ValueDropEntity]()
+			do { valueDropItems = try context.fetch(fetchRequestValueDrop) } catch { }
+
+			let carCosts: [Double] = carCostsItems.map({$0.value})
+			let valueDrop: [Double] = valueDropItems.map({$0.value})
+
+
+			let date = Calendar.current.date(byAdding: .year, value: -1, to: Date())
+
+			let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
+			let sortByStartTime = NSSortDescriptor(key: "startTime", ascending: true)
+			fetchRequest.sortDescriptors = [sortByStartTime]
+			fetchRequest.predicate = NSPredicate(format:"startTime >= %f && isBusinessDrive == true && isInProgress == false", date!.timeIntervalSince1970)
+
+
+			let fetchRequest2: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
+
+			let sortByDay2 = NSSortDescriptor(key: "sortingYearMonthDayString", ascending: true)
+			let sortByStartTime2 = NSSortDescriptor(key: "startTime", ascending: true)
+			fetchRequest2.sortDescriptors = [sortByDay2, sortByStartTime2]
+			fetchRequest2.predicate = NSPredicate(format:"startTime >= %f && isBusinessDrive == true && isInProgress == false", date!.timeIntervalSince1970)
+
+			var fetchedResultsController: NSFetchedResultsController<DriveEntity>!
+
+			fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest2, managedObjectContext: DataBaseManager.shared.mainManagedObjectContext(), sectionNameKeyPath: "sortingYearMonthDayString", cacheName: nil)
+
+			var drives = [DriveEntity]()
+			var sectionedDrives = [[DriveEntity]]()
+			
+			do {
+				try fetchedResultsController.performFetch()
+
+				for section in fetchedResultsController.sections! {
+
+					if let correctObjects = section.objects {
+						sectionedDrives.append((correctObjects as? [DriveEntity])!)
+					}
+				}
+
+				drives = try DataBaseManager.shared.mainManagedObjectContext().fetch(fetchRequest)
+			} catch { }
+
+			let response = MainList.FetchStats.Response(fetchedDrives: drives, fetchedSectionedDrives: sectionedDrives, statsShowType: self.statsShowType, carCosts: carCosts, valueDrop: valueDrop)
+			self.presenter?.loadStats(response: response)
+		}
+
+		DataBaseManager.shared.addATask(action: task)
+	}
+
 	// MARK: NSFetchedResultsControllerDelegate
 	
   	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		fetchDrives(request: MainList.FetchDrives.Request())
+
+
+		let requestStats = MainList.FetchStats.Request(statsShowType: self.statsShowType)
+		fetchStats(request: requestStats)
 	}
 }

@@ -63,11 +63,26 @@
 "main_business_category" = "Business";
 "main_car_wash_category" = "Car wash or refuel";
 "main_no_drives_yet" = "No Drives yet..";
+"map_all_drives" = "All drives";
 //=== MAIN
 
 
 //--- STATS
-"stats_no_data" = "Statistics will appear here..\n\n\nOnce I finish programming this.";
+"stats_drives_days_in_year" = "xxx days (yyy drives) in a year";
+"stats_drives_days_in_week" = "xxx days (yyy drives) ~ in a week";
+"stats_drives_days_in_month" = "xxx days (yyy drives) ~ in a month";
+"stats_avg_month_eur" = "~ xxx Eur per month";
+"stats_avg_half_year_eur" = "~ xxx Eur per half year";
+"stats_avg_year_eur" = "~ xxx Eur per year";
+"stats_year_interval" = "Year interval";
+"stats_first_year" = "First";
+"stats_last_year" = "Last";
+"stats_average_year" = "Average";
+"stats_my_car" = "My car";
+"stats_citybee" = "CityBee";
+"stats_bolt_drive" = "Bolt Drive";
+"stats_carguru" = "CarGuru";
+"stats_mixed" = "Mixed";
 //=== STATS
 
 

@@ -15,10 +15,12 @@ import CoreData
 
 protocol MapBusinessLogic {
 	func fetchPoints(request: Map.FetchPoints.Request)
+	func deleteAPoint(request: Map.DeleteAPoint.Request)
 }
 
 protocol MapDataStore {
 	var identificator: String { get set }
+	var monthIdentificator: String { get set }
 }
 
 class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsControllerDelegate {
@@ -27,6 +29,8 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 	var fetchedResultsController: NSFetchedResultsController<DriveEntity>!
 
   	var identificator: String = ""
+  	var monthIdentificator: String = ""
+	var mapDrive: DriveEntity?
 
 	// MARK: MainListBusinessLogic
 
@@ -37,8 +41,13 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 			let sortByMonth = NSSortDescriptor(key: "monthString", ascending: true)
 			let sortByStartTime = NSSortDescriptor(key: "startTime", ascending: false)
 			fetchRequest.sortDescriptors = [sortByMonth, sortByStartTime]
-			fetchRequest.predicate = NSPredicate(format:"identificator == %@", identificator)
-			fetchRequest.fetchLimit = 1
+
+			if identificator.isEmpty == false {
+				fetchRequest.predicate = NSPredicate(format:"identificator == %@", identificator)
+				fetchRequest.fetchLimit = 1
+			} else if monthIdentificator.isEmpty == false {
+				fetchRequest.predicate = NSPredicate(format:"sectionedMonthString == %@", monthIdentificator)
+			}
 			
 			fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
 
@@ -47,12 +56,18 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 
 
 		var drive: DriveEntity?
+		var drives: [DriveEntity]?
 
 		do {
 			try fetchedResultsController.performFetch()
 
+
+
 			if let firstDrive = fetchedResultsController.fetchedObjects?.first {
 				drive = firstDrive
+				mapDrive = drive
+
+				drives = fetchedResultsController.fetchedObjects
 			}
 
 		} catch let error {
@@ -60,12 +75,63 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 			print("Something went wrong. \(error)")
 		}
 
+		var sortedPointsPerDrive: [[PointEntity]] = []
 
-		let sortedPoints: [PointEntity] = drive?.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
-		
-    	let response = Map.FetchPoints.Response(fetchedPoints: sortedPoints)
+		var totalCount = 0
+
+		if let drives = drives {
+			for aDrive in drives {
+				if drives.count == 1 {
+					let sortedPoints: [PointEntity] = aDrive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
+					sortedPointsPerDrive.append(sortedPoints)
+				} else {
+					let sortedPoints: [PointEntity] = aDrive.rFilteredPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: true)]) as! [PointEntity]
+					totalCount += sortedPoints.count
+					sortedPointsPerDrive.append(sortedPoints)
+				}
+			}
+		}
+
+		print("totalCount \(totalCount)"); //484757  //134586  //99942  //62079
+
+    	let response = Map.FetchPoints.Response(fetchedPoints: sortedPointsPerDrive, monthIdentificator: monthIdentificator)
     	presenter?.presentData(response: response)
 
+	}
+
+	func deleteAPoint(request: Map.DeleteAPoint.Request)
+	{
+		let task =
+		{
+			let context = DataBaseManager.shared.mainManagedObjectContext()
+			let point = context.object(with: request.point.objectID)
+
+			context.delete(point)
+			DataBaseManager.shared.saveContext()
+
+			if let mapDrive = self.mapDrive {
+				let drive: DriveEntity = context.object(with: mapDrive.objectID) as! DriveEntity
+				drive.totalTime = 0
+				drive.totalDistance = 0
+				drive.startAddress = ""
+				drive.endAddress = ""
+
+				if let filteredPointsSet = drive.rFilteredPoints {
+					for point in filteredPointsSet.allObjects as! [PointEntity] {
+						point.rFilteredDrive = nil
+					}
+				}
+
+				drive.rFilteredPoints = nil
+				
+				DataBaseManager.shared.saveContext()
+				DataBaseWorker.calculateDistanceAndTimeForDrives()
+				DataBaseWorker.calculateFilteredPointsForDrives()
+				self.fetchPoints(request: Map.FetchPoints.Request.init())
+			}
+		}
+
+		DataBaseManager.shared.addATask(action: task)
 	}
 
 	// MARK: NSFetchedResultsControllerDelegate

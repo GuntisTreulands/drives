@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CarCostsEntity" representedClassName="CarCostsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="sortId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="DriveEntity" representedClassName="DriveEntity" syncable="YES" codeGenerationType="class">
         <attribute name="endAddress" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="endCountry" optional="YES" attributeType="String" defaultValueString=""/>
@@ -10,11 +14,14 @@
         <attribute name="monthString" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="sectionedMonthString" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="sortingMonthDayYearString" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="sortingYearMonthDayString" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="startAddress" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="startCountry" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="startTime" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="rFilteredPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointEntity" inverseName="rFilteredDrive" inverseEntity="PointEntity"/>
+        <relationship name="rLastPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PointEntity" inverseName="rLastPointDrive" inverseEntity="PointEntity"/>
         <relationship name="rPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointEntity" inverseName="rDrive" inverseEntity="PointEntity"/>
     </entity>
     <entity name="PointEntity" representedClassName="PointEntity" syncable="YES" codeGenerationType="class">
@@ -22,9 +29,17 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="rDrive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DriveEntity" inverseName="rPoints" inverseEntity="DriveEntity"/>
+        <relationship name="rFilteredDrive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DriveEntity" inverseName="rFilteredPoints" inverseEntity="DriveEntity"/>
+        <relationship name="rLastPointDrive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DriveEntity" inverseName="rLastPoint" inverseEntity="DriveEntity"/>
+    </entity>
+    <entity name="ValueDropEntity" representedClassName="ValueDropEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="sortId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="DriveEntity" positionX="-63" positionY="-18" width="128" height="254"/>
-        <element name="PointEntity" positionX="-54" positionY="-9" width="128" height="89"/>
+        <element name="CarCostsEntity" positionX="-36" positionY="135" width="128" height="59"/>
+        <element name="DriveEntity" positionX="-63" positionY="-18" width="128" height="299"/>
+        <element name="PointEntity" positionX="-54" positionY="-9" width="128" height="119"/>
+        <element name="ValueDropEntity" positionX="-27" positionY="144" width="128" height="59"/>
     </elements>
 </model>

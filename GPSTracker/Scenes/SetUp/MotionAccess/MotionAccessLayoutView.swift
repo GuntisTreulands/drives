@@ -149,10 +149,10 @@ class MotionAccessLayoutView: FontChangeView {
 	// MARK: Functions
 
 	private func updateFonts() {
-		titleLabel.font = Font(.normal, size: .size0).font
-		descriptionLabel.font = Font(.normal, size: .size2).font
-		giveAccessButton.titleLabel?.font = Font(.medium, size: .size2).font
-		laterButton.titleLabel?.font = Font(.medium, size: .size2).font
+		titleLabel.font = Font(.normal, size: .size33).font
+		descriptionLabel.font = Font(.normal, size: .size21).font
+		giveAccessButton.titleLabel?.font = Font(.medium, size: .size21).font
+		laterButton.titleLabel?.font = Font(.medium, size: .size21).font
 	}
 
   	@objc private func giveAccessButtonPressed() {

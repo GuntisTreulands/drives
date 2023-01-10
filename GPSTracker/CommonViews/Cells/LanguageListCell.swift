@@ -68,8 +68,8 @@ class LanguageListCell: FontChangeTableViewCell {
 	// MARK: Functions
 
 	private func updateFonts() {
-		titleLabel.font = Font(.medium, size: .size3).font
-		descriptionLabel.font = Font(.normal, size: .size5).font
+		titleLabel.font = Font(.medium, size: .size19).font
+		descriptionLabel.font = Font(.normal, size: .size15).font
 	}
 
 	override func fontSizeWasChanged() {

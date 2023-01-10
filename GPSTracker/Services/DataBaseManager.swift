@@ -41,9 +41,9 @@ class DataBaseManager: NSObject, DataBaseManagerLogic {
 
 		persistentContainer = NSPersistentContainer(name: "DataBase")
 		persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-////                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
 
 			self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
 			self.persistentContainer.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump;
@@ -67,10 +67,7 @@ class DataBaseManager: NSObject, DataBaseManagerLogic {
     }
 	
     func saveBackgroundContext(backgroundContext: NSManagedObjectContext) {
-    	let taskIsComingFromMainThread = Thread.current.isMainThread
-
-		print("doing saving in context on main thread? \(taskIsComingFromMainThread)")
-		
+   
 		if backgroundContext.hasChanges {
             do {
                 try backgroundContext.save()
@@ -91,6 +88,7 @@ class DataBaseManager: NSObject, DataBaseManagerLogic {
     func newBackgroundManagedObjectContext() -> NSManagedObjectContext {
 		let bgContext = persistentContainer!.newBackgroundContext()
 		bgContext.mergePolicy = NSOverwriteMergePolicy
+
 		return bgContext
     }
 	
@@ -113,8 +111,8 @@ class DataBaseManager: NSObject, DataBaseManagerLogic {
 	
     private func doTask()
     {
-    	print("mainThreadTaskArray \(mainThreadTaskArray)")
-    	print("backgroundTaskArray \(backgroundTaskArray)")
+//    	print("mainThreadTaskArray \(mainThreadTaskArray)")
+//    	print("backgroundTaskArray \(backgroundTaskArray)")
     	
     	if isDoingATask {
 			return
@@ -131,9 +129,9 @@ class DataBaseManager: NSObject, DataBaseManagerLogic {
 			let function = backgroundTaskArray.first!
 
 			DispatchQueue.background(background: {
-				print("doing a background task - start!")
+//				print("doing a background task - start!")
 				function()
-				print("about to finish a background task - end!")
+//				print("about to finish a background task - end!")
 			}, completion:{
 				DispatchQueue.main.async {
 					self.backgroundTaskArray.removeFirst(1)

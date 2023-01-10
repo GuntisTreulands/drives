@@ -64,9 +64,9 @@ class TableViewNoDataView: FontChangeView, TableViewNoDataViewDisplayLogic {
 
 	private func updateFonts() {
 		if useSmallFonts {
-			titleLabel.font = Font(.normal, size: .size3).font
+			titleLabel.font = Font(.normal, size: .size19).font
 		} else {
-			titleLabel.font = Font(.normal, size: .size2).font
+			titleLabel.font = Font(.normal, size: .size21).font
 		}
 	}
 

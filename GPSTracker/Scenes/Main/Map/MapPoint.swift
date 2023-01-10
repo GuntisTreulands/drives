@@ -12,6 +12,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class MapPoint: NSObject, MKAnnotation {
 	var title: String?
@@ -19,13 +20,15 @@ class MapPoint: NSObject, MKAnnotation {
 	var isStart: Bool
 	var isEnd: Bool
 	var coordinate: CLLocationCoordinate2D
+	var objectID: NSManagedObjectID
 
 	
-    init(title: String, subtitle: String, isStart: Bool, isEnd: Bool, coordinate: CLLocationCoordinate2D) {
+    init(title: String, subtitle: String, isStart: Bool, isEnd: Bool, coordinate: CLLocationCoordinate2D, objectID: NSManagedObjectID) {
         self.title = title
         self.subtitle = subtitle
         self.isStart = isStart
         self.isEnd = isEnd
         self.coordinate = coordinate
+        self.objectID = objectID
     }
 }

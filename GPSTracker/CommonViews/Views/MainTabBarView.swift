@@ -157,8 +157,8 @@ class MainTabBarView: FontChangeView, MainTabBarViewDisplayLogic {
 	}
 
 	private func updateFonts() {
-		self.leftLabel.font = Font(.normal, size: .size6).font
-		self.rightLabel.font = Font(.normal, size: .size6).font
+		self.leftLabel.font = Font(.normal, size: .size14).font
+		self.rightLabel.font = Font(.normal, size: .size14).font
 	}
 
 	override func fontSizeWasChanged() {

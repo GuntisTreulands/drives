@@ -155,8 +155,8 @@ class SetupAppLanguageLayoutView: FontChangeView, UITableViewDataSource, UITable
 	// MARK: Functions
 
 	private func updateFonts() {
-		topTitleLabel.font = Font(.normal, size: .size2).font
-		nextButton.titleLabel?.font = Font(.medium, size: .size2).font
+		topTitleLabel.font = Font(.normal, size: .size21).font
+		nextButton.titleLabel?.font = Font(.medium, size: .size21).font
 	}
 
 	override func fontSizeWasChanged() {

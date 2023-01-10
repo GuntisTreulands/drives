@@ -3,7 +3,7 @@
 //  GPSTracker
 //
 //  Created by Guntis on 21/02/2022.
-//  Copyright © 2022 myEmerg. All rights reserved.
+//  Copyright © 2022. All rights reserved.
 //
 
 import Foundation

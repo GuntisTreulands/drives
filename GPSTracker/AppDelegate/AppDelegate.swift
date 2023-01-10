@@ -72,7 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		DataBaseWorker.invalidateAnyEntriesWithNoAddress()
 		DataBaseWorker.calculateStartAndEndAddressForDrives()
 		DataBaseWorker.calculateDistanceAndTimeForDrives()
+		DataBaseWorker.calculateFilteredPointsForDrives()
 
+		DataDownloader.shared.activateProcess()
+		
 		UNUserNotificationCenter.current().removeAllDeliveredNotifications()
 	}
 
