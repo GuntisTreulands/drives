@@ -12,6 +12,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 enum Map {
 	// MARK: Use cases
@@ -21,6 +22,13 @@ enum Map {
 			var point: MapPoint
 		}
 	}
+    
+    enum MoveAPoint {
+        struct Request {
+            var point: MapPoint
+            var newCoordinate: CLLocationCoordinate2D
+        }
+    }
 
 	enum FetchPoints {
 		struct Request {

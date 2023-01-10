@@ -21,6 +21,9 @@
 "cancel_button_title" = "Atcelt";
 "ok_button_title" = "Labi";
 "hey_alert_title" = "Uzmanību";
+"done_button_title" = "Pabeigt";
+"move_button_title" = "Pārvietot";
+"edit_button_title" = "Labot";
 "delete_button_title" = "Dzēst";
 //=== GLOBAL
 

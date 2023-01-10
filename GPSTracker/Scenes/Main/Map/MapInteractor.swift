@@ -16,6 +16,7 @@ import CoreData
 protocol MapBusinessLogic {
 	func fetchPoints(request: Map.FetchPoints.Request)
 	func deleteAPoint(request: Map.DeleteAPoint.Request)
+    func moveAPoint(request: Map.MoveAPoint.Request)
 }
 
 protocol MapDataStore {
@@ -133,6 +134,44 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 
 		DataBaseManager.shared.addATask(action: task)
 	}
+    
+    
+    func moveAPoint(request: Map.MoveAPoint.Request)
+    {
+        let task =
+        {
+            let context = DataBaseManager.shared.mainManagedObjectContext()
+            let point: PointEntity = context.object(with: request.point.objectID) as! PointEntity
+            
+            point.latitude = request.newCoordinate.latitude
+            point.longitude = request.newCoordinate.longitude
+            
+            DataBaseManager.shared.saveContext()
+
+            if let mapDrive = self.mapDrive {
+                let drive: DriveEntity = context.object(with: mapDrive.objectID) as! DriveEntity
+                drive.totalTime = 0
+                drive.totalDistance = 0
+                drive.startAddress = ""
+                drive.endAddress = ""
+
+                if let filteredPointsSet = drive.rFilteredPoints {
+                    for point in filteredPointsSet.allObjects as! [PointEntity] {
+                        point.rFilteredDrive = nil
+                    }
+                }
+
+                drive.rFilteredPoints = nil
+                
+                DataBaseManager.shared.saveContext()
+                DataBaseWorker.calculateDistanceAndTimeForDrives()
+                DataBaseWorker.calculateFilteredPointsForDrives()
+                self.fetchPoints(request: Map.FetchPoints.Request.init())
+            }
+        }
+
+        DataBaseManager.shared.addATask(action: task)
+    }
 
 	// MARK: NSFetchedResultsControllerDelegate
 	

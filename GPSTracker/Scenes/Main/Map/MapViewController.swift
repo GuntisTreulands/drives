@@ -24,6 +24,7 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	var router: (NSObjectProtocol & MapRoutingLogic & MapDataPassing)?
 	var layoutView: MapLayoutView!
 	var editModeEnabled: Bool = false
+    var moveButtonEnabled: Bool = false
 
 	// MARK: Object lifecycle
 
@@ -106,10 +107,20 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	}
 
 	private func setUpTopRightButton() {
+        self.navigationItem.rightBarButtonItems = nil
+        
 		if editModeEnabled {
-			self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(editButtonPressed))
+            if moveButtonEnabled {
+                self.navigationItem.rightBarButtonItems = [
+                    UIBarButtonItem.init(title: "done_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed)),
+                    UIBarButtonItem.init(title: "move_button_title".localized(), style: .done, target: self, action: #selector(moveButtonPressed))
+                    
+                ]
+            } else {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "done_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed))
+            }
 		} else {
-			self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editButtonPressed))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "edit_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed))
 		}
 	}
 
@@ -119,10 +130,17 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 		let request = Map.FetchPoints.Request()
 		interactor?.fetchPoints(request: request)
 	}
-
+    
+    @objc func moveButtonPressed() {
+        let result = layoutView.getSelectedMapPointAndNewCoordinate()
+        if let mapPoint = result.mapPoint {
+            self.interactor?.moveAPoint(request: Map.MoveAPoint.Request.init(point: mapPoint, newCoordinate: result.newCoordinate))
+        }
+    }
+    
 	@objc func editButtonPressed() {
         editModeEnabled.toggle()
-
+        moveButtonEnabled = false
 		setUpTopRightButton()
 
 		getData()
@@ -143,10 +161,20 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 
 	// MARK: MapLayoutViewLogic
 
-	func mapPointWasPressed(_ point: MapPoint) {
+	func deleteAMapPoint(_ point: MapPoint) {
 		self.interactor?.deleteAPoint(request: Map.DeleteAPoint.Request.init(point: point))
 	}
-
+    
+    func activateMoveButton() {
+        moveButtonEnabled = true
+        setUpTopRightButton()
+    }
+    
+    func deActivateMoveButton() {
+        moveButtonEnabled = false
+        setUpTopRightButton()
+    }
+    
 	// MARK: Notifications
 
 	@objc private func languageWasChanged() {

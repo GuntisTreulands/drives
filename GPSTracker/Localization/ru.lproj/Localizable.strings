@@ -20,7 +20,10 @@
 "later_button_title" = "Позже";
 "cancel_button_title" = "Отмена";
 "ok_button_title" = "Ну ладно";
-"hey_alert_title" = "Uzmanību";
+"hey_alert_title" = "Внимание";
+"done_button_title" = "Сделанный";
+"move_button_title" = "Переместить точку";
+"edit_button_title" = "Редактировать";
 "delete_button_title" = "Удалить";
 //=== GLOBAL
 

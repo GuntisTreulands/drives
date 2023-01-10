@@ -21,6 +21,9 @@
 "cancel_button_title" = "Cancel";
 "ok_button_title" = "Ok";
 "hey_alert_title" = "Hey";
+"done_button_title" = "Done";
+"move_button_title" = "Move";
+"edit_button_title" = "Edit";
 "delete_button_title" = "Delete";
 //=== GLOBAL
 

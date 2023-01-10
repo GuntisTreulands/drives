@@ -11,11 +11,14 @@ import MapKit
 
 
 protocol MapLayoutViewLogic: AnyObject {
-	func mapPointWasPressed(_ point: MapPoint)
+	func deleteAMapPoint(_ point: MapPoint)
+    func activateMoveButton()
+    func deActivateMoveButton()
 }
 
 protocol MapLayoutViewDataLogic: AnyObject {
 	func updateData(data: [[MapPoint]], editMode: Bool)
+    func getSelectedMapPointAndNewCoordinate() -> (mapPoint: MapPoint?, newCoordinate: CLLocationCoordinate2D)
 }
 
 class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate, MKMapViewDelegate {
@@ -26,9 +29,11 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	@IBOutlet var baseView: UIView!
 	@IBOutlet var mapView: MKMapView!
 
-
+    @IBOutlet weak var centerDot: UIView!
+    
 	var data = [[MapPoint]]()
 	var editMode: Bool = false
+    var shouldRedrawLines = false
 
 	var calculatedMaxPinWidth: CGFloat = 0
 	var calculatedMaxPinHeight: CGFloat = 0
@@ -40,6 +45,8 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	var zoomOnUserWasDone: Bool = false
 	var userDraggedOrZoomedMap: Bool = false
 	var disableMapAdjusting: Bool = false
+    
+    var selectedMapPoint: MapPoint?
 
 	// MARK: View lifecycle
 
@@ -69,6 +76,7 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		self.translatesAutoresizingMaskIntoConstraints = false
 		baseView.translatesAutoresizingMaskIntoConstraints = false
 		mapView.translatesAutoresizingMaskIntoConstraints = false
+        centerDot.translatesAutoresizingMaskIntoConstraints = false
 
 		baseView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 		baseView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
@@ -77,7 +85,19 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		mapView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
 
 		mapView.delegate = self
-
+        
+        centerDot.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
+        centerDot.centerYAnchor.constraint(equalTo: mapView.centerYAnchor).isActive = true
+        centerDot.widthAnchor.constraint(equalToConstant: 22).isActive = true
+        centerDot.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        
+        centerDot.layer.cornerRadius = 11
+        centerDot.layer.borderColor = UIColor.white.cgColor
+        centerDot.layer.borderWidth = 3
+        centerDot.backgroundColor = .blue
+        centerDot.clipsToBounds = true
+        centerDot.alpha = 0
+        
 		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.didDragOrPinchMap(_:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.didDragOrPinchMap(_:)))
         panGesture.delegate = self
@@ -196,10 +216,19 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 					mapView.addAnnotations(drive)
 				}
 			}
-
 		}
+        
+        if shouldRedrawLines {
+            shouldRedrawLines = false
+            addNecessaryLinePoints()
+        }
 	}
-
+    
+    func getSelectedMapPointAndNewCoordinate() -> (mapPoint: MapPoint?, newCoordinate: CLLocationCoordinate2D) {
+        shouldRedrawLines = true
+        return (mapPoint: selectedMapPoint, newCoordinate: self.mapView.centerCoordinate)
+    }
+    
 	// MARK: MKMapViewDelegate
 
 	@objc(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:) func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -257,7 +286,25 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 		guard !(view.annotation is MKUserLocation) else { return }
+        
+        if self.editMode == true {
+            centerDot.alpha = 1
+            self.controller?.activateMoveButton()
+            let mapPoint = view.annotation as! MapPoint
+            selectedMapPoint = mapPoint
+        }
 	}
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        guard !(view.annotation is MKUserLocation) else { return }
+        
+        centerDot.alpha = 0
+        
+        if self.editMode == true {
+            self.controller?.deActivateMoveButton()
+            selectedMapPoint = nil
+        }
+    }
 
 	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 		if self.data.count > 1 {
@@ -271,7 +318,7 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		if self.editMode {
 			let mapPoint = view.annotation as! MapPoint
 			//print("mapPoint \(mapPoint)")
-			controller?.mapPointWasPressed(view.annotation as! MapPoint)
+			controller?.deleteAMapPoint(view.annotation as! MapPoint)
 
 			// We support only first line.
 			let index = self.data[0].firstIndex(of: mapPoint)
