@@ -11,7 +11,7 @@ This has been a tiny hobby project of mine - to make an app, that would automati
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example4.gif)
 
 
-** Version 2 Update!! Whoop Whoop!🙀 **  
+**Version 2 Update!! Whoop Whoop!🙀**  
 
 **1.)** Statistics page (To finally determine if owning a car costs more that rent services.. )
 
@@ -64,6 +64,7 @@ Map is now more usable, but it still takes some time to load, and iOS 16.x has a
 
 --------------- 
 **Drives recording**
+
 How does it work.
 
 ---------------
