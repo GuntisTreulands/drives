@@ -39,11 +39,11 @@ Bolt Drive, CarGuru and CityBee.
 
 And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
 
-**Definatelly it is worth to have my own car, than rent!(*)(*) **
+**Definatelly it is worth to have my own car, than rent!(#)(#)**
 
-(*) If I am being honest, In year 1 of owning my current car, it actually appears that my car was more expensive than renting would have been, because in year one I got premium insurance, had some initial post-buy repairs, car value dropped much more on first year, etc.  So - the longer I own a car, the cheaper it got, and in the last year, my car is cheaper by ~3.5x than if I would rent a car for each drive/trip
+(#) If I am being honest, In year 1 of owning my current car, it actually appears that my car was more expensive than renting would have been, because in year one I got premium insurance, had some initial post-buy repairs, car value dropped much more on first year, etc.  So - the longer I own a car, the cheaper it got, and in the last year, my car is cheaper by ~3.5x than if I would rent a car for each drive/trip
 
-(*) I am using static rent service prices, while comparing my car costs 5 years ago. Yes, it sucks, but hey, it's a start, and it's pretty cool in my humble opinion.  Rent service prices are hardcoded for now.
+(#) I am using static rent service prices, while comparing my car costs 5 years ago. Yes, it sucks, but hey, it's a start, and it's pretty cool in my humble opinion.  Rent service prices are hardcoded for now.
 
 
 **Month drives / All drives - map view**
