@@ -53,10 +53,10 @@ And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
 
 Not much to comment here. It felt kinda awesome, if I could see All my drives at once, just to see that spider web on the map - where have I driven with my car.
 
-It was actually (and still is) a challange. I started recording my drives since 2022.02.15 I think, and I have recorded about 533 drives, in total having around 480k points. No easy feat for MKMapview.
+It was actually (and still is) a challange. I started recording my drives since **2022.02.15** I think, and I have recorded about **533** drives, in total having around **480k** points. No easy feat for MKMapview.
 
-So, I added some filtering, to determine and keep only pivotal points and ended up with around 67k points.
-Map is now more usable, but it still takes some time to load, and iOS 16.x has a bug, that it will freeze app after a while (with so much data). Only solution is to refresh it (change mapType to something else and back) after each panning/zooming. Still room to improve.
+So, I added some filtering, to determine and keep only pivotal points and ended up with around **67k** points.
+Map is now more usable, but it still takes some time to load, and iOS **16.x** has a bug, that it will freeze app after a while (with so much data). Only solution is to refresh it (change mapType to something else and back) after each panning/zooming. Still room to improve.
 
 
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example9.gif)
