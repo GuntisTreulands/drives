@@ -70,7 +70,7 @@ How does it work?
 ---------------
  
   
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/example3.gif)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/example1.gif)
  
 **1.)** App needs "Location Updates" and "Background processing" capabilities
  
