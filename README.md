@@ -43,7 +43,7 @@ And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
  
 (#) If I am being honest, In year 1 of owning my current car, it actually appears that my car was more expensive than renting would have been, because in year one I got premium insurance, had some initial post-buy repairs, car value dropped much more in the first year, etc.  So - the longer I own a car, the cheaper it got, and in the last year, my car is cheaper by ~3.5x than if I would rent a car for each drive/trip
  
-(#) I am using static rent service prices, while comparing my car costs 5 years ago. Yes, it sucks, but hey, it's a start, and it's pretty cool in my humble opinion.  Rent service prices are hardcoded for now.
+(#) I am using static rent service prices, while comparing my car costs 5 years ago. Yes, it sucks, but hey, it's a start, and it's pretty cool in my humble opinion. (Rent service prices are hardcoded for now in the app)
  
  
 **Month drives / All drives - map view**
