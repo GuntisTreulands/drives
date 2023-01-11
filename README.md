@@ -8,7 +8,7 @@ This has been a tiny hobby project of mine - to make an app, that would automati
 
   
 
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example4.gif)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example4.gif)
 
 
 **Version 2 Update!! Whoop Whoop!🙀**  
@@ -21,8 +21,8 @@ This has been a tiny hobby project of mine - to make an app, that would automati
 **Statistics** 
 
 
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example7.png)
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example8.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example7.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example8.png)
 
 
 Since for ever, I have collected all the costs I have with my car.. Fuel, Taxes, insurance, car wash, repairs, and
@@ -48,8 +48,8 @@ And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
 
 **Month drives / All drives - map view**
 
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example6.png)
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/v2_example5.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example6.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example5.png)
 
 Not much to comment here. It felt kinda awesome, if I could see All my drives at once, just to see that spider web on the map - where have I driven with my car.
 
@@ -59,7 +59,7 @@ So, I added some filtering, to determine and keep only pivotal points and ended 
 Map is now more usable, but it still takes some time to load, and iOS **16.x** has a bug, that it will freeze app after a while (with so much data). Only solution is to refresh it (change mapType to something else and back) after each panning/zooming. Still room to improve.
 
 
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example9.gif)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/example9.gif)
 
 
 --------------- 
@@ -70,7 +70,7 @@ How does it work.
 ---------------
 
   
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/example3.gif)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/example3.gif)
 
 **1.)** App needs "Location Updates" and "Background processing" capabilities
 
