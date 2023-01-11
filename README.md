@@ -25,7 +25,7 @@ This has been a tiny hobby project of mine - to make an app that would automatic
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example8.png)
  
  
-Since forever, I have collected all the costs I have with my car.. Fuel, Taxes, insurance, car wash, repairs, and
+Since forever, I have collected all the costs I have with my car. Fuel, Taxes, insurance, car wash, repairs, and
 even - car value drop (once a year I check some market place to see the approx value of my car).
 But what was missing - how often do I drive, and how long are the drives.
  
