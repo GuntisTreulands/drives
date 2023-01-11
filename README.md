@@ -49,7 +49,7 @@ And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
 **Month drives / All drives - map view**
  
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example6.png)
-![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example5.png)
+![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example5.jpeg)
  
 Not much to comment here. It felt kinda awesome, if I could see all my drives at once, just to see that spider web on the map - where have I driven with my car.
  
