@@ -128,7 +128,7 @@ I could rig up either a server sending some VOIP pushes from time to time to wak
   
  
   
-Motion API
+**Motion API**
  
 ---------------
  
@@ -138,7 +138,7 @@ In my case, my phone connects to car Bluetooth, and that seems to be the primary
  
  
  
-More info
+**More info**
  
 ---------------
  
@@ -150,7 +150,7 @@ I am also thinking of rigging it up for running activities (like, if I am runnin
  
   
  
-Got feedback?
+**Got feedback?**
  
 ---------------
  
