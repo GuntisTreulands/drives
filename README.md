@@ -4,7 +4,7 @@
  
  I present to you... an app that can record all your car drives automatically.
  
-This has been a tiny hobby project of mine - to make an app that would automatically record all the car drives I make and be able to export some "useful" data to email.
+This has been a tiny hobby project of mine - to make an app that would automatically record all the car drives I make and be able to work with that data.
  
   
  
