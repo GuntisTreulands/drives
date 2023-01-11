@@ -51,7 +51,7 @@ And the conclusion, for my specific car, and drive patterns are.. 🥁🥁🥁
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example6.png)
 ![PreviewImage](https://raw.githubusercontent.com/GuntisTreulands/drives/main/ExampleImages/v2_example5.jpeg)
  
-Not much to comment here. It felt kinda awesome, if I could see all my drives at once, just to see that spider web on the map - where have I driven with my car.
+It felt kinda awesome, if I could see all my drives at once, just to see that spider web on the map - where have I driven with my car.
  
 It was actually (and still is) a challenge. I started recording my drives since **2022.02.15** I think, and I have recorded about **533** drives, in total having around **480k** points. No easy feat for MKMapview.
  
