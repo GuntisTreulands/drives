@@ -22,7 +22,6 @@
 "ok_button_title" = "Ok";
 "hey_alert_title" = "Hey";
 "done_button_title" = "Done";
-"move_button_title" = "Move";
 "edit_button_title" = "Edit";
 "delete_button_title" = "Delete";
 //=== GLOBAL
@@ -66,6 +65,10 @@
 "main_business_category" = "Business";
 "main_car_wash_category" = "Car wash or refuel";
 "main_no_drives_yet" = "No Drives yet..";
+"map_select_interval" = "Select P1-P2";
+"map_delete_interval" = "Delete P1-P2";
+"map_split_interval" = "Split";
+"map_move_point" = "Move P1";
 "map_all_drives" = "All drives";
 //=== MAIN
 

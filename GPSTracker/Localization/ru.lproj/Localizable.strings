@@ -22,7 +22,6 @@
 "ok_button_title" = "Ну ладно";
 "hey_alert_title" = "Внимание";
 "done_button_title" = "Сделанный";
-"move_button_title" = "Переместить точку";
 "edit_button_title" = "Редактировать";
 "delete_button_title" = "Удалить";
 //=== GLOBAL
@@ -66,6 +65,10 @@
 "main_business_category" = "Бизнес";
 "main_car_wash_category" = "Автомойка или заправка";
 "main_no_drives_yet" = "Поездок пока нет.";
+"map_select_interval" = "Выделять P1-P2";
+"map_delete_interval" = "Удалить P1-P2";
+"map_split_interval" = "Разделить";
+"map_move_point" = "Переместить P1";
 "map_all_drives" = "Все поездки";
 //=== MAIN
 

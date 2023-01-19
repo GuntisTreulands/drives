@@ -11,14 +11,14 @@ import MapKit
 
 
 protocol MapLayoutViewLogic: AnyObject {
-	func deleteAMapPoint(_ point: MapPoint)
-    func activateMoveButton()
-    func deActivateMoveButton()
+    func deleteAMapPoint(_ point: MapPoint)
+    func moveAMapPoint(_ point: MapPoint, newCoordinate: CLLocationCoordinate2D)
+    func splitAMapPoint(_ coordinate: CLLocationCoordinate2D)
+    func deleteIntervalBetween(_ point1: MapPoint, point2: MapPoint)
 }
 
 protocol MapLayoutViewDataLogic: AnyObject {
 	func updateData(data: [[MapPoint]], editMode: Bool)
-    func getSelectedMapPointAndNewCoordinate() -> (mapPoint: MapPoint?, newCoordinate: CLLocationCoordinate2D)
 }
 
 class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate, MKMapViewDelegate {
@@ -31,7 +31,13 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 
     @IBOutlet weak var centerDot: UIView!
     
-	var data = [[MapPoint]]()
+    @IBOutlet weak var editBarView: UIView!
+    @IBOutlet weak var p1p2Button: UIButton!
+    @IBOutlet weak var deleteIntervalButton: UIButton!
+    @IBOutlet weak var splitIntervalButton: UIButton!
+    @IBOutlet weak var movePointButton: UIButton!
+    
+    var data = [[MapPoint]]()
 	var editMode: Bool = false
     var shouldRedrawLines = false
 
@@ -43,10 +49,12 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	var selectedPinMapRect: MKMapRect!
 
 	var zoomOnUserWasDone: Bool = false
-	var userDraggedOrZoomedMap: Bool = false
 	var disableMapAdjusting: Bool = false
     
     var selectedMapPoint: MapPoint?
+    
+    var selectedP1Point: MapPoint?
+    var selectedP2Point: MapPoint?
 
 	// MARK: View lifecycle
 
@@ -60,9 +68,9 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
     	setup()
 	}
 
-	deinit {
-
-	}
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .fontSizeWasChanged, object: nil)
+    }
 
 	override func layoutSubviews() {
 		super.layoutSubviews()
@@ -77,12 +85,20 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		baseView.translatesAutoresizingMaskIntoConstraints = false
 		mapView.translatesAutoresizingMaskIntoConstraints = false
         centerDot.translatesAutoresizingMaskIntoConstraints = false
+        editBarView.translatesAutoresizingMaskIntoConstraints = false
+        p1p2Button.translatesAutoresizingMaskIntoConstraints = false
+        deleteIntervalButton.translatesAutoresizingMaskIntoConstraints = false
+        splitIntervalButton.translatesAutoresizingMaskIntoConstraints = false
+        movePointButton.translatesAutoresizingMaskIntoConstraints = false
 
+        
 		baseView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 		baseView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
 
-		mapView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-		mapView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+		mapView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+		mapView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
 		mapView.delegate = self
         
@@ -98,16 +114,122 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
         centerDot.clipsToBounds = true
         centerDot.alpha = 0
         
-		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.didDragOrPinchMap(_:)))
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.didDragOrPinchMap(_:)))
-        panGesture.delegate = self
-        pinchGesture.delegate = self
-        mapView.addGestureRecognizer(panGesture)
-        mapView.addGestureRecognizer(pinchGesture)
+        editBarView.backgroundColor = .white
+        editBarView.leftAnchor.constraint(equalTo: mapView.leftAnchor).isActive = true
+        editBarView.rightAnchor.constraint(equalTo: mapView.rightAnchor).isActive = true
+        editBarView.topAnchor.constraint(equalTo: mapView.topAnchor).isActive = true
+        editBarView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        let space1 = UILayoutGuide.init()
+        editBarView.addLayoutGuide(space1)
+        let space2 = UILayoutGuide.init()
+        editBarView.addLayoutGuide(space2)
+        let space3 = UILayoutGuide.init()
+        editBarView.addLayoutGuide(space3)
+        
+        let space1Constraint = space1.widthAnchor.constraint(equalToConstant: 1)
+        space1Constraint.priority = .defaultLow
+        space1Constraint.isActive = true
+        let space2Constraint = space2.widthAnchor.constraint(equalTo: space1.widthAnchor)
+        space2Constraint.priority = .defaultLow
+        space2Constraint.isActive = true
+        let space3Constraint = space3.widthAnchor.constraint(equalTo: space1.widthAnchor)
+        space3Constraint.priority = .defaultLow
+        space3Constraint.isActive = true
+        
+       
+        p1p2Button.leftAnchor.constraint(equalTo: editBarView.leftAnchor, constant: 20).isActive = true
+        p1p2Button.topAnchor.constraint(equalTo: editBarView.topAnchor, constant: 5).isActive = true
+        p1p2Button.bottomAnchor.constraint(equalTo: editBarView.bottomAnchor, constant: -5).isActive = true
+        
+        space1.leftAnchor.constraint(equalTo: p1p2Button.rightAnchor).isActive = true
+        
+        deleteIntervalButton.leftAnchor.constraint(equalTo: space1.rightAnchor).isActive = true
+        deleteIntervalButton.topAnchor.constraint(equalTo: editBarView.topAnchor, constant: 5).isActive = true
+        deleteIntervalButton.bottomAnchor.constraint(equalTo: editBarView.bottomAnchor, constant: -5).isActive = true
+        
+        space2.leftAnchor.constraint(equalTo: deleteIntervalButton.rightAnchor).isActive = true
+        
+        splitIntervalButton.leftAnchor.constraint(equalTo: space2.rightAnchor).isActive = true
+        splitIntervalButton.topAnchor.constraint(equalTo: editBarView.topAnchor, constant: 5).isActive = true
+        splitIntervalButton.bottomAnchor.constraint(equalTo: editBarView.bottomAnchor, constant: -5).isActive = true
+        
+        space3.leftAnchor.constraint(equalTo: splitIntervalButton.rightAnchor).isActive = true
+        
+        movePointButton.leftAnchor.constraint(equalTo: space3.rightAnchor).isActive = true
+        movePointButton.topAnchor.constraint(equalTo: editBarView.topAnchor, constant: 5).isActive = true
+        movePointButton.bottomAnchor.constraint(equalTo: editBarView.bottomAnchor, constant: -5).isActive = true
+        movePointButton.rightAnchor.constraint(equalTo: editBarView.rightAnchor, constant: -20).isActive = true
+        
+        p1p2Button.setTitle("map_select_interval".localized(), for: .normal)
+        deleteIntervalButton.setTitle("map_delete_interval".localized(), for: .normal)
+        splitIntervalButton.setTitle("map_split_interval".localized(), for: .normal)
+        movePointButton.setTitle("map_move_point".localized(), for: .normal)
+        
+        p1p2Button.addTarget(self, action: #selector(p1p2ButtonPressed), for: .touchUpInside)
+        deleteIntervalButton.addTarget(self, action: #selector(deleteIntervalButtonPressed), for: .touchUpInside)
+        splitIntervalButton.addTarget(self, action: #selector(splitIntervalButtonPressed), for: .touchUpInside)
+        movePointButton.addTarget(self, action: #selector(movePointButtonPressed), for: .touchUpInside)
+        
+        deleteIntervalButton.isEnabled = false
+        splitIntervalButton.isEnabled = false
+        movePointButton.isEnabled = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fontSizeWasChanged),
+            name: .fontSizeWasChanged, object: nil)
+        
+        updateFonts()
   	}
 
 	// MARK: Functions
-
+    
+    internal func updateFonts() {
+        p1p2Button.titleLabel?.font = Font(.medium, size: .size15).font
+        deleteIntervalButton.titleLabel?.font = Font(.medium, size: .size15).font
+        splitIntervalButton.titleLabel?.font = Font(.medium, size: .size15).font
+        movePointButton.titleLabel?.font = Font(.medium, size: .size15).font
+    }
+    
+    @objc private func p1p2ButtonPressed() {
+        p1p2Button.isSelected = !p1p2Button.isSelected
+        self.splitIntervalButton.isEnabled = !p1p2Button.isSelected
+        
+        self.updateData(data: self.data, editMode: self.editMode)
+    }
+    
+    @objc private func deleteIntervalButtonPressed() {
+        if let selectedP1Point = selectedP1Point, let selectedP2Point = selectedP2Point {
+            shouldRedrawLines = true
+            self.controller?.deleteIntervalBetween(selectedP1Point, point2: selectedP2Point)
+        }
+        selectedP1Point = nil
+        selectedP2Point = nil
+        p1p2Button.isSelected = false
+        deleteIntervalButton.isEnabled = false
+    }
+    
+    @objc private func splitIntervalButtonPressed() {
+        shouldRedrawLines = true
+        self.controller?.splitAMapPoint(self.mapView.centerCoordinate)
+    }
+    
+    @objc private func movePointButtonPressed() {
+        if let selectedMapPoint = selectedMapPoint {
+            shouldRedrawLines = true
+            self.controller?.moveAMapPoint(selectedMapPoint, newCoordinate: self.mapView.centerCoordinate)
+        }
+    }
+    
+    
+    private func disableEditBarFunctions() {
+        selectedP1Point = nil
+        selectedP2Point = nil
+        p1p2Button.isSelected = false
+        deleteIntervalButton.isEnabled = false
+        splitIntervalButton.isEnabled = false
+        movePointButton.isEnabled = false
+    }
+    
 	private func addNecessaryLinePoints() {
 		for overlay in mapView.overlays {
 			mapView.removeOverlay(overlay)
@@ -180,7 +302,14 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 	func updateData(data: [[MapPoint]], editMode: Bool) {
 
 		self.editMode = editMode
+        self.editBarView.alpha = self.editMode == true ? 1 : 0
+        self.centerDot.alpha = self.editMode == true ? 1 : 0
+        self.splitIntervalButton.isEnabled = self.editMode
 
+        if self.editMode == false {
+            disableEditBarFunctions()
+        }
+        
 		if self.data.isEmpty {
 			self.data = data
 
@@ -224,19 +353,10 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
         }
 	}
     
-    func getSelectedMapPointAndNewCoordinate() -> (mapPoint: MapPoint?, newCoordinate: CLLocationCoordinate2D) {
-        shouldRedrawLines = true
-        return (mapPoint: selectedMapPoint, newCoordinate: self.mapView.centerCoordinate)
-    }
-    
 	// MARK: MKMapViewDelegate
 
 	@objc(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:) func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
-    }
-
-    @objc func didDragOrPinchMap(_ sender: UIGestureRecognizer) {
-		userDraggedOrZoomedMap = true
     }
 
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -265,8 +385,9 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 
 		if (annotation as! MapPoint).title!.contains("$") {
 			av.pinTintColor = UIColor.purple
-		}
-		else if (annotation as! MapPoint).isStart && !self.editMode {
+		} else if (annotation as! MapPoint) == selectedP1Point || (annotation as! MapPoint) == selectedP2Point {
+            av.pinTintColor = .blue
+        } else if (annotation as! MapPoint).isStart && !self.editMode {
 			av.pinTintColor = UIColor.init(red: 69/255.0, green: 155/255.0, blue: 2/255.0, alpha: 1)
 		} else {
 			av.pinTintColor = .red
@@ -288,20 +409,36 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 		guard !(view.annotation is MKUserLocation) else { return }
         
         if self.editMode == true {
-            centerDot.alpha = 1
-            self.controller?.activateMoveButton()
             let mapPoint = view.annotation as! MapPoint
-            selectedMapPoint = mapPoint
+            
+            if p1p2Button.isSelected {
+                if selectedP1Point == nil {            // Set P1
+                    selectedP1Point = mapPoint
+                    mapView.removeAnnotation(selectedP1Point!)
+                    mapView.addAnnotation(selectedP1Point!)
+                } else if selectedP1Point != nil && selectedP2Point == nil {      // Set P2
+                    selectedP2Point = mapPoint
+                    mapView.removeAnnotation(selectedP2Point!)
+                    mapView.addAnnotation(selectedP2Point!)
+                    deleteIntervalButton.isEnabled = true
+                } else if selectedP2Point != nil {      // Disable P2 and Set P1
+                    selectedP1Point = mapPoint
+                    selectedP2Point = nil
+                    deleteIntervalButton.isEnabled = false
+                    self.updateData(data: self.data, editMode: self.editMode)
+                }
+            } else {
+                selectedMapPoint = mapPoint
+                movePointButton.isEnabled = true
+            }
         }
 	}
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         guard !(view.annotation is MKUserLocation) else { return }
         
-        centerDot.alpha = 0
-        
         if self.editMode == true {
-            self.controller?.deActivateMoveButton()
+            movePointButton.isEnabled = false
             selectedMapPoint = nil
         }
     }
@@ -347,4 +484,10 @@ class MapLayoutView: UIView, MapLayoutViewDataLogic, UIGestureRecognizerDelegate
 
     	return MKPolylineRenderer()
 	}
+    
+    // MARK: Notifications
+
+    @objc private func fontSizeWasChanged() {
+        updateFonts()
+    }
 }

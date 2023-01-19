@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +13,12 @@
             <connections>
                 <outlet property="baseView" destination="iN0-l3-epB" id="FVJ-x9-mgh"/>
                 <outlet property="centerDot" destination="kCL-Z1-jli" id="qxd-kV-0Q0"/>
+                <outlet property="deleteIntervalButton" destination="4p9-Qi-gux" id="UKg-lh-eld"/>
+                <outlet property="editBarView" destination="CNp-sN-xgR" id="IbW-LP-83t"/>
                 <outlet property="mapView" destination="gHi-fw-XZl" id="v1f-Vh-nGG"/>
+                <outlet property="movePointButton" destination="aoN-wY-D5Z" id="5M5-kx-QRS"/>
+                <outlet property="p1p2Button" destination="Eac-ya-xda" id="nca-qQ-3nd"/>
+                <outlet property="splitIntervalButton" destination="aHA-fE-fud" id="5K3-W4-wzB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,6 +30,60 @@
                     <rect key="frame" x="66" y="274" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </mapView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CNp-sN-xgR" userLabel="EditBarView">
+                    <rect key="frame" x="66" y="274" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eac-ya-xda" userLabel="P1P2">
+                            <rect key="frame" x="82" y="46" width="75" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" name="DisabledButtonColor"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" name="DisabledButtonColor"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" name="BusinessColor"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4p9-Qi-gux" userLabel="DeleteInterval">
+                            <rect key="frame" x="82" y="46" width="75" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" name="DeleteColor"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" name="DisabledButtonColor"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHA-fE-fud" userLabel="Split">
+                            <rect key="frame" x="82" y="46" width="75" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" name="BusinessColor"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" name="DisabledButtonColor"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoN-wY-D5Z" userLabel="Move">
+                            <rect key="frame" x="82" y="46" width="75" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" name="BusinessColor"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" name="DisabledButtonColor"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCL-Z1-jli" userLabel="centerDot">
                     <rect key="frame" x="66" y="274" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -38,6 +98,15 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="BusinessColor">
+            <color red="0.10588235294117647" green="0.69803921568627447" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DeleteColor">
+            <color red="0.95294117647058818" green="0.16862745098039217" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DisabledButtonColor">
+            <color red="0.49019607843137253" green="0.51372549019607838" blue="0.54509803921568623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

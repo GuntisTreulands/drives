@@ -22,7 +22,6 @@
 "ok_button_title" = "Labi";
 "hey_alert_title" = "Uzmanību";
 "done_button_title" = "Pabeigt";
-"move_button_title" = "Pārvietot";
 "edit_button_title" = "Labot";
 "delete_button_title" = "Dzēst";
 //=== GLOBAL
@@ -66,6 +65,10 @@
 "main_business_category" = "Bizness";
 "main_car_wash_category" = "Auto mazgāšana vai degvielas uzpilde";
 "main_no_drives_yet" = "Vēl nav neviena brauciena..";
+"map_select_interval" = "Iezīmēt P1-P2";
+"map_delete_interval" = "Dzēst P1-P2";
+"map_split_interval" = "Sadalīt";
+"map_move_point" = "Pārvietot P1";
 "map_all_drives" = "Visi braucieni";
 //=== MAIN
 

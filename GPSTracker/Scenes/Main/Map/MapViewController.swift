@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 
@@ -24,7 +25,6 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	var router: (NSObjectProtocol & MapRoutingLogic & MapDataPassing)?
 	var layoutView: MapLayoutView!
 	var editModeEnabled: Bool = false
-    var moveButtonEnabled: Bool = false
 
 	// MARK: Object lifecycle
 
@@ -107,18 +107,9 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 	}
 
 	private func setUpTopRightButton() {
-        self.navigationItem.rightBarButtonItems = nil
         
 		if editModeEnabled {
-            if moveButtonEnabled {
-                self.navigationItem.rightBarButtonItems = [
-                    UIBarButtonItem.init(title: "done_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed)),
-                    UIBarButtonItem.init(title: "move_button_title".localized(), style: .done, target: self, action: #selector(moveButtonPressed))
-                    
-                ]
-            } else {
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "done_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed))
-            }
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "done_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed))
 		} else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "edit_button_title".localized(), style: .done, target: self, action: #selector(editButtonPressed))
 		}
@@ -126,23 +117,14 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 
 	// MARK: Functions
 
-	func getData() {
+	internal func getData() {
 		let request = Map.FetchPoints.Request()
 		interactor?.fetchPoints(request: request)
 	}
     
-    @objc func moveButtonPressed() {
-        let result = layoutView.getSelectedMapPointAndNewCoordinate()
-        if let mapPoint = result.mapPoint {
-            self.interactor?.moveAPoint(request: Map.MoveAPoint.Request.init(point: mapPoint, newCoordinate: result.newCoordinate))
-        }
-    }
-    
-	@objc func editButtonPressed() {
+	@objc internal func editButtonPressed() {
         editModeEnabled.toggle()
-        moveButtonEnabled = false
 		setUpTopRightButton()
-
 		getData()
 	}
 
@@ -165,14 +147,16 @@ class MapViewController: UIViewController, MapDisplayLogic, MapLayoutViewLogic {
 		self.interactor?.deleteAPoint(request: Map.DeleteAPoint.Request.init(point: point))
 	}
     
-    func activateMoveButton() {
-        moveButtonEnabled = true
-        setUpTopRightButton()
+    internal func moveAMapPoint(_ point: MapPoint, newCoordinate: CLLocationCoordinate2D) {
+        self.interactor?.moveAPoint(request: Map.MoveAPoint.Request.init(point: point, newCoordinate: newCoordinate))
     }
     
-    func deActivateMoveButton() {
-        moveButtonEnabled = false
-        setUpTopRightButton()
+    internal func splitAMapPoint(_ coordinate: CLLocationCoordinate2D) {
+        self.interactor?.splitAPoint(request: Map.SplitAPoint.Request.init(coordinate: coordinate))
+    }
+    
+    internal func deleteIntervalBetween(_ point1: MapPoint, point2: MapPoint) {
+        self.interactor?.deleteInterval(request: Map.DeleteInterval.Request(point1: point1, point2: point2))
     }
     
 	// MARK: Notifications

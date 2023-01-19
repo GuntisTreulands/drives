@@ -29,6 +29,19 @@ enum Map {
             var newCoordinate: CLLocationCoordinate2D
         }
     }
+    
+    enum SplitAPoint {
+        struct Request {
+            var coordinate: CLLocationCoordinate2D
+        }
+    }
+    
+    enum DeleteInterval {
+        struct Request {
+            var point1: MapPoint
+            var point2: MapPoint
+        }
+    }
 
 	enum FetchPoints {
 		struct Request {

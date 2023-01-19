@@ -12,11 +12,14 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 protocol MapBusinessLogic {
 	func fetchPoints(request: Map.FetchPoints.Request)
 	func deleteAPoint(request: Map.DeleteAPoint.Request)
     func moveAPoint(request: Map.MoveAPoint.Request)
+    func splitAPoint(request: Map.SplitAPoint.Request)
+    func deleteInterval(request: Map.DeleteInterval.Request)
 }
 
 protocol MapDataStore {
@@ -35,7 +38,7 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 
 	// MARK: MainListBusinessLogic
 
-	func fetchPoints(request: Map.FetchPoints.Request) {
+	internal func fetchPoints(request: Map.FetchPoints.Request) {
 		if fetchedResultsController == nil {
 			let context = DataBaseManager.shared.mainManagedObjectContext()
 			let fetchRequest: NSFetchRequest<DriveEntity> = DriveEntity.fetchRequest()
@@ -93,14 +96,14 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 			}
 		}
 
-		print("totalCount \(totalCount)"); //484757  //134586  //99942  //62079
+		//print("totalCount \(totalCount)"); //484757  //134586  //99942  //62079
 
     	let response = Map.FetchPoints.Response(fetchedPoints: sortedPointsPerDrive, monthIdentificator: monthIdentificator)
     	presenter?.presentData(response: response)
 
 	}
 
-	func deleteAPoint(request: Map.DeleteAPoint.Request)
+	internal func deleteAPoint(request: Map.DeleteAPoint.Request)
 	{
 		let task =
 		{
@@ -136,7 +139,7 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 	}
     
     
-    func moveAPoint(request: Map.MoveAPoint.Request)
+    internal func moveAPoint(request: Map.MoveAPoint.Request)
     {
         let task =
         {
@@ -172,7 +175,157 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, NSFetchedResultsC
 
         DataBaseManager.shared.addATask(action: task)
     }
+    
+    internal func splitAPoint(request: Map.SplitAPoint.Request)
+    {
+        let task =
+        {
+            let context = DataBaseManager.shared.mainManagedObjectContext()
+            
+            if let mapDrive = self.mapDrive {
+                let drive: DriveEntity = context.object(with: mapDrive.objectID) as! DriveEntity
+                
+                let sortedPoints: [PointEntity] = drive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: false)]) as! [PointEntity]
+                
+                let currentLocation = CLLocation.init(latitude: request.coordinate.latitude, longitude: request.coordinate.longitude)
+                var nearestDistance: CLLocationDistance = 999999
 
+                var usedPoint1: PointEntity?
+                var usedPoint2: PointEntity!
+                
+                var closestPoint = sortedPoints.first!
+                    
+                var distance: Double = 999999
+                let targetPoint = CLLocation.init(latitude: request.coordinate.latitude, longitude: request.coordinate.longitude)
+                
+                // To determine if the closest point is first or last.
+                for point in sortedPoints {
+                    let tmpDistance = CLLocation.init(latitude: point.latitude, longitude: point.longitude).distance(from: targetPoint)
+                    if tmpDistance < distance {
+                        closestPoint = point
+                        distance = tmpDistance
+                    }
+                }
+                
+                // To determine best two points to split.
+                // We can't use closest point + calculate second best, as it will give false result.
+                if sortedPoints.count >= 2 {
+                    for index in 0...sortedPoints.count - 2 {
+                        let firstPoint = sortedPoints[index]
+                        let secondPoint = sortedPoints[index + 1]
+                        
+                        let closestCoordinate2 = MapWorker.distanceBetweenTwoPointsFrom(origin: request.coordinate, pointOne: firstPoint, pointTwo: secondPoint)
+                        
+                        let dx = currentLocation.coordinate.latitude - closestCoordinate2.latitude
+                        let dy = currentLocation.coordinate.longitude - closestCoordinate2.longitude
+                        
+                        let distance = sqrt(dx * dx + dy * dy)
+                        
+                        
+                        if distance < nearestDistance {
+                            nearestDistance = distance
+                            usedPoint1 = firstPoint
+                            usedPoint2 = secondPoint
+                        }
+                    }
+                }
+                
+                if nearestDistance < 1000, let usedPoint1 = usedPoint1, let usedPoint2 = usedPoint2 {
+                    let currentPointIndex = sortedPoints.firstIndex(of: closestPoint)!
+                    
+                    let newPoint = PointEntity.init(context:DataBaseManager.shared.mainManagedObjectContext())
+                    newPoint.latitude = request.coordinate.latitude
+                    newPoint.longitude = request.coordinate.longitude
+                    newPoint.rDrive = drive
+                    
+                    // For cases when it is first or last point - just add a new point. Don't split.
+                    
+                    if currentPointIndex == 0 {
+                        newPoint.timestamp = closestPoint.timestamp + 60
+                    } else if currentPointIndex == sortedPoints.count - 1 {
+                        newPoint.timestamp = closestPoint.timestamp - 60
+                    } else {
+                        newPoint.timestamp = min(usedPoint1.timestamp, usedPoint2.timestamp) + abs(usedPoint1.timestamp - usedPoint2.timestamp) / 2
+                    }
+                
+                    drive.totalTime = 0
+                    drive.totalDistance = 0
+                    drive.startAddress = ""
+                    drive.endAddress = ""
+                    
+                    if let filteredPointsSet = drive.rFilteredPoints {
+                        for point in filteredPointsSet.allObjects as! [PointEntity] {
+                            point.rFilteredDrive = nil
+                        }
+                    }
+                    
+                    drive.rFilteredPoints = nil
+                }
+                
+                DataBaseManager.shared.saveContext()
+                DataBaseWorker.calculateDistanceAndTimeForDrives()
+                DataBaseWorker.calculateFilteredPointsForDrives()
+                self.fetchPoints(request: Map.FetchPoints.Request.init())
+            }
+        }
+
+        DataBaseManager.shared.addATask(action: task)
+    }
+    
+    internal func deleteInterval(request: Map.DeleteInterval.Request)
+    {
+        let task =
+        {
+            let context = DataBaseManager.shared.mainManagedObjectContext()
+            
+            if let mapDrive = self.mapDrive {
+                let drive: DriveEntity = context.object(with: mapDrive.objectID) as! DriveEntity
+                
+                let sortedPoints: [PointEntity] = drive.rPoints?.sortedArray(using: [NSSortDescriptor(key: "timestamp", ascending: false)]) as! [PointEntity]
+                
+                var pointsToDelete: [PointEntity] = []
+                
+                var startAdding = false
+                for point in sortedPoints {
+                    if point.objectID == request.point1.objectID {
+                        startAdding = !startAdding
+                        pointsToDelete.append(point)
+                    } else if point.objectID == request.point2.objectID {
+                        startAdding = !startAdding
+                        pointsToDelete.append(point)
+                    } else if startAdding {
+                        pointsToDelete.append(point)
+                    }
+                }
+                
+                for point in pointsToDelete {
+                    context.delete(point)
+                }
+                    
+                drive.totalTime = 0
+                drive.totalDistance = 0
+                drive.startAddress = ""
+                drive.endAddress = ""
+                
+                if let filteredPointsSet = drive.rFilteredPoints {
+                    for point in filteredPointsSet.allObjects as! [PointEntity] {
+                        point.rFilteredDrive = nil
+                    }
+                }
+                
+                drive.rFilteredPoints = nil
+            
+                
+                DataBaseManager.shared.saveContext()
+                DataBaseWorker.calculateDistanceAndTimeForDrives()
+                DataBaseWorker.calculateFilteredPointsForDrives()
+                self.fetchPoints(request: Map.FetchPoints.Request.init())
+            }
+        }
+
+        DataBaseManager.shared.addATask(action: task)
+    }
+    
 	// MARK: NSFetchedResultsControllerDelegate
 	
   	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

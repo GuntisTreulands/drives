@@ -11,16 +11,43 @@
 //
 
 import UIKit
+import MapKit
+import CoreData
 
 class MapWorker {
 
-//	class func getPrices(with type: FuelType, from prices: [PriceEntity]) -> [FuelList.FetchPrices.ViewModel.DisplayedPrice] {
-//		let pricesForFuelType = prices.filter({ $0.fuelType == type.rawValue })
-//		let pricesToReturn = pricesForFuelType.map() { price in
-//			return FuelList.FetchPrices.ViewModel.DisplayedPrice(id: price.id!, company: price.rStation!.rCompany!, actualPrice: price, price: price.price!, dateString: "\(Date.init(timeIntervalSince1970:price.date))", isPriceCheapest: price.price! == pricesForFuelType.first?.price!, fuelType: type, addressDescription: price.rStation!.address!, address: [price.rStation!], city: price.rStation!.city!)
-//		}
-//
-//		return pricesToReturn
-//	}
+    class func distanceBetweenTwoPointsFrom(origin: CLLocationCoordinate2D, pointOne: PointEntity, pointTwo: PointEntity) -> CLLocationCoordinate2D {
+
+        let A: Double = origin.latitude - pointOne.latitude
+        let B: Double = origin.longitude - pointOne.longitude
+        let C: Double = pointTwo.latitude - pointOne.latitude
+        let D: Double = pointTwo.longitude - pointOne.longitude
+
+
+        let dot: Double = A * C + B * D
+        let len_sq: Double = C * C + D * D
+        var param: Double = -1
+
+        if len_sq != 0 {
+            param = dot / len_sq
+        }
+
+        var xx: Double = 0
+        var yy: Double = 0
+
+        if param < 0 || (pointOne.latitude == pointTwo.latitude && pointOne.longitude == pointTwo.longitude) {
+            xx = pointOne.latitude
+            yy = pointOne.longitude
+        } else if param > 1 {
+            xx = pointTwo.latitude
+            yy = pointTwo.longitude
+        } else {
+            xx = pointOne.latitude + param * C
+            yy = pointOne.longitude + param * D
+        }
+
+
+        return CLLocationCoordinate2D.init(latitude: xx, longitude: yy)
+    }
 
 }
