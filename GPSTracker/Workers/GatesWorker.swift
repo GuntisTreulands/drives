@@ -64,7 +64,7 @@ class GatesWorker: NSObject, GatesWorkerLogic {
 		if gateRegion.contains(location.coordinate) {
 			if self.shouldInitiateCallForGate == true {
 				if encounters >= 2 {
-					PrivateGatesHelperWorker.openTheGates()
+                    PrivateGatesHelperWorker.openTheGates { _ in }
 					self.shouldInitiateCallForGate = false
 				} else {
 					encounters += 1

@@ -126,17 +126,68 @@
 		5CF32D0228E05A4200265CB7 /* CityBeePriceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF32D0128E05A4100265CB7 /* CityBeePriceWorker.swift */; };
 		5CF9673C28E20CFB00E02153 /* BoltDrivePriceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9673B28E20CFB00E02153 /* BoltDrivePriceWorker.swift */; };
 		63364074D2B59618DF26EDB7 /* Pods_GPSTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */; };
+		6422645A298D52120070AA5F /* AppConnectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64226459298D52120070AA5F /* AppConnectionWorker.swift */; };
+		6457CF57298BF0EB00A55933 /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF56298BF0EB00A55933 /* WatchAppApp.swift */; };
+		6457CF59298BF0EB00A55933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF58298BF0EB00A55933 /* ContentView.swift */; };
+		6457CF5B298BF0EC00A55933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6457CF5A298BF0EC00A55933 /* Assets.xcassets */; };
+		6457CF5E298BF0EC00A55933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6457CF5D298BF0EC00A55933 /* Preview Assets.xcassets */; };
+		6457CF67298BF22E00A55933 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645F236729882CA4003B308E /* WidgetKit.framework */; };
+		6457CF68298BF22E00A55933 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645F236929882CA4003B308E /* SwiftUI.framework */; };
+		6457CF6B298BF22F00A55933 /* WatchApp_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF6A298BF22F00A55933 /* WatchApp_Extension.swift */; };
+		6457CF6D298BF23100A55933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6457CF6C298BF23100A55933 /* Assets.xcassets */; };
+		6457CF71298BF23100A55933 /* WatchApp Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6457CF66298BF22E00A55933 /* WatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6457CF90298C1D1900A55933 /* WatchConnectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF8F298C1D1900A55933 /* WatchConnectionWorker.swift */; };
+		6483C73B298C492400F7DA89 /* Open the Gates.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6457CF54298BF0EA00A55933 /* Open the Gates.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6457CF6F298BF23100A55933 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C11F072229EF4FB00EC7CEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6457CF65298BF22E00A55933;
+			remoteInfo = "WatchApp ExtensionExtension";
+		};
+		6483C73C298C492400F7DA89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C11F072229EF4FB00EC7CEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6457CF53298BF0EA00A55933;
+			remoteInfo = WatchApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		5C1A9BD627D8DEED0079305A /* Embed App Extensions */ = {
+		5C1A9BD627D8DEED0079305A /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6457CF19298AD2F100A55933 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				6483C73B298C492400F7DA89 /* Open the Gates.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6457CF75298BF23200A55933 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6457CF71298BF23100A55933 /* WatchApp Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -266,6 +317,19 @@
 		5CD015402965DD99004A4122 /* MyCarDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCarDataModel.swift; sourceTree = "<group>"; };
 		5CF32D0128E05A4100265CB7 /* CityBeePriceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityBeePriceWorker.swift; sourceTree = "<group>"; };
 		5CF9673B28E20CFB00E02153 /* BoltDrivePriceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoltDrivePriceWorker.swift; sourceTree = "<group>"; };
+		64226459298D52120070AA5F /* AppConnectionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConnectionWorker.swift; sourceTree = "<group>"; };
+		6457CF54298BF0EA00A55933 /* Open the Gates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open the Gates.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6457CF56298BF0EB00A55933 /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
+		6457CF58298BF0EB00A55933 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6457CF5A298BF0EC00A55933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6457CF5D298BF0EC00A55933 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6457CF66298BF22E00A55933 /* WatchApp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchApp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6457CF6A298BF22F00A55933 /* WatchApp_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchApp_Extension.swift; sourceTree = "<group>"; };
+		6457CF6C298BF23100A55933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6457CF6E298BF23100A55933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6457CF8F298C1D1900A55933 /* WatchConnectionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionWorker.swift; sourceTree = "<group>"; };
+		645F236729882CA4003B308E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		645F236929882CA4003B308E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		771CC491CCEE1062F8249937 /* Pods-GPSTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.debug.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPSTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99646AD5BE7EBB9D53BFCE1D /* Pods-GPSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSTracker.release.xcconfig"; path = "Target Support Files/Pods-GPSTracker/Pods-GPSTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +351,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6457CF51298BF0EA00A55933 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6457CF63298BF22E00A55933 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6457CF68298BF22E00A55933 /* SwiftUI.framework in Frameworks */,
+				6457CF67298BF22E00A55933 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -303,6 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				5C4D730527B6ECA5007E7DB0 /* GPSTracker */,
+				6457CF55298BF0EB00A55933 /* WatchApp Watch App */,
+				6457CF69298BF22F00A55933 /* WatchApp Extension */,
 				5C11F07B229EF4FB00EC7CEC /* Products */,
 				A06D9252C43D3E2E4CB0455A /* Frameworks */,
 				0089759EE82449622D5B108A /* Pods */,
@@ -313,6 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				5C11F07A229EF4FB00EC7CEC /* GPSTracker.app */,
+				6457CF54298BF0EA00A55933 /* Open the Gates.app */,
+				6457CF66298BF22E00A55933 /* WatchApp Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -563,6 +647,7 @@
 				5C3F7A8A27E4C3FE009DD23D /* PrivateGatesHelperWorker.swift */,
 				5C7B814427C17F19006E89C4 /* DataBaseWorker.swift */,
 				5C2F9DC627C401EA00EBF242 /* HelperWorker.swift */,
+				6457CF8F298C1D1900A55933 /* WatchConnectionWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -613,6 +698,36 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
+		6457CF55298BF0EB00A55933 /* WatchApp Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				6457CF56298BF0EB00A55933 /* WatchAppApp.swift */,
+				6457CF58298BF0EB00A55933 /* ContentView.swift */,
+				64226459298D52120070AA5F /* AppConnectionWorker.swift */,
+				6457CF5A298BF0EC00A55933 /* Assets.xcassets */,
+				6457CF5C298BF0EC00A55933 /* Preview Content */,
+			);
+			path = "WatchApp Watch App";
+			sourceTree = "<group>";
+		};
+		6457CF5C298BF0EC00A55933 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6457CF5D298BF0EC00A55933 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6457CF69298BF22F00A55933 /* WatchApp Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6457CF6A298BF22F00A55933 /* WatchApp_Extension.swift */,
+				6457CF6C298BF23100A55933 /* Assets.xcassets */,
+				6457CF6E298BF23100A55933 /* Info.plist */,
+			);
+			path = "WatchApp Extension";
+			sourceTree = "<group>";
+		};
 		A06D9252C43D3E2E4CB0455A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +740,8 @@
 				5CBE5A1E237C4BF900639FDF /* CoreTelephony.framework */,
 				5CBEF11F2370C6BA0052D289 /* MapKit.framework */,
 				8C2F03F9DE291454958B1867 /* Pods_GPSTracker.framework */,
+				645F236729882CA4003B308E /* WidgetKit.framework */,
+				645F236929882CA4003B308E /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -637,21 +754,59 @@
 			buildConfigurationList = 5C11F0A2229EF4FC00EC7CEC /* Build configuration list for PBXNativeTarget "GPSTracker" */;
 			buildPhases = (
 				CB8E7F8B62B8BFBC9ECA83FC /* [CP] Check Pods Manifest.lock */,
-				5CBE5A1B237B5D9C00639FDF /* Run Script */,
+				5CBE5A1B237B5D9C00639FDF /* Translations */,
 				5C11F076229EF4FB00EC7CEC /* Sources */,
 				5C11F077229EF4FB00EC7CEC /* Frameworks */,
 				5C11F078229EF4FB00EC7CEC /* Resources */,
 				94B19138247197A9C10E4582 /* [CP] Embed Pods Frameworks */,
-				5C1A9BD627D8DEED0079305A /* Embed App Extensions */,
+				5C1A9BD627D8DEED0079305A /* Embed Foundation Extensions */,
+				6457CF19298AD2F100A55933 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6483C73D298C492400F7DA89 /* PBXTargetDependency */,
 			);
 			name = GPSTracker;
 			productName = fuelhunter;
 			productReference = 5C11F07A229EF4FB00EC7CEC /* GPSTracker.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6457CF53298BF0EA00A55933 /* WatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6457CF5F298BF0EC00A55933 /* Build configuration list for PBXNativeTarget "WatchApp" */;
+			buildPhases = (
+				6457CF50298BF0EA00A55933 /* Sources */,
+				6457CF51298BF0EA00A55933 /* Frameworks */,
+				6457CF52298BF0EA00A55933 /* Resources */,
+				6457CF75298BF23200A55933 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6457CF70298BF23100A55933 /* PBXTargetDependency */,
+			);
+			name = WatchApp;
+			productName = "WatchApp Watch App";
+			productReference = 6457CF54298BF0EA00A55933 /* Open the Gates.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6457CF65298BF22E00A55933 /* WatchApp Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6457CF72298BF23200A55933 /* Build configuration list for PBXNativeTarget "WatchApp Extension" */;
+			buildPhases = (
+				6457CF62298BF22E00A55933 /* Sources */,
+				6457CF63298BF22E00A55933 /* Frameworks */,
+				6457CF64298BF22E00A55933 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchApp Extension";
+			productName = "WatchApp ExtensionExtension";
+			productReference = 6457CF66298BF22E00A55933 /* WatchApp Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -659,8 +814,8 @@
 		5C11F072229EF4FB00EC7CEC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1300;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = myEmerg;
 				TargetAttributes = {
 					5C11F079229EF4FB00EC7CEC = {
@@ -673,6 +828,12 @@
 								enabled = 1;
 							};
 						};
+					};
+					6457CF53298BF0EA00A55933 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					6457CF65298BF22E00A55933 = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -692,6 +853,8 @@
 			projectRoot = "";
 			targets = (
 				5C11F079229EF4FB00EC7CEC /* GPSTracker */,
+				6457CF53298BF0EA00A55933 /* WatchApp */,
+				6457CF65298BF22E00A55933 /* WatchApp Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -728,10 +891,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6457CF52298BF0EA00A55933 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6457CF5E298BF0EC00A55933 /* Preview Assets.xcassets in Resources */,
+				6457CF5B298BF0EC00A55933 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6457CF64298BF22E00A55933 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6457CF6D298BF23100A55933 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5CBE5A1B237B5D9C00639FDF /* Run Script */ = {
+		5CBE5A1B237B5D9C00639FDF /* Translations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -740,14 +920,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = Translations;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby excel2LangFiles.rb gpstracker_languages.xlsx\n";
+			shellScript = "/usr/bin/python3 excel2LangFiles.py\n";
 		};
 		94B19138247197A9C10E4582 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -838,6 +1018,7 @@
 				5C2EA81E27BEC14A006534F2 /* MapLayoutView.swift in Sources */,
 				5C2EA81A27BEC14A006534F2 /* MapPresenter.swift in Sources */,
 				5C4D73EF27B6ECA6007E7DB0 /* NotifPhoneAnimationView.swift in Sources */,
+				6457CF90298C1D1900A55933 /* WatchConnectionWorker.swift in Sources */,
 				5C4D73A227B6ECA6007E7DB0 /* SettingsViewController.swift in Sources */,
 				5CD0153829649D49004A4122 /* StatsSegmentHeaderView.swift in Sources */,
 				5C2EA81927BEC14A006534F2 /* MapRouter.swift in Sources */,
@@ -885,7 +1066,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6457CF50298BF0EA00A55933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6422645A298D52120070AA5F /* AppConnectionWorker.swift in Sources */,
+				6457CF59298BF0EB00A55933 /* ContentView.swift in Sources */,
+				6457CF57298BF0EB00A55933 /* WatchAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6457CF62298BF22E00A55933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6457CF6B298BF22F00A55933 /* WatchApp_Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6457CF70298BF23100A55933 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6457CF65298BF22E00A55933 /* WatchApp Extension */;
+			targetProxy = 6457CF6F298BF23100A55933 /* PBXContainerItemProxy */;
+		};
+		6483C73D298C492400F7DA89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6457CF53298BF0EA00A55933 /* WatchApp */;
+			targetProxy = 6483C73C298C492400F7DA89 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5C4D739427B6ECA5007E7DB0 /* Localizable.strings */ = {
@@ -1070,6 +1282,130 @@
 			};
 			name = Release;
 		};
+		6457CF60298BF0EC00A55933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchApp Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.test.gpsTracker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker.watchkitapp;
+				PRODUCT_NAME = "Open the Gates";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		6457CF61298BF0EC00A55933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchApp Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.test.gpsTracker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker.watchkitapp;
+				PRODUCT_NAME = "Open the Gates";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		6457CF73298BF23200A55933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open the Gates";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 . All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker.watchkitapp.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		6457CF74298BF23200A55933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 355GY66FJT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Open the Gates";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 . All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.gpsTracker.watchkitapp.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1087,6 +1423,24 @@
 			buildConfigurations = (
 				5C11F0A3229EF4FC00EC7CEC /* Debug */,
 				5C11F0A4229EF4FC00EC7CEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6457CF5F298BF0EC00A55933 /* Build configuration list for PBXNativeTarget "WatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6457CF60298BF0EC00A55933 /* Debug */,
+				6457CF61298BF0EC00A55933 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6457CF72298BF23200A55933 /* Build configuration list for PBXNativeTarget "WatchApp Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6457CF73298BF23200A55933 /* Debug */,
+				6457CF74298BF23200A55933 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

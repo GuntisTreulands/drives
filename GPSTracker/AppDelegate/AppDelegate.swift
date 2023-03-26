@@ -11,18 +11,24 @@ import CoreData
 import Sentry
 import UserNotifications
 import UserNotificationsUI
+import WatchConnectivity
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-//	var appSettings = AppSettingsWorker.shared
-
+    
+    
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions
 		launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-
+        
+        if WCSession.isSupported() {
+            // To initiate it.
+            _ = WatchConnectionWorker.shared
+        }
+        
 		SentrySDK.start { options in
 			options.dsn = "https://da766b8be7b3499580d043df9176bcdb@o115860.ingest.sentry.io/6235431"
 			options.debug = true // Enabled debug when first installing is always helpful
@@ -35,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// To initiate it.
 		_ = AppSettingsWorker.shared
 		_ = DataBaseManager.shared
-
+        
 		//ScenesManager.shared.resetState() // For debug, to start over.
 		window?.backgroundColor = .white
 		ScenesManager.shared.window = window

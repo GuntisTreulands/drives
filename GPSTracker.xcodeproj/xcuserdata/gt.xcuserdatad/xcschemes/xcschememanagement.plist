@@ -9,6 +9,44 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>WatchApp Extension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>WatchApp.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6457CF1D298AE54300A55933</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6457CF53298BF0EA00A55933</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6457CF65298BF22E00A55933</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>645F235029881F5C003B308E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>645F236529882CA4003B308E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
